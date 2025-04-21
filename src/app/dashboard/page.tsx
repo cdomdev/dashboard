@@ -47,7 +47,7 @@ export default function Home() {
         <div className="flex gap-1 justify-center flex-wrap h-auto py-4 px-2 items-center w-full ">
           {dataBox.map((item, index) => (
             <div
-              className="w-40 h-24 md:w-[240px] md:h-28 rounded-lg shadow-md flex justify-between p-3"
+              className="w-40 h-24 md:w-[240px] md:h-28 rounded-lg shadow-md flex justify-between p-3 bg-white"
               key={index}
             >
               <div className="flex justify-between flex-col">

@@ -2,7 +2,6 @@ import Link from "next/link";
 import {
   Products,
   Categorias,
-  Inventario,
   Ofertas,
   Subcategorias,
   Usuario,
@@ -13,14 +12,13 @@ import { Profile } from "./Profile";
 
 export default function Aside() {
   const itemsAside = [
-    { name: "Dashboard", path: "/", icon: Home },
-    { name: "Productos", path: "/productos", icon: Products },
-    { name: "Inventario", path: "/inventario", icon: Inventario },
-    { name: "Ventas", path: "/pedidos", icon: Ventas },
-    { name: "Ofertas", path: "/ofertas", icon: Ofertas },
-    { name: "Categorias", path: "/categorias", icon: Categorias },
-    { name: "Subcategorias", path: "/subcategorias", icon: Subcategorias },
-    { name: "Usuarios", path: "/gestion-usuarios/usuarios", icon: Usuario },
+    { name: "Dashboard", path: "/dashboard", icon: Home },
+    { name: "Productos", path: "/dashboard/productos", icon: Products },
+    { name: "Ventas", path: "/dashboard/ventas", icon: Ventas },
+    { name: "Ofertas", path: "/dashboard/ofertas", icon: Ofertas },
+    { name: "Categorias", path: "/dashboard/categorias", icon: Categorias },
+    { name: "Subcategorias", path: "/dashboard/subcategorias", icon: Subcategorias },
+    { name: "Usuarios", path: "/dashboard/usuarios", icon: Usuario },
   ];
   return (
     <aside
@@ -42,8 +40,6 @@ export default function Aside() {
             </li>
           ))}
         </ul>
-
-        
       <div className="border-t border-b border-t-white border-b-white "><Profile/></div>
       </div>
       

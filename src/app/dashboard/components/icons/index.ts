@@ -10,3 +10,5 @@ export { Box} from "./Box";
 export { SendBox} from "./SendBox";
 export { Time} from "./Time";
 export { Sale} from "./Sale";
+export { Dataabase} from "./Dataabase";
+export { More} from "./More";
