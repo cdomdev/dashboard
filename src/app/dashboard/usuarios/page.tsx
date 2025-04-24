@@ -1,5 +1,10 @@
-import { Left } from "../components/buttons/Left";
+import { Left } from "../components/ui/buttons/Left";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Usuarios",
+  description: "Pagina de usuarios",
+};
 
 export default function HomeUsuario() {
   return (

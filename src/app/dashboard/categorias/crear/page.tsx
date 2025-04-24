@@ -1,9 +1,7 @@
 "use client";
 
-import { Left } from "../../components/buttons/Left";
+import { Left } from "../../components/ui/buttons/Left";
 import { FormCategory } from "./components/FormCategory";
-import { ButtonGrs } from "../../components/buttons/ButtonGrs";
-import { Categorias } from "@/app/dashboard/components/icons";
 
 export default function CrearCategoria() {
   return (
@@ -17,12 +15,7 @@ export default function CrearCategoria() {
         </div>
       </section>
       <section className="flex gap-4">
-        <div className="shadow-md w-[75%] rounded-md p-4 bg-white">
-          <FormCategory />
-        </div>
-        <div className="shadow-md w-[25%] rounded-md p-4 bg-white h-20">
-          <ButtonGrs text="Guardar categoria" icon={<Categorias />} />
-        </div>
+        <FormCategory />
       </section>
     </section>
   );

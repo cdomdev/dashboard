@@ -1,6 +1,6 @@
 "use client";
 
-import { Left } from "../../components/buttons/Left";
+import { Left } from "../../components/ui/buttons/Left";
 import { FormSubcategory } from "../components/FormSubcategory";
 
 export default function Crearsubcategoria() {

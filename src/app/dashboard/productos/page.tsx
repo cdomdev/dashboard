@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { Left } from "../components/buttons/Left";
-import { ButtonGrs } from "../components/buttons/ButtonGrs";
+import { Left } from "../components/ui/buttons/Left";
+import { ButtonGrs } from "../components/ui/buttons/ButtonGrs";
 import { More } from "../components/icons";
 
 export const metadata: Metadata = {
@@ -21,6 +21,7 @@ export default function ProductosPage() {
             text="Agregar un nuevo producto"
             icon={<More />}
             href="/dashboard/productos/crear"
+            type="button"
           />
         </div>
       </section>

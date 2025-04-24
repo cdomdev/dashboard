@@ -1,9 +1,7 @@
 "use client";
 
-import { Left } from "../../components/buttons/Left";
-import { ButtonGrs } from "../../components/buttons/ButtonGrs";
-import { Dataabase } from "../../components/icons";
-import {FormProducts} from "./components/FormProducts";
+import { Left } from "../../components/ui/buttons/Left";
+import { FormProducts } from "./components/FormProducts";
 
 export default function CreateProduct() {
   return (
@@ -15,12 +13,7 @@ export default function CreateProduct() {
         </div>
       </section>
       <section className="flex gap-4">
-        <div className="shadow-md w-[75%] rounded-md p-4 bg-white">
-          <FormProducts />
-        </div>
-        <div className="shadow-md w-[25%] rounded-md p-4 bg-white h-20">
-          <ButtonGrs text="Guardar producto" icon={<Dataabase />} />
-        </div>
+        <FormProducts />
       </section>
     </section>
   );

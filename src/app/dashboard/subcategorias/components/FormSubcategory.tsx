@@ -1,7 +1,7 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import type { categorySchema } from "@/interfaces";
 import { Subcategorias } from "../../components/icons";
-import { ButtonGrs } from "../../components/buttons/ButtonGrs";
+import { ButtonGrs } from "../../components/ui/buttons/ButtonGrs";
 
 export function FormSubcategory() {
   const onSubmit = async (values: categorySchema) => {

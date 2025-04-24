@@ -1,5 +1,9 @@
-import { Left } from "../components/buttons/Left";
-
+import { Left } from "../components/ui/buttons/Left";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Ventas",
+  description: "Pagina de ventas - ver nuevas ventas",
+};
 export default function HomeVentas() {
   return (
     <section className="w-full min-h-dvh p-7 flex flex-col gap-5 ">

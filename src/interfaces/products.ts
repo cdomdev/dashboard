@@ -4,7 +4,5 @@ export interface ProductSchema {
   precio: number |string;
   referencia: string;
   cantidad: number  | string;
-  categoria: string;
-  subcategoria: string;
   descripcion: string;
 }

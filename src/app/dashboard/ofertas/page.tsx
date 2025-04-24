@@ -1,6 +1,13 @@
-import { Left } from "../components/buttons/Left";
-import { ButtonGrs } from "../components/buttons/ButtonGrs";
+import { Left } from "../components/ui/buttons/Left";
+import { ButtonGrs } from "../components/ui/buttons/ButtonGrs";
 import { More } from "../components/icons";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Ventas",
+  description: "Pagina de ofertas - ver o crear nuevas ofertas",
+};
 
 export default function OfertasPage() {
   return (

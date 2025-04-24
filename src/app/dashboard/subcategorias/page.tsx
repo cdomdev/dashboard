@@ -1,6 +1,13 @@
-import { Left } from "../components/buttons/Left";
-import { ButtonGrs } from "../components/buttons/ButtonGrs";
+import { Left } from "../components/ui/buttons/Left";
+import { ButtonGrs } from "../components/ui/buttons/ButtonGrs";
 import { More } from "../components/icons";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Subcategorias",
+  description: "Pagina de subcategorias - ver o crear nuevas subcategorias",
+};
+
 
 export default function HomeSubcategoria() {
   return (
