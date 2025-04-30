@@ -1,22 +1,17 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { query } from "./request";
 
 export async function refreshAdminToken() {
   try {
-    const response = await fetch(
-      "http://localhost:3000/api/refresh-token-admin",
-      {
-        method: "POST",
-        credentials: "include",
-      }
-    );
+    const response = await query("/api/refresh-token-admin", "POST");
 
-    if (!response.ok) {
+    if (!response) {
       throw new Error("No se pudo renovar el token");
     }
 
-    const { newAccessToken } = await response.json();
+    const { newAccessToken } = await response.data;
 
     const cookieStore = await cookies();
     cookieStore.set("bearer-token", newAccessToken, {

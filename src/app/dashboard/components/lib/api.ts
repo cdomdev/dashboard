@@ -1,11 +1,12 @@
 import axios from "axios";
 import { getAccessToken, refreshAdminToken } from "./refreshToken";
-const { HOST_API } = process.env;
+const HOST = process.env.NEXT_PUBLIC_HOST_API;
+
 
 axios.defaults.withCredentials = true;
 
 export const api = axios.create({
-  baseURL: HOST_API,
+  baseURL: HOST,
   headers: {
     "Content-Type": "application/json",
   },
