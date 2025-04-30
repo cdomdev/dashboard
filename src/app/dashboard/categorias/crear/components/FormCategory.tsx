@@ -1,10 +1,22 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import type { categorySchema } from "@/interfaces";
-import { ButtonGrs } from "@/app/dashboard/components/ui/buttons/ButtonGrs";
+import { ButtonGrs } from "@/app/dashboard/components/ui/buttons/Button";
 import { Categorias } from "@/app/dashboard/components/icons";
+import { createCategoria } from "../../lib/categoria";
+import { useToastStore } from "@/app/dashboard/components/context/global.context.app";
+
+
+
 export function FormCategory() {
   const onSubmit = async (values: categorySchema) => {
-    console.log(values);
+    const res = await createCategoria(values);
+    if (res?.status === 201) {
+      const seToast = useToastStore.getState().setToast;
+      seToast("Categoría creada con éxito", "toast-success");
+    } else {
+      const seToast = useToastStore.getState().setToast;
+      seToast("Error al crear la categoría", "error");
+    }
   };
 
   return (
