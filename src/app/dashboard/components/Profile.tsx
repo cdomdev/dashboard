@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { logoutAdmin } from "./lib/logout";
 
 export const Profile = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -17,7 +18,7 @@ export const Profile = () => {
       >
         <div className="relative w-10 h-10 overflow-hidden  rounded-full dark:bg-gray-600 cursor-pointer">
           <svg
-            className="absolute w-12 h-12 text-gray-400 -left-1"
+            className="absolute w-10 h-12 text-gray-400 -Back-1"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +31,7 @@ export const Profile = () => {
           </svg>
         </div>
 
-        <span >administrador</span>
+        <span>administrador</span>
       </div>
 
       <div
@@ -55,6 +56,9 @@ export const Profile = () => {
         </ul>
         <div>
           <button
+            onClick={async () => {
+              await logoutAdmin();
+            }}
             type="button"
             className="block py-2 w-full px-0 rounded-b-md text-sm text-center text-gray-700 dark:text-black  hover:bg-red-600 duration-150 hover:text-white cursor-pointer dark:hover:text-white"
           >
