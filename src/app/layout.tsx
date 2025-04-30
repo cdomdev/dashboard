@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
+import { Toast } from "./dashboard/components/Toast";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -13,6 +14,7 @@ export default async function LayoutRoot({
   return (
     <html lang="es">
       <body>
+        <Toast />
         <main>{children}</main>
       </body>
     </html>
