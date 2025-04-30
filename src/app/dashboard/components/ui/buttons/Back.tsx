@@ -1,10 +1,10 @@
 import Link from "next/link"
 
-interface LeftProps {
+interface BacksProps {
     url: string;
   }
 
-export const Left = ({url}: LeftProps) => {
+export const Back = ({url}: BacksProps) => {
   return (
     <Link href={url} className="flex items-center gap-1 group mb-2 font-semibold text-lg">
       <svg
@@ -17,7 +17,7 @@ export const Left = ({url}: LeftProps) => {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-left size-6  group-hover:-translate-x-0.5 transition duration-150"
+        className="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-Back size-6  group-hover:-translate-x-0.5 transition duration-150"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M5 12l14 0" />

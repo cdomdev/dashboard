@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { Left } from "../components/ui/buttons/Left";
-import { ButtonGrs } from "../components/ui/buttons/ButtonGrs";
+import { Back } from "../components/ui/buttons/Back";
+import { ButtonGrs } from "../components/ui/buttons/Button";
 import { More } from "../components/icons";
 
 export const metadata: Metadata = {
@@ -13,8 +13,8 @@ export default function ProductosPage() {
     <section className="w-full min-h-dvh p-7 flex flex-col gap-5 ">
       <section className="w-full px-10 pt-14 flex justify-between gap-5">
         <div>
-          <Left url="/dashboard" />
-          <h1 className="text-lg font-semibold">Productos</h1>
+          <Back url="/dashboard" />
+          <h1 className="text-lg font-bold md:text-2xl">Productos</h1>
         </div>
         <div>
           <ButtonGrs

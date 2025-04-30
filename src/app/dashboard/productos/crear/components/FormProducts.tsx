@@ -1,13 +1,12 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import type { ProductSchema } from "@/interfaces";
 import { ImageDrop } from "./Drag";
-import { ButtonGrs } from "@/app/dashboard/components/ui/buttons/ButtonGrs";
+import { ButtonGrs } from "@/app/dashboard/components/ui/buttons/Button";
 import { Dataabase } from "@/app/dashboard/components/icons";
 
 export function FormProducts() {
   const onSubmit = async (values: ProductSchema) => {
     console.log("Formulario enviado:", values);
-    console.log(values);
   };
   return (
     <>
