@@ -10,5 +10,7 @@ export interface ProductSchema {
 }
 
 export interface categorySchema {
+  id?: string;
   nombre: string;
+  codigo?: string;
 }
