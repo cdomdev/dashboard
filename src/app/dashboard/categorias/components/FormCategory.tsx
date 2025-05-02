@@ -5,17 +5,17 @@ import { Categorias } from "@/app/dashboard/components/icons";
 import { createCategoria } from "../../lib/categoria";
 import { useToastStore } from "@/app/dashboard/components/context/global.context.app";
 
-
-
 export function FormCategory() {
   const onSubmit = async (values: categorySchema) => {
-    const res = await createCategoria(values);
-    if (res?.status === 201) {
-      const seToast = useToastStore.getState().setToast;
-      seToast("Categoría creada con éxito", "toast-success");
-    } else {
-      const seToast = useToastStore.getState().setToast;
+    const seToast = useToastStore.getState().setToast;
+    try {
+      const res = await createCategoria(values);
+      if (res?.status === 201) {
+        seToast("Categoría creada con éxito", "toast-success");
+      }
+    } catch (error) {
       seToast("Error al crear la categoría", "error");
+      console.error("Error creating categoria:", error);
     }
   };
 
