@@ -1,20 +1,20 @@
-interface Subcategoria {
-  nombre: string;
+import { query } from "@/app/dashboard/components";
+import { categorySchema } from "@/interfaces";
+
+
+export function createSubcategoria({ nombre }: categorySchema) {
+  const response = query("/api/subcategories/create", "POST", { nombre });
+  return response;
 }
 
-export function createSubcategoria({ nombre }: Subcategoria) {
-  const res = fetch("http://localhost:3000/api/categories/create", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ nombre }),
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return response.json();
-  });
 
-  return res;
+export function getSubcategorias() {
+  const response = query("/api/subcategories/list", "GET");
+  return response;
 }
+
+export function deleteSubcategoria(id?: string) {
+  const response = query(`/api/subcategories/delete/${id}`, "DELETE");
+  return response;
+}
+

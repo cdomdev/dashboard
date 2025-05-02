@@ -1,12 +1,25 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import type { categorySchema } from "@/interfaces";
-import { Subcategorias } from "../../components/icons";
+import { Dataabase } from "../../components/icons";
 import { ButtonGrs } from "../../components/ui/buttons/Button";
+import { createSubcategoria } from "../lib/subcategoria";
+import { useToastStore } from "@/app/dashboard/components/context/global.context.app";
 
 export function FormSubcategory() {
-  const onSubmit = async (values: categorySchema) => {
-    console.log("Formulario enviado:", values);
-    // const res = await createSubcategoria(values);
+  const onSubmit = async (
+    values: categorySchema,
+    { resetForm }: { resetForm: () => void }
+  ) => {
+    try {
+      const res = await createSubcategoria(values);
+      if (res?.status === 201) {
+        resetForm();
+        const seToast = useToastStore.getState().setToast;
+        seToast("Subcategoría creada con éxito", "toast-success");
+      }
+    } catch (error) {
+      console.error("Error creating subcategoria:", error);
+    }
   };
 
   return (
@@ -31,7 +44,7 @@ export function FormSubcategory() {
               htmlFor="nombre"
               className="block my-1 pt-4 mx-1 text-sm font-medium text-gray-900"
             >
-             Nombre
+              Nombre
             </label>
             <div className="relative max-w-2/4">
               <Field
@@ -52,8 +65,8 @@ export function FormSubcategory() {
           <div className="w-[25%] shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20">
             <ButtonGrs
               text="Guardar subcategoría"
-              icon={<Subcategorias />}
-              onClick={handleSubmit} 
+              icon={<Dataabase />}
+              onClick={handleSubmit}
             />
           </div>
         </div>
