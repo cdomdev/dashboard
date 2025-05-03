@@ -13,26 +13,30 @@ interface Props {
 
 export function List({ setCatCount }: Props) {
   const [categorias, setCategorias] = useState<categorySchema[]>();
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const res = await getSubcategorias();
-      if (res?.status === 200) {
+      if (res?.status === 200 && Array.isArray(res.data?.categorias)) {
         setCatCount(res.data.categorias.length);
         setCategorias(res.data.categorias);
+      } else {
+        setCatCount(0);
+        setCategorias([]);
       }
     };
     fetchData();
-  }, [setCatCount, categorias]);
+  }, [setCatCount]);
 
+ 
+  if (!categorias) return <Loading />;
+  
   if (categorias?.length === 0)
     return (
       <p className="text-center text-md text-gray-400">
         No hay subcategorias para listar
       </p>
     );
-  if (!categorias) return <Loading />;
-
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-sm animate-fadeIn">
       <table className="w-full text-sm text-Back rtl:text-right text-gray-500 dark:text-gray-400">

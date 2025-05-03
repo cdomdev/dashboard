@@ -1,5 +1,5 @@
 export default function Loading() {
-  const filasFalsas = Array.from({ length: 5 });
+  const filasFalsas = Array.from({ length: 3 });
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-sm animate-pulse">
