@@ -15,6 +15,7 @@ export function middleware(request: NextRequest) {
   // Si hay token, continuar con la navegación normal
   return NextResponse.next();
 }
+
 export const config = {
-  matcher: ["/((?!_next|favicon.ico|.*\\..*).*)"],
+  matcher: ["/((?!_next|api|favicon.ico|.*\\..*).*)"],
 };
