@@ -1,7 +1,6 @@
 import axios from "axios";
-import { getAccessToken, refreshAdminToken } from "./refreshToken";
+import { getToken, refreshAdminToken } from "./refreshToken";
 const HOST = process.env.NEXT_PUBLIC_HOST_API;
-
 
 axios.defaults.withCredentials = true;
 
@@ -14,7 +13,7 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-    const token = await getAccessToken(); 
+    const token = await getToken("bearer-token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     } else {
@@ -36,9 +35,12 @@ api.interceptors.response.use(
     ) {
       originalRequest._retry = true;
 
-      const newToken = await refreshAdminToken();
-      if (newToken) {
-        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+      const refreshResponse = await refreshAdminToken();
+      console.log('respuesta del refresh--->', refreshResponse)
+
+      const { newAccessToken } = refreshResponse;
+      if (refreshResponse) {
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return api(originalRequest);
       }
     }

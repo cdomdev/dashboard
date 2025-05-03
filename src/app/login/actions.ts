@@ -15,12 +15,19 @@ export async function loginAdmin(data: LoginData) {
     },
     body: JSON.stringify(data),
   });
-  
+
   const result = await response.json();
 
-  const { accessToken } = result;
+  const { accessToken, refreshToken } = result;
   const cookiesSession = await cookies();
   cookiesSession.set("bearer-token", accessToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+    path: "/",
+  });
+
+  cookiesSession.set("bearer-token-rfsh", refreshToken, {
     httpOnly: true,
     secure: true,
     sameSite: "strict",
