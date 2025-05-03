@@ -10,3 +10,24 @@ export async function getCategorias() {
   const response = await query("/api/categories/list", "GET");
   return response;
 }
+
+export async function deleteCategory(id?: string) {
+  const response = await query(`/api/categories/delete/${id}`, "DELETE");
+  return response;
+}
+
+export async function editCategory({
+  id,
+  nombre,
+  category,
+}: {
+  id?: string;
+  nombre: string;
+  category: string;
+}) {
+  const response = await query(`/api/categories/edit/${id}`, "PUT", {
+    nombre,
+    category,
+  });
+  return response;
+}

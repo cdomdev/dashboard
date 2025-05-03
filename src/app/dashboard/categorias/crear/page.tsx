@@ -1,7 +1,7 @@
 "use client";
 
 import { Back } from "../../components/ui/buttons/Back";
-import { FormCategory } from "./components/FormCategory";
+import { FormCategory } from "../components/FormCategory";
 
 
 

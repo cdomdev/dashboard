@@ -4,24 +4,39 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { getCategorias } from "../lib/categoria";
 import type { categorySchema } from "@/interfaces";
+import { DeleteCategoria } from "./Delete";
+import Loading from "../loading";
+import { FormEditCat } from "./FormEditCat";
 
 interface Props {
-  setCatCount: (count: number) => void;
+  setCatCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export function Listar({ setCatCount }: Props) {
-  const [categorias, setCategorias] = useState<categorySchema[]>();
+export function List({ setCatCount }: Props) {
+  const [categorias, setCategorias] = useState<categorySchema[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await getCategorias();
-      if (res?.status === 200) {
+      if (res?.status === 200 && Array.isArray(res.data?.categorias)) {
         setCatCount(res.data.categorias.length);
         setCategorias(res.data.categorias);
+      } else {
+        setCatCount(0);
+        setCategorias([]);
       }
     };
     fetchData();
   }, [setCatCount]);
+
+  if (!categorias) return <Loading />;
+
+  if (categorias?.length === 0)
+    return (
+      <p className="text-center text-md text-gray-400">
+        No hay categorias para listar
+      </p>
+    );
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-sm">
@@ -36,10 +51,10 @@ export function Listar({ setCatCount }: Props) {
             </th>
 
             <th scope="col" className="pr-12 py-3">
-              Action
+              acción
             </th>
             <th scope="col" className="px-6 py-3 ">
-              Action
+              acción
             </th>
           </tr>
         </thead>
@@ -63,20 +78,14 @@ export function Listar({ setCatCount }: Props) {
               </th>
 
               <td className="pl-20 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-red-600 dark:text-red-500 hover:underline"
-                >
-                  Delete
-                </a>
+                <DeleteCategoria
+                  setCategorias={setCategorias}
+                  id={cat.id}
+                  setCatCount={setCatCount}
+                />
               </td>
               <td className="px-6 py-4 flex items-center justify-center">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
+                <FormEditCat category={cat} setCategorias={setCategorias} />
               </td>
             </tr>
           ))}

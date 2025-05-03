@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Back } from "../components/ui/buttons/Back";
 import { ButtonGrs } from "../components/ui/buttons/Button";
 import { More } from "../components/icons";
-import { Listar } from "./components/Listar";
+import { List } from "./components/List";
 
 export default function HomeCategoriaClient() {
   const [catCount, setCatCount] = useState(0);
@@ -15,7 +15,9 @@ export default function HomeCategoriaClient() {
         <div>
           <Back url="/dashboard" />
           <h1 className="text-lg font-bold md:text-2xl">Categorias</h1>
-          <span>Total categorias <strong>{catCount}</strong></span>
+          <span>
+            Total categorias <strong>{catCount}</strong>
+          </span>
         </div>
         <div>
           <ButtonGrs
@@ -26,7 +28,7 @@ export default function HomeCategoriaClient() {
         </div>
       </section>
       <section className="shadow-md w-full  p-4 bg-white">
-        <Listar setCatCount={setCatCount} />
+        <List setCatCount={setCatCount} />
       </section>
     </section>
   );

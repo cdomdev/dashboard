@@ -1,21 +1,33 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import type { categorySchema } from "@/interfaces";
 import { ButtonGrs } from "@/app/dashboard/components/ui/buttons/Button";
-import { Categorias } from "@/app/dashboard/components/icons";
-import { createCategoria } from "../../lib/categoria";
+import { Dataabase } from "@/app/dashboard/components/icons";
+import { createCategoria } from "../lib/categoria";
 import { useToastStore } from "@/app/dashboard/components/context/global.context.app";
 
 export function FormCategory() {
-  const onSubmit = async (values: categorySchema) => {
+  const onSubmit = async (
+    values: categorySchema,
+    { resetForm }: { resetForm: () => void }
+  ) => {
     const seToast = useToastStore.getState().setToast;
-    try {
-      const res = await createCategoria(values);
-      if (res?.status === 201) {
-        seToast("Categoría creada con éxito", "toast-success");
+    const res = await createCategoria(values);
+
+    if (res.success) {
+      resetForm();
+      seToast("Categoría creada con éxito", "toast-success");
+    } else {
+      if (res.status === 409) {
+        seToast(
+          res.message || "Ya existe una categoría con ese nombre",
+          "error"
+        );
+      } else {
+        seToast(
+          res.message || "Error inesperado al crear la categoría",
+          "error"
+        );
       }
-    } catch (error) {
-      seToast("Error al crear la categoría", "error");
-      console.error("Error creating categoria:", error);
     }
   };
 
@@ -49,7 +61,7 @@ export function FormCategory() {
                   type="text"
                   id="nombre"
                   name="nombre"
-                  placeholder="Título del producto"
+                  placeholder="Nombre de la categoria"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring- focus:ring-blue-400 focus:border-blue-400 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-1 dark:focus:ring-blue-400 dark:focus:border-blue-400"
                 />
               </div>
@@ -64,7 +76,7 @@ export function FormCategory() {
               <ButtonGrs
                 text="Guardar categoría"
                 classNeme="w-full "
-                icon={<Categorias />}
+                icon={<Dataabase />}
                 onClick={handleSubmit}
               />
             </div>
