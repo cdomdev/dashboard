@@ -1,4 +1,3 @@
-// import Aside from "../../components/Aside";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
@@ -28,13 +27,12 @@ export default async function DashboardLayout({
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <div className="flex min-h-screen w-full">
+      <div className="flex min-h-dvh w-full">
         <AppSidebar />
-
         <div className="flex flex-col flex-1">
           <header className="sticky top-0 z-20 border-b bg-background px-4 py-3 shadow-sm w-full">
             <nav className="flex items-center justify-between gap-4">
-              <SidebarTrigger />
+              <SidebarTrigger className="cursor-pointer" />
               <div className="flex items-center gap-2">
                 <ModeToggle />
                 <DropdNotications />

@@ -1,13 +1,7 @@
-
-import type { Metadata } from "next";
 import "@/app/globals.css";
 import { Toast } from "@/components/Toast";
-import { ThemeProvider } from "next-themes";
+import { Providers } from "@/app/Provider";
 
-export const metadata: Metadata = {
-  title: "Login",
-  description: "Dashboard",
-};
 export default async function LayoutRoot({
   children,
 }: Readonly<{
@@ -15,16 +9,11 @@ export default async function LayoutRoot({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <body className="bg-white dark:bg-slate-900">
+        <Providers>
           <Toast />
           <main>{children}</main>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

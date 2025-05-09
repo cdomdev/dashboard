@@ -54,7 +54,7 @@ export default async function Home() {
           {dataBox.map((item, index) => (
             <div
               key={index}
-              className="w-full min-w-[10rem] sm:min-w-[12rem] h-24 sm:h-28 rounded-xl shadow-md flex justify-between p-3 bg-white dark:text-black dark:bg-gray-300"
+              className="w-full min-w-[10rem] sm:min-w-[12rem] h-24 sm:h-28 rounded-xl shadow-md flex justify-between p-3 bg-white dark:text-black dark:bg-gray-200 "
             >
               <div className="flex flex-col justify-between">
                 <h1 className="text-xs sm:text-sm font-semibold">
@@ -79,13 +79,13 @@ export default async function Home() {
       </section>
 
       <section className=" grid grid-cols-1 lg:grid-cols-2 gap-3">
-        <div className="h-auto rounded-md p-2 bg-white shadow dark:text-black dark:bg-gray-300">
+        <div className="h-auto rounded-md p-2 bg-white shadow dark:text-black dark:bg-gray-200">
           <h2 className="text-lg md:text-xl font-semibold pl-1 md:pl-4">
             Productos mas vendidos
           </h2>
           <Graficas />
         </div>
-        <div className="rounded-md sm:p-1 p-4 bg-white shadow  dark:text-black dark:bg-gray-300">
+        <div className="rounded-md sm:p-1 p-4 bg-white shadow  dark:text-black dark:bg-gray-200">
           <Sale />
         </div>
       </section>
