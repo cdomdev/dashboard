@@ -42,6 +42,7 @@ export function FormProducts() {
           categoria: "",
           subcategoria: "",
           descripcion: "",
+          image: "",
         }}
         validationSchema={productValidationSchema}
         onSubmit={onSubmit}
