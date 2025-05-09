@@ -27,7 +27,7 @@ export default function HomeCategoriaClient() {
           />
         </div>
       </section>
-      <section className="shadow-md w-full  p-4 bg-white">
+      <section className="w-full">
         <List setCatCount={setCatCount} />
       </section>
     </section>
