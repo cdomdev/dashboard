@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { categorySchema } from "@/interfaces";
 import { deleteCategory } from "../lib/categoria";
-import { useToastStore } from "@/app/dashboard/components/context/global.context.app";
-import { Modal } from "../../components/ui/Modals/Modal";
+import { useToastStore } from "@/context/global.context.app";
+import { Modal } from "../../../../components/ui/custom/Modals/Modal";
 
 interface deleProps {
   id?: string;
@@ -49,13 +49,13 @@ export function DeleteCategoria({ id, setCategorias, setCatCount }: deleProps) {
       >
         <div className="flex gap-3 justify-center items-center pt-4">
           <button
-            className="bg-red-600 text-white py-1.5 px-6 rounded-md"
+            className="bg-red-600 text-white py-1.5 px-6 rounded-md cursor-pointer hover:bg-red-800 duration-200 "
             onClick={handleDelete}
           >
             Sí, eliminar
           </button>
           <button
-            className="border py-1.5 px-5 rounded-md hover:bg-gray-400"
+            className="text-black border py-1.5 px-5 rounded-md hover:bg-gray-400 dark:hover:text-black cursor-pointer duration-200"
             onClick={() => setIsDeleteOpen(false)}
           >
             No, cancelar

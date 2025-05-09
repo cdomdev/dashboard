@@ -1,6 +1,6 @@
 import { categorySchema } from "@/interfaces";
 import { deleteSubcategoria } from "../lib/subcategoria";
-import { useToastStore } from "@/app/dashboard/components/context/global.context.app";
+import { useToastStore } from "@/context/global.context.app";
 
 interface deleProps {
   id?: string;

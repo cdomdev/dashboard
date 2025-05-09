@@ -1,9 +1,9 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import type { categorySchema } from "@/interfaces";
-import { ButtonGrs } from "@/app/dashboard/components/ui/buttons/Button";
-import { Dataabase } from "@/app/dashboard/components/icons";
+import { ButtonGrs } from "@/components/ui/custom/buttons/Button";
+import { Dataabase } from "@/components/icons";
 import { createCategoria } from "../lib/categoria";
-import { useToastStore } from "@/app/dashboard/components/context/global.context.app";
+import { useToastStore } from "@/context/global.context.app";
 
 export function FormCategory() {
   const onSubmit = async (
@@ -48,7 +48,7 @@ export function FormCategory() {
           <div className="flex w-full gap-4">
             <form
               onSubmit={handleSubmit}
-              className="w-[75%] shadow-md rounded-md p-4 bg-white"
+              className="w-[75%] shadow-md rounded-md p-4 bg-white dark:bg-gray-200"
             >
               <label
                 htmlFor="nombre"
@@ -72,7 +72,7 @@ export function FormCategory() {
               />
             </form>
 
-            <div className="w-[25%] shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20">
+            <div className="w-[25%] shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20 dark:bg-gray-200">
               <ButtonGrs
                 text="Guardar categoría"
                 classNeme="w-full "

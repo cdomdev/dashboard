@@ -1,14 +1,20 @@
-import { Box, SendBox, Sale, Time, Usuario } from "./components/icons";
+import {
+  BoxComponent,
+  SendBox,
+  Sale,
+  Time,
+  Usuario,
+} from "../../components/icons";
 import "@/app/globals.css";
-import Graficas from "./components/Grafics";
+import Graficas from "../../components/Grafics";
 
-export default function Home() {
+export default async function Home() {
   const dataBox = [
     {
       title: "Total ordenes",
       value: 0,
       text: "Ordenees sin despachar",
-      icon: Box,
+      icon: BoxComponent,
       bgBox: "bg-[#fbddb9]",
     },
     {
@@ -43,27 +49,27 @@ export default function Home() {
 
   return (
     <section className="min-h-dvh">
-      <section className="flex gap-4 pt-5">
-        <div className="flex gap-1 justify-center flex-wrap h-auto py-4 px-2 items-center w-full ">
+      <section className="w-full py-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center">
           {dataBox.map((item, index) => (
             <div
-              className="w-40 h-24 md:w-[240px] md:h-28 rounded-lg shadow-md flex justify-between p-3 bg-white"
               key={index}
+              className="w-full min-w-[10rem] sm:min-w-[12rem] h-24 sm:h-28 rounded-xl shadow-md flex justify-between p-3 bg-white dark:text-black dark:bg-gray-300"
             >
-              <div className="flex justify-between flex-col">
-                <h1 className="text-xs md:text-sm font-semibold">
+              <div className="flex flex-col justify-between">
+                <h1 className="text-xs sm:text-sm font-semibold">
                   {item.title}
                 </h1>
-                <p className="font-extrabold text-sm md:text-xl">
+                <p className="font-extrabold text-sm sm:text-xl">
                   {item.value}
                 </p>
-                <span className="text-[6px] text-slate-500 md:text-xs">
+                <span className="text-[8px] text-slate-500 sm:text-xs">
                   {item.text}
                 </span>
               </div>
 
               <div
-                className={` ${item.bgBox} rounded-full w-10 h-10 md:h-12 md:w-12 flex justify-center items-center p-1`}
+                className={`${item.bgBox} rounded-full w-10 h-10 sm:h-12 sm:w-12 flex justify-center items-center p-1`}
               >
                 <item.icon />
               </div>
@@ -72,14 +78,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className=" grid grid-cols-1 lg:grid-cols-2 gap-3 ">
-        <div className="h-auto rounded-md p-2 bg-white shadow">
+      <section className=" grid grid-cols-1 lg:grid-cols-2 gap-3">
+        <div className="h-auto rounded-md p-2 bg-white shadow dark:text-black dark:bg-gray-300">
           <h2 className="text-lg md:text-xl font-semibold pl-1 md:pl-4">
             Productos mas vendidos
           </h2>
           <Graficas />
         </div>
-        <div className="rounded-md sm:p-1 p-4 bg-white shadow">
+        <div className="rounded-md sm:p-1 p-4 bg-white shadow  dark:text-black dark:bg-gray-300">
           <Sale />
         </div>
       </section>

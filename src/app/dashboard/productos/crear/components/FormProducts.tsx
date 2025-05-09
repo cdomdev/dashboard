@@ -1,8 +1,8 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import type { ProductSchema } from "@/interfaces";
 import { ImageDrop } from "./Drag";
-import { ButtonGrs } from "@/app/dashboard/components/ui/buttons/Button";
-import { Dataabase } from "@/app/dashboard/components/icons";
+import { ButtonGrs } from "@/components/ui/custom/buttons/Button";
+import { Dataabase } from "@/components/icons";
 
 export function FormProducts() {
   const onSubmit = async (values: ProductSchema) => {

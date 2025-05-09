@@ -4,18 +4,21 @@ import { cookies } from "next/headers";
 
 const HOST = process.env.NEXT_PUBLIC_HOST_API;
 
-console.log(HOST)
+
 export async function refreshAdminToken() {
   const refreshToken = getToken("bearer-token-rfsh");
   if (!refreshToken) return null;
 
   try {
-    const response = await fetch(`${HOST}/api/refresh-token-admin`, {
+    const response = await fetch(`${HOST}/api/auth/refresh-token`, {
       method: "POST",
       headers: {
-        Cookie: `bearer-token-rfsh=${refreshToken}`,
+        Cookie: `bearer-token-${refreshToken}`,
       },
     });
+
+    console.log("respuesta del refresk --->", response, )
+
 
     if (!response) {
       throw new Error("No se pudo renovar el token");

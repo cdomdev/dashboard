@@ -1,6 +1,6 @@
 "use client";
 
-import { Back } from "../../components/ui/buttons/Back";
+import { Back } from "../../../../components/ui/custom/buttons/Back";
 import { FormCategory } from "../components/FormCategory";
 
 

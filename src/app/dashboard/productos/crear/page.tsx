@@ -1,6 +1,6 @@
 "use client";
 
-import { Back } from "../../components/ui/buttons/Back";
+import { Back } from "../../../../components/ui/custom/buttons/Back";
 import { FormProducts } from "./components/FormProducts";
 
 export default function CreateProduct() {

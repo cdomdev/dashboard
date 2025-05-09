@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useToastStore } from "./context/global.context.app";
+import { useToastStore } from "@/context/global.context.app";
 
 export const Toast: React.FC = () => {
   const { showToast, bgToast, hideToast, toastMessage } = useToastStore();

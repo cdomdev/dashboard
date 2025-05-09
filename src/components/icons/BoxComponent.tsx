@@ -1,4 +1,4 @@
-export const Box = () => {
+export function BoxComponent (){
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

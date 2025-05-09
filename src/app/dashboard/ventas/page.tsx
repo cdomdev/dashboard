@@ -1,4 +1,4 @@
-import { Back } from "../components/ui/buttons/Back";
+import { Back } from "../../../components/ui/custom/buttons/Back";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Ventas",

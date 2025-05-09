@@ -1,4 +1,4 @@
-import { query } from "../../components/lib/request";
+import {query} from '@/lib/request'
 import { categorySchema } from "@/interfaces";
 
 export async function createCategoria({ nombre }: categorySchema) {

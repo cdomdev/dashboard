@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import { Back } from "../components/ui/buttons/Back";
-import { ButtonGrs } from "../components/ui/buttons/Button";
-import { More } from "../components/icons";
+import { Back } from "../../../components/ui/custom/buttons/Back";
+import { ButtonGrs } from "../../../components/ui/custom/buttons/Button";
+import { More } from "../../../components/icons";
 
 export const metadata: Metadata = {
   title: "Productos",

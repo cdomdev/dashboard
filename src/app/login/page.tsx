@@ -4,19 +4,32 @@ import { LoginSchema } from "@/interfaces/login";
 import { useState } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { loginAdmin } from "./actions";
+import { useToastStore } from "../../context/global.context.app";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
 
+  const seToast = useToastStore.getState().setToast;
+
+  useToastStore();
   const onSubmit = async (data: LoginSchema) => {
     setIsLoading(true);
 
     const res = await loginAdmin(data);
-
-    if (!res) {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
+    const { result, response } = res;
+    console.log(result);
+    console.log(response);
+    if (res) {
+      seToast(
+        `${result ? result.message : "Hubo un error en el inicio de sesion"} `,
+        "erros"
+      );
+      setIsLoading(false);
+    } else {
+      seToast(
+        "Algo salio mal con el inicio de sesion, intente mas tarde",
+        "error"
+      );
     }
   };
 

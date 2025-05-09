@@ -3,12 +3,15 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+const HOST = process.env.NEXT_PUBLIC_HOST_API;
+
 interface LoginData {
   email: string;
   password: string;
 }
+
 export async function loginAdmin(data: LoginData) {
-  const response = await fetch("http://localhost:3000/api/auth-admin", {
+  const response = await fetch(`${HOST}/api/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -38,5 +41,5 @@ export async function loginAdmin(data: LoginData) {
     redirect("/dashboard");
   }
 
-  return response.status;
+  return { response: response.status, result: result };
 }

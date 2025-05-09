@@ -1,11 +1,11 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import { useState } from "react";
 import type { categorySchema } from "@/interfaces";
-import { ButtonGrs } from "@/app/dashboard/components/ui/buttons/Button";
-import { Dataabase } from "@/app/dashboard/components/icons";
+import { ButtonGrs } from "@/components/ui/custom/buttons/Button";
+import { Dataabase } from "@/components/icons";
 import { editCategory } from "../lib/categoria";
-import { useToastStore } from "@/app/dashboard/components/context/global.context.app";
-import { Modal } from "../../components/ui/Modals/Modal";
+import { useToastStore } from "@/context/global.context.app";
+import { Modal } from "../../../../components/ui/custom/Modals/Modal";
 
 interface PropForm {
   nombre: string;

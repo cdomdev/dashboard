@@ -1,22 +1,34 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import type { categorySchema } from "@/interfaces";
-import { Dataabase } from "../../components/icons";
-import { ButtonGrs } from "../../components/ui/buttons/Button";
+import { Dataabase } from "../../../../components/icons";
+import { ButtonGrs } from "../../../../components/ui/custom/buttons/Button";
 import { createSubcategoria } from "../lib/subcategoria";
-import { useToastStore } from "@/app/dashboard/components/context/global.context.app";
+import { useToastStore } from "@/context/global.context.app";
 
 export function FormSubcategory() {
   const onSubmit = async (
     values: categorySchema,
     { resetForm }: { resetForm: () => void }
   ) => {
+    const seToast = useToastStore.getState().setToast;
     try {
       const res = await createSubcategoria(values);
       if (res?.status === 201) {
         resetForm();
-        const seToast = useToastStore.getState().setToast;
         seToast("Subcategoría creada con éxito", "toast-success");
       }
+
+      if (res.status === 409) {
+        seToast(
+          res.message || "Ya existe una subcategoría con ese nombre",
+          "error"
+        );
+      }
+
+      seToast(
+        res.message || "Error inesperado al crear la subcategoría",
+        "error"
+      );
     } catch (error) {
       console.error("Error creating subcategoria:", error);
     }
