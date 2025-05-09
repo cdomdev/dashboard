@@ -16,19 +16,17 @@ export function FormSubcategory() {
       if (res?.status === 201) {
         resetForm();
         seToast("Subcategoría creada con éxito", "toast-success");
-      }
-
-      if (res.status === 409) {
+      } else if (res.status === 409) {
         seToast(
           res.message || "Ya existe una subcategoría con ese nombre",
           "error"
         );
+      } else {
+        seToast(
+          res.message || "Error inesperado al crear la subcategoría",
+          "error"
+        );
       }
-
-      seToast(
-        res.message || "Error inesperado al crear la subcategoría",
-        "error"
-      );
     } catch (error) {
       console.error("Error creating subcategoria:", error);
     }

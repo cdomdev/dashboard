@@ -20,7 +20,7 @@ export const Modal: React.FC<ModalProps> = ({
       id="popup-modal"
       className="fixed top-0 right-0 left-0 z-50 w-full h-full flex justify-center items-center bg-black/30"
     >
-      <div className="relative p-1 w-full max-w-md max-h-full bg-white rounded-lg">
+      <div className="relative p-1 w-full max-w-md max-h-full rounded-lg">
         <div className="relative bg-white rounded-lg">
           <button
             onClick={onClose}
@@ -44,11 +44,12 @@ export const Modal: React.FC<ModalProps> = ({
             </svg>
             <span className="sr-only">Close modal</span>
           </button>
-          <div className="p-1 text-center">
+          <div className="p-1 text-center ">
             <h3 className="mb-2 text-lg text-gray-800 font-semibold">
               {modalTitle}
             </h3>
-            {modalContent && <p className="text-black pt-2 text-balance text-base">{modalContent}</p>}
+            <hr className="text-black dark:text-black w-full"/>
+            {modalContent && <p className="text-black pt-2 text-pretty text-base">{modalContent}</p>}
             <div className="p-4">{children}</div>
           </div>
         </div>

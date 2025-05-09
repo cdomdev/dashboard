@@ -6,36 +6,38 @@ import { getSubcategorias } from "../lib/subcategoria";
 import type { categorySchema } from "@/interfaces";
 import { DeleteSubcategoria } from "./Delete";
 import Loading from "../loading";
+import { DbNotResult } from "@/components/icons/DbNotResult";
 
 interface Props {
-  setCatCount: (count: number) => void;
+  setCatCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export function List({ setCatCount }: Props) {
-  const [categorias, setCategorias] = useState<categorySchema[]>();
-  
+  const [subcategoria, setSubcategoria] = useState<categorySchema[]>();
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await getSubcategorias();
-      if (res?.status === 200 && Array.isArray(res.data?.categorias)) {
-        setCatCount(res.data.categorias.length);
-        setCategorias(res.data.categorias);
+      console.log(res)
+      if (res?.status === 200 && Array.isArray(res.data?.subcategorias)) {
+        setCatCount(res.data.subcategorias.length);
+        setSubcategoria(res.data.subcategorias);
       } else {
         setCatCount(0);
-        setCategorias([]);
+        setSubcategoria([]);
       }
     };
     fetchData();
   }, [setCatCount]);
 
- 
-  if (!categorias) return <Loading />;
-  
-  if (categorias?.length === 0)
+  if (!subcategoria) return <Loading />;
+
+  if (subcategoria?.length === 0)
     return (
-      <p className="text-center text-md text-gray-400">
-        No hay subcategorias para listar
-      </p>
+      <div className="text-center text-md text-gray- py-4 dark:text-black flex flex-col items-center">
+        <DbNotResult className="" />
+        <p className="text-gray-700">No hay subcategorias para listar</p>
+      </div>
     );
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-sm animate-fadeIn">
@@ -58,7 +60,7 @@ export function List({ setCatCount }: Props) {
           </tr>
         </thead>
         <tbody>
-          {categorias?.map((cat, index) => (
+          {subcategoria?.map((cat, index) => (
             <tr
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
               key={cat.id || index}
@@ -77,7 +79,11 @@ export function List({ setCatCount }: Props) {
               </th>
 
               <td className="pl-20 py-4">
-                <DeleteSubcategoria id={cat.id} setCategorias={setCategorias} />
+                <DeleteSubcategoria
+                  id={cat.id}
+                  setSubcategorias={setSubcategoria}
+                  setCatCount={setCatCount}
+                />
               </td>
               <td className="px-6 py-4 flex items-center justify-center">
                 <a

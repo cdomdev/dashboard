@@ -1,12 +1,14 @@
 export interface ProductSchema {
+  id?: string ;
+  cantidad: number;
   marca: string;
   titulo: string;
-  precio: number | string;
+  precio: number;
   referencia: string;
-  cantidad: number | string;
   categoria: string;
   subcategoria: string;
   descripcion: string;
+  image: string;
 }
 
 export interface categorySchema {

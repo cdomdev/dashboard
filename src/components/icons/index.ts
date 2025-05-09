@@ -15,3 +15,5 @@ export { More } from "./More";
 export { MoonIcon } from "./MoonIcon";
 export { SunIcon } from "./SunIcon";
 export { SystemIcon } from "./SystemIcon";
+export { DbNotResult } from "./DbNotResult";
+export { Delete } from "./Delete";
