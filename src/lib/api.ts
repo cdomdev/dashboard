@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken, refreshAdminToken } from "./refreshToken";
+import { refreshAdminTokenClient } from "./refreshToken";
 const HOST = process.env.NEXT_PUBLIC_HOST_API;
 
 axios.defaults.withCredentials = true;
@@ -13,12 +13,6 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-    const token = await getToken("bearer-token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    } else {
-      console.warn("No hay token en cookies");
-    }
     return config;
   },
   (error) => Promise.reject(error)
@@ -35,8 +29,7 @@ api.interceptors.response.use(
     ) {
       originalRequest._retry = true;
 
-      const refreshResponse = await refreshAdminToken();
-      console.log('respuesta del refresh--->', refreshResponse)
+      const refreshResponse = await refreshAdminTokenClient();
 
       const { newAccessToken } = refreshResponse;
       if (refreshResponse) {
