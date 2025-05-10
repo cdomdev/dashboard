@@ -16,11 +16,15 @@ export function ListProducts() {
       console.log("productos", res);
       if (res.status === 200) {
         setProducts(res.data.data);
+      }else{
+        setProducts([])
       }
     }
     fechData();
   }, []);
+
   if (!products) return <Loading />;
+  
   if (products?.length === 0)
     return (
       <div className="text-center text-md text-gray- py-4 dark:text-black flex flex-col items-center dark:bg-white rounded-md">
