@@ -13,35 +13,35 @@ export default async function Home() {
     {
       title: "Total ordenes",
       value: 0,
-      text: "Ordenees sin despachar",
+      text: "Ordenes sin despachar",
       icon: BoxComponent,
       bgBox: "bg-[#fbddb9]",
     },
     {
       title: "Ordenes despachadas",
       value: 0,
-      text: "Con estado de entregado",
+      text: "Entregado",
       icon: SendBox,
       bgBox: "bg-[#6ee35e]",
     },
     {
       title: "Pendientes por envio",
       value: 0,
-      text: "Pendientes",
+      text: "Pendientes...",
       icon: Time,
       bgBox: "bg-[#cd76d8]",
     },
     {
       title: "Total vendido",
       value: 0,
-      text: "Balance total de ventas",
+      text: "Balance",
       icon: Sale,
       bgBox: "bg-[#c86464]",
     },
     {
       title: "Total usuarios",
       value: 0,
-      text: "Usuarios e invitados",
+      text: "Usuarios",
       icon: Usuario,
       bgBox: "bg-[#33ddc0]",
     },
@@ -54,7 +54,7 @@ export default async function Home() {
           {dataBox.map((item, index) => (
             <div
               key={index}
-              className="w-full min-w-[10rem] sm:min-w-[12rem] h-24 sm:h-28 rounded-xl shadow-md flex justify-between p-3 bg-white dark:text-black dark:bg-gray-200 "
+              className={`text-black w-full min-w-[10rem] sm:min-w-[12rem] h-24 sm:h-28 rounded-xl shadow-md flex justify-between p-3 ${item.bgBox} `}
             >
               <div className="flex flex-col justify-between">
                 <h1 className="text-xs sm:text-sm font-semibold">
@@ -63,13 +63,13 @@ export default async function Home() {
                 <p className="font-extrabold text-sm sm:text-xl">
                   {item.value}
                 </p>
-                <span className="text-[8px] text-slate-500 sm:text-xs">
+                <span className="text-[8px] text-slate-800 sm:text-xs font-semibold">
                   {item.text}
                 </span>
               </div>
 
               <div
-                className={`${item.bgBox} rounded-full w-10 h-10 sm:h-12 sm:w-12 flex justify-center items-center p-1`}
+                className={`bg-white rounded-full w-10 h-10 sm:h-12 sm:w-12 flex justify-center items-center `}
               >
                 <item.icon />
               </div>
