@@ -1,11 +1,13 @@
 import React from "react";
 
-export const Home = () => {
+export const Home = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
+    {...props}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"
+      className={props.className}
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"

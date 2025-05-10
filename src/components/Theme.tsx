@@ -9,7 +9,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import { SystemIcon } from "./icons";
 
 export function ModeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -41,7 +40,7 @@ export function ModeToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="cursor-pointer ring-0 dark:ring-0 focus:ring-0"
+          className="cursor-pointer ring-0 dark:ring-0 focus:ring-0 hover:bg-transparent"
         >
           {showIcon()}
           <span className="sr-only">Toggle theme</span>

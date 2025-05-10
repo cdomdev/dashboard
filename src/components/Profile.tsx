@@ -16,30 +16,16 @@ export function DropProfileMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar className="cursor-pointer">
-          <AvatarImage src="/path/to/avatar.jpg" alt="Admin" />
-          <AvatarFallback>
-            {" "}
-            <svg
-              className="size-20 text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </AvatarFallback>
-        </Avatar>
+      <Avatar>
+      <AvatarImage src="https://github.com/shadcn.png" alt="avatar-admin" />
+      <AvatarFallback>AD</AvatarFallback>
+    </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-44">
         <DropdownMenuLabel className="uppercase">Admin</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/">Dashboard</Link>
+          <Link href="/dashboard">Dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
@@ -54,3 +40,5 @@ export function DropProfileMenu() {
     </DropdownMenu>
   );
 }
+
+ 
