@@ -17,7 +17,7 @@ export default function LoginPage() {
 
     const res = await loginAdmin(data);
     const { result } = res;
-    if (res.result.status === 200) {
+    if (res.result.status !== 200) {
       seToast(
         `${result ? result.message : "Hubo un error en el inicio de sesion"} `,
         "erros"
