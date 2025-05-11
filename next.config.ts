@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['res.cloudinary.com'],
   },
+  allowedDevOrigins: ['https://studio.firebase.google.com'],
 };
 
 export default nextConfig;
