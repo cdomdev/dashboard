@@ -1,6 +1,13 @@
 import "@/app/globals.css";
 import { Toast } from "@/components/Toast";
 import { Providers } from "@/app/Provider";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login",
+  description: "Pagina de login",
+};
+
 
 export default async function LayoutRoot({
   children,

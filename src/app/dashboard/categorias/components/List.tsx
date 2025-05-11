@@ -34,14 +34,14 @@ export function List({ setCatCount }: Props) {
 
   if (categorias?.length === 0)
     return (
-      <div className="text-center text-md text-gray- py-4 dark:text-black flex flex-col items-center dark:bg-white rounded-md">
-        <DbNotResult className="" />
+      <div className=" shadow-sm mt-10 text-center text-md py-4 dark:text-black flex flex-col items-center dark:bg-white rounded-md">
+        <DbNotResult className="text-gray-400"/>
         <p className="text-gray-700">No hay subcategorias para listar</p>
       </div>
     );
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-sm">
+    <div className="mt-10 relative overflow-x-auto shadow-md sm:rounded-sm">
       <table className="w-full text-sm text-Back rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>

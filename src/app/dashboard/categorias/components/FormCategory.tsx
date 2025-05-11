@@ -45,10 +45,10 @@ export function FormCategory() {
         onSubmit={onSubmit}
       >
         {({ handleSubmit }) => (
-          <div className="flex w-full gap-4">
+          <div className="grid md:grid-cols-2 w-full gap-4">
             <form
               onSubmit={handleSubmit}
-              className="w-[75%] shadow-md rounded-md p-4 bg-white dark:bg-gray-200"
+              className="shadow-md rounded-md p-4 bg-white dark:bg-gray-200"
             >
               <label
                 htmlFor="nombre"
@@ -56,7 +56,7 @@ export function FormCategory() {
               >
                 Nombre
               </label>
-              <div className="relative max-w-2/4">
+              <div className="relative w-full lg:max-w-2/4">
                 <Field
                   type="text"
                   id="nombre"
@@ -72,10 +72,10 @@ export function FormCategory() {
               />
             </form>
 
-            <div className="w-[25%] shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20 dark:bg-gray-200">
+            <div className="shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20 dark:bg-gray-200">
               <ButtonGrs
                 text="Guardar categoría"
-                classNeme="w-full "
+                classNeme="w-full w-fit md:max-w-[70%] mx-auto"
                 icon={<Dataabase />}
                 onClick={handleSubmit}
               />

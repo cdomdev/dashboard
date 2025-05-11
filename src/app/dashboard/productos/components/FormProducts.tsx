@@ -48,12 +48,12 @@ export function FormProducts() {
         onSubmit={onSubmit}
       >
         {({ handleSubmit }) => (
-          <div className="flex w-full gap-4">
+          <div className="flex flex-col md:flex-row w-full gap-4">
             <form
               onSubmit={handleSubmit}
-              className="w-[75%] shadow-md rounded-md p-4 bg-white dark:bg-gray-100"
+              className="md:w-[75%] shadow-md rounded-md p-4 bg-white dark:bg-gray-100"
             >
-              <div className="flex gap-4">
+              <div className="grid md:grid-cols-2 gap-4">
                 <div className="w-full">
                   <label
                     htmlFor="titulo"
@@ -102,7 +102,7 @@ export function FormProducts() {
                 </div>
               </div>
 
-              <div className=" flex gap-4">
+              <div className="grid md:grid-cols-2 gap-4">
                 <div className="w-full">
                   <label
                     htmlFor="referencia"
@@ -154,7 +154,7 @@ export function FormProducts() {
                 </div>
               </div>
 
-              <div className=" flex gap-4 max-w-2/4">
+              <div className=" grid md:grid-cols-2 gap-4 lg:max-w-2/4">
                 <div className="w-full">
                   <label
                     htmlFor="cantidad"
@@ -181,7 +181,7 @@ export function FormProducts() {
                 </div>
               </div>
 
-              <div className="flex gap-4">
+              <div className="grid md:grid-cols-2 gap-4">
                 <div className="w-full">
                   <SelectCat />
                 </div>
@@ -191,7 +191,7 @@ export function FormProducts() {
                 </div>
               </div>
 
-              <div className="mb-3 flex gap-4">
+              <div className="mb-3 grid md:grid-cols-2 gap-4">
                 <div className="w-full">
                   <label
                     htmlFor="descripcion"
@@ -224,9 +224,9 @@ export function FormProducts() {
               </div>
             </form>
 
-            <div className="w-[25%] shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20 dark:bg-gray-100">
+            <div className="md:w-[25%] shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20 dark:bg-gray-100">
               <ButtonGrs
-                classNeme="w-full"
+                classNeme="w-full w-fit"
                 onClick={handleSubmit}
                 text=""
                 icon={<Dataabase />}

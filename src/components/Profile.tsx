@@ -16,7 +16,7 @@ export function DropProfileMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-      <Avatar>
+      <Avatar className="cursor-pointer">
       <AvatarImage src="https://github.com/shadcn.png" alt="avatar-admin" />
       <AvatarFallback>AD</AvatarFallback>
     </Avatar>

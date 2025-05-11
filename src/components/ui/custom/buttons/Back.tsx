@@ -6,7 +6,7 @@ interface BacksProps {
 
 export const Back = ({url}: BacksProps) => {
   return (
-    <Link href={url} className="flex items-center gap-1 group mb-2 font-semibold text-lg">
+    <Link href={url} className="flex items-center gap-1 group mb-2 font-semibold text-base md:text-lg">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

@@ -1,1 +1,1 @@
-export type { ProductSchema, categorySchema } from "./interfaces";
+export type { ProductSchema, categorySchema, OfertsSchema } from "./interfaces";

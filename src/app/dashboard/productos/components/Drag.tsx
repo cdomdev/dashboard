@@ -6,6 +6,7 @@ import { uploadImageToCloudinary } from "../utils/uploadCloudinary";
 import { useState } from "react";
 type ImageDropProps = {
   name: string;
+  
 };
 
 export const ImageDrop = ({ name }: ImageDropProps) => {

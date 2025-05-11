@@ -1,22 +1,20 @@
-"use client";
-
-import { Back } from "../../../../components/ui/custom/buttons/Back";
+import { HeaderPagesSection } from "@/components/HeaderPagesSection";
 import { FormSubcategory } from "../components/FormSubcategory";
+
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Agregar nueva oferta",
+    description: "Pagina para agregar nueva oferta - crear un nuevo oferta",
+};
 
 export default function Crearsubcategoria() {
   return (
-    <section className="w-full min-h-dvh p-7 flex flex-col gap-5 ">
-      <section className="w-full px-10 pt-10 flex justify-between gap-5">
-        <div>
-          <Back url="/dashboard/subcategorias" />
-          <h1 className="text-lg font-semibold">
-            Agregar una nueva subcategoria{" "}
-          </h1>
-        </div>
-      </section>
+    <>
+      <HeaderPagesSection href="#" title="Agregar nueva subcategoria" url="/dahsboard/subcategoria" viewCount={false} />
       <section className="flex gap-4">
         <FormSubcategory />
       </section>
-    </section>
+    </>
   );
 }

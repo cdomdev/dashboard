@@ -45,10 +45,10 @@ export function FormSubcategory() {
       onSubmit={onSubmit}
     >
       {({ handleSubmit }) => (
-        <div className="flex w-full gap-4">
+        <div className="grid md:grid-cols-2 w-full gap-4">
           <form
             onSubmit={handleSubmit}
-            className="w-[75%] shadow-md rounded-md p-4 bg-white"
+            className="shadow-md rounded-md p-4 bg-white"
           >
             <label
               htmlFor="nombre"
@@ -56,12 +56,12 @@ export function FormSubcategory() {
             >
               Nombre
             </label>
-            <div className="relative max-w-2/4">
+            <div className="relative lg:max-w-2/4">
               <Field
                 type="text"
                 id="nombre"
                 name="nombre"
-                placeholder="Título del producto"
+                placeholder="Nombre de la subcategoria"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring- focus:ring-blue-400 focus:border-blue-400 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-1 dark:focus:ring-blue-400 dark:focus:border-blue-400"
               />
             </div>
@@ -72,7 +72,7 @@ export function FormSubcategory() {
             />
           </form>
 
-          <div className="w-[25%] shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20">
+          <div className="shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20">
             <ButtonGrs
               text="Guardar subcategoría"
               icon={<Dataabase />}

@@ -127,6 +127,7 @@ export default function LoginPage() {
                     type="password"
                     id="password"
                     name="password"
+                     autoComplete="current-password"
                     placeholder="Ingrese su contraseña"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring- focus:ring-blue-400 focus:border-blue-400 block w-full ps-10 p-2.5
                     dark:bg-gray-600 dark:border-gray-400 dark:placeholder-gray-400 dark:text-white dark:focus:ring-1 dark:focus:ring-blue-400 dark:focus:border-blue-400"
