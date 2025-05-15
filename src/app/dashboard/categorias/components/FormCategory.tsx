@@ -1,3 +1,5 @@
+"use client"
+
 import { Formik, Field, ErrorMessage } from "formik";
 import type { categorySchema } from "@/interfaces";
 import { ButtonGrs } from "@/components/ui/custom/buttons/Button";
@@ -45,10 +47,10 @@ export function FormCategory() {
         onSubmit={onSubmit}
       >
         {({ handleSubmit }) => (
-          <div className="grid md:grid-cols-2 w-full gap-4">
+          <div className="grid grid-cols-1 md:flex w-full gap-4 ">
             <form
               onSubmit={handleSubmit}
-              className="shadow-md rounded-md p-4 bg-white dark:bg-gray-200"
+              className="shadow-md rounded-md p-4 bg-white dark:bg-gray-200 md:w-2/3"
             >
               <label
                 htmlFor="nombre"
@@ -72,10 +74,9 @@ export function FormCategory() {
               />
             </form>
 
-            <div className="shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20 dark:bg-gray-200">
+            <div className="shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20 dark:bg-gray-200 lg:w-1/3">
               <ButtonGrs
                 text="Guardar categoría"
-                classNeme="w-full w-fit md:max-w-[70%] mx-auto"
                 icon={<Dataabase />}
                 onClick={handleSubmit}
               />

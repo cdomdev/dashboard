@@ -31,7 +31,6 @@ api.interceptors.response.use(
 
       const refreshResponse = await refreshAdminTokenClient();
 
-      console.log('interceptor ----> ', refreshResponse)
       const { newAccessToken } = refreshResponse;
       
       if (refreshResponse) {

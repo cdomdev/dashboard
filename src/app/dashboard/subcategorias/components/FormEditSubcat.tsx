@@ -3,24 +3,23 @@ import { useState } from "react";
 import type { categorySchema } from "@/interfaces";
 import { ButtonGrs } from "@/components/ui/custom/buttons/Button";
 import { Dataabase } from "@/components/icons";
-import { editCategory } from "../lib/categoria";
+import { editSubcategory } from "../lib/subcategoria";
 import { useToastStore } from "@/context/global.context.app";
 import { Modal } from "../../../../components/ui/custom/Modals/Modal";
 import { Edit } from "lucide-react";
 
-
 interface PropForm {
   nombre: string;
-  category: string;
+  subcategory: string;
   id?: string;
 }
 
 interface Props {
-  category: categorySchema;
-  setCategorias: React.Dispatch<React.SetStateAction<categorySchema[]>>;
+  subcategory: categorySchema;
+  setSubCategoria: React.Dispatch<React.SetStateAction<categorySchema[]>>;
 }
 
-export function FormEditCat({ category, setCategorias }: Props) {
+export function FormEditSubcat({ subcategory, setSubCategoria }: Props) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const onSubmit = async (
     values: PropForm,
@@ -28,26 +27,26 @@ export function FormEditCat({ category, setCategorias }: Props) {
   ) => {
     const seToast = useToastStore.getState().setToast;
 
-    const res = await editCategory(values);
+    const res = await editSubcategory(values);
 
     if (res.success) {
       resetForm();
       setIsDeleteOpen(false);
-      seToast("Categoría actalizada con éxito", "toast-success");
-      setCategorias((prev) =>
+      seToast("SUbcategoría actalizada con éxito", "toast-success");
+      setSubCategoria((prev) =>
         prev.map((cat) =>
-          cat.id === category.id ? { ...cat, nombre: values.nombre } : cat
+          cat.id === subcategory.id ? { ...cat, nombre: values.nombre } : cat
         )
       );
     } else {
       if (res.status === 409) {
         seToast(
-          res.message || "Ya existe una categoría con ese nombre",
+          res.message || "Ya existe una subcategoría con ese nombre",
           "error"
         );
       } else {
         seToast(
-          res.message || "Error inesperado al crear la categoría",
+          res.message || "Error inesperado al editar la subcategoría",
           "error"
         );
       }
@@ -57,7 +56,7 @@ export function FormEditCat({ category, setCategorias }: Props) {
   return (
     <>
       <button
-        className="text-blue-600 hover:underline font-medium text-sm cursor-pointer w-full flex items-center gap-1 justify-center"
+        className="text-blue-600 hover:underline font-medium text-sm cursor-pointer inline-flex items-center gap-1"
         onClick={() => setIsDeleteOpen(true)}
       >
         <Edit className="w-5 h-5"/>
@@ -72,13 +71,13 @@ export function FormEditCat({ category, setCategorias }: Props) {
       >
         <Formik
           initialValues={{
-            nombre: category.nombre,
-            id: category.id,
-            category: category.nombre,
+            nombre: subcategory.nombre,
+            id: subcategory.id,
+            subcategory: subcategory.nombre,
           }}
           validate={(values: PropForm) => {
             const errors: Partial<PropForm> = {};
-            if (values.nombre === category.nombre) {
+            if (values.nombre === subcategory.nombre) {
               errors.nombre =
                 "¡Debe cambiar o ingresar una categoria con nombre distinto!";
             }
@@ -89,8 +88,8 @@ export function FormEditCat({ category, setCategorias }: Props) {
           {({ handleSubmit }) => (
             <>
               <p className="text-red-500 font-medium text-base text-balance">
-                <strong>¡Atención!</strong> Si la categoría seleccionada tiene
-                productos asociados, se recomienda no modificarla.
+                <strong>¡Atención!</strong> Si la subcategoría seleccionada
+                tiene productos asociados, se recomienda no modificarla.
               </p>
               <p className="text-red-500 font-medium text-base text-balance">
                 Modificar esta categoría podría romper la referencia entre la

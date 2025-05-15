@@ -1,24 +1,41 @@
-"use client"
-import { useEffect, useState } from 'react';
-import { getAdmin } from './lib/users'
+"use client";
+import { useEffect, useState } from "react";
+import { getAdmin } from "./lib/users";
+import { ListUsers } from "./components/List";
+import { HeaderPagesSection } from "@/components/HeaderPagesSection";
 
 export default function AdminPage() {
-  const [res, setRes] = useState()
+  const [res, setRes] = useState();
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getAdmin()
-      console.log('response ---> ', res)
-      setRes(res?.data?.users)
-    }
-    fetchData()
-  }, [])
+      const res = await getAdmin();
+      setRes(res?.data?.users);
+    };
+    fetchData();
+  }, []);
 
-  console.log(res)
+  const itemsHeadTable = [
+    "#ID",
+    "Nombre",
+    "Email",
+    "Estado",
+    "Rol",
+    "Imagen",
+    "Telefono",
+    "Ciudad",
+    "Accion",
+    "Accion",
+    "Detalles",
+  ];
 
   return (
     <>
-      <h2 className="">Listado de administradores</h2>
-      <span className="">Aqio el conteido o tabla de administradores</span>
+      <HeaderPagesSection href="#" title="Administradores" url="/dashboard" />
+      <h2 className="text-base md:text-xl">Listado de administradores</h2>
+      <hr className="w-full my-1" />
+      <section className="mt-5">
+        <ListUsers items={itemsHeadTable} users={res} />
+      </section>
     </>
   );
 }

@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 export default function Crearsubcategoria() {
   return (
     <>
-      <HeaderPagesSection href="#" title="Agregar nueva subcategoria" url="/dahsboard/subcategoria" viewCount={false} />
+      <HeaderPagesSection href="#" title="Agregar nueva subcategoria" url="/dashboard/subcategorias" viewCount={false} />
       <section className="flex gap-4">
-        <FormSubcategory />
+        <FormSubcategory  />
       </section>
     </>
   );

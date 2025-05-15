@@ -11,7 +11,6 @@ export async function refreshAdminTokenClient() {
 
     const data = await res.json();
 
-    console.log("data de refresh ---> ", data)
     return data;
   } catch (err) {
     console.error("Error al refrescar token:", err);

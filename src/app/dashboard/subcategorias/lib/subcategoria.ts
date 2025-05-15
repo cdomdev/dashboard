@@ -15,3 +15,19 @@ export function deleteSubcategoria(id?: string) {
   const response = query(`/api/subcategories/delete/${id}`, "DELETE");
   return response;
 }
+
+export async function editSubcategory({
+  id,
+  nombre,
+  subcategory,
+}: {
+  id?: string;
+  nombre: string;
+  subcategory: string;
+}) {
+  const response = await query(`/api/subcategories/edit/${id}`, "PUT", {
+    nombre,
+    subcategory,
+  });
+  return response;
+}

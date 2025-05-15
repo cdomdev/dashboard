@@ -4,6 +4,7 @@ import { categorySchema } from "@/interfaces";
 import { deleteCategory } from "../lib/categoria";
 import { useToastStore } from "@/context/global.context.app";
 import { Modal } from "../../../../components/ui/custom/Modals/Modal";
+import { Delete } from "@/components/icons";
 
 interface deleProps {
   id?: string;
@@ -35,9 +36,10 @@ export function DeleteCategoria({ id, setCategorias, setCatCount }: deleProps) {
   return (
     <>
       <button
-        className="text-red-600 hover:underline font-medium text-sm cursor-pointer"
+        className="text-red-600 hover:underline font-medium text-sm cursor-pointer inline-flex gap-1 items-center"
         onClick={() => setIsDeleteOpen(true)}
       >
+        <Delete />
         Eliminar
       </button>
 

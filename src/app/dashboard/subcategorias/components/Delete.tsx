@@ -8,7 +8,7 @@ import { Delete } from "@/components/icons";
 interface deleProps {
   id?: string;
   setSubcategorias: React.Dispatch<
-    React.SetStateAction<categorySchema[] | undefined>
+    React.SetStateAction<categorySchema[]>
   >;
   setCatCount: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -40,7 +40,7 @@ export function DeleteSubcategoria({
   return (
     <>
       <button
-        className="group flex items-center gap-1 text-red-600 hover:underline font-medium text-sm cursor-pointer"
+        className="flex items-center gap-1 justify-center text-red-600 hover:underline font-medium text-sm cursor-pointer w-full"
         onClick={() => setIsDeleteOpen(true)}
       >
        <Delete/>

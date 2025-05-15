@@ -1,3 +1,5 @@
+"use client";
+
 import { Formik, Field, ErrorMessage } from "formik";
 import type { categorySchema } from "@/interfaces";
 import { Dataabase } from "../../../../components/icons";
@@ -45,10 +47,10 @@ export function FormSubcategory() {
       onSubmit={onSubmit}
     >
       {({ handleSubmit }) => (
-        <div className="grid md:grid-cols-2 w-full gap-4">
+        <div className="grid grid-cols-1 md:flex w-full gap-4 mt-5">
           <form
             onSubmit={handleSubmit}
-            className="shadow-md rounded-md p-4 bg-white"
+            className="shadow-md rounded-md p-4 bg-white md:w-2/3"
           >
             <label
               htmlFor="nombre"
@@ -56,7 +58,7 @@ export function FormSubcategory() {
             >
               Nombre
             </label>
-            <div className="relative lg:max-w-2/4">
+            <div className="relative lg:max-w-3/4">
               <Field
                 type="text"
                 id="nombre"
@@ -72,7 +74,7 @@ export function FormSubcategory() {
             />
           </form>
 
-          <div className="shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20">
+          <div className="shadow-md rounded-md p-4 bg-white flex items-center justify-center max-h-20 lg:w-1/3">
             <ButtonGrs
               text="Guardar subcategoría"
               icon={<Dataabase />}

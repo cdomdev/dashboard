@@ -30,6 +30,10 @@ export function List({ setCatCount }: Props) {
     fetchData();
   }, [setCatCount]);
 
+  
+  const itemsHead = ["#ID", "Nombre de la categoria", "Accion", "Accion"];
+
+
   if (!categorias) return <Loading />;
 
   if (categorias?.length === 0)
@@ -41,23 +45,15 @@ export function List({ setCatCount }: Props) {
     );
 
   return (
-    <div className="mt-10 relative overflow-x-auto shadow-md sm:rounded-sm">
+    <div className="mt-10 relative shadow-md sm:rounded-sm animate-fadeIn">
       <table className="w-full text-sm text-Back rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" className="p-4">
-              #ID
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Nombre de la categoria
-            </th>
-
-            <th scope="col" className="pr-12 py-3">
-              acción
-            </th>
-            <th scope="col" className="px-6 py-3 ">
-              acción
-            </th>
+           <tr>
+            {itemsHead.map((item, idx) => (
+              <th key={idx} scope="col" className="p-4 text-center">
+                {item}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -68,25 +64,25 @@ export function List({ setCatCount }: Props) {
             >
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
                 {cat.id?.slice(1, 7) || index}
               </th>
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
                 {cat.nombre}
               </th>
 
-              <td className="pl-20 py-4">
+              <td className="px-6 py-4 text-center">
                 <DeleteCategoria
                   setCategorias={setCategorias}
                   id={cat.id}
                   setCatCount={setCatCount}
                 />
               </td>
-              <td className="px-6 py-4 flex items-center justify-center">
+              <td className="px-6 py-4 flex items-center justify- text-center">
                 <FormEditCat category={cat} setCategorias={setCategorias} />
               </td>
             </tr>

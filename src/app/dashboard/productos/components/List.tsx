@@ -16,15 +16,27 @@ export function ListProducts() {
       console.log("productos", res);
       if (res.status === 200) {
         setProducts(res.data.data);
-      }else{
-        setProducts([])
+      } else {
+        setProducts([]);
       }
     }
     fechData();
   }, []);
 
+  const itemsHeadTable = [
+    "id",
+    "Nombre del producto",
+    "Marca",
+    "Cantidad",
+    "Precio",
+    "Imagen",
+    "Referencia",
+    "Accion",
+    "Accion",
+  ];
+
   if (!products) return <Loading />;
-  
+
   if (products?.length === 0)
     return (
       <div className="text-center text-md text-gray- py-4 dark:text-black flex flex-col items-center dark:bg-white rounded-md">
@@ -32,42 +44,20 @@ export function ListProducts() {
         <p className="text-gray-700">No hay products para listar</p>
       </div>
     );
+
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-sm">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-sm animate-fadeIn">
       <table className="w-full text-sm text-Back rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" className="p-4">
-              #ID
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Nombre
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Marca
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Cantidad
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Precio
-            </th>
-            <th scope="col" className="pr-12 py-3">
-              Imagen
-            </th>
-            <th scope="col" className="pr-12 py-3">
-              Referencia
-            </th>
-
-            <th scope="col" className="px-6 py-3 ">
-              acción
-            </th>
-            <th scope="col" className="pr-12 py-3">
-              acción
-            </th>
+            {itemsHeadTable.map((item, idx) => (
+              <th key={idx} scope="col" className="p-4">
+                {item}
+              </th>
+            ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="overflow-y-auto">
           {products?.map((prod, index) => (
             <tr
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -79,33 +69,35 @@ export function ListProducts() {
               >
                 {prod?.id?.slice(1, 7)}
               </th>
-              <th
+              <td
                 scope="row"
-                className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
                 {prod.titulo}
-              </th>
-              <th
+              </td>
+              <td
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
                 {prod.marca}
-              </th>
-              <th
+              </td>
+              <td
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className={`${
+                  prod.cantidad < 10 ? "text-red-600 font-extrabold" : "text-gray-900"
+                } px-6 py-4 font-medium  whitespace-nowrap dark:text-white text-center`}
               >
                 {prod.cantidad}
-              </th>
-              <th
+              </td>
+              <td
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
                 {prod.precio}
-              </th>
-              <th
+              </td>
+              <td
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text- text-center"
               >
                 <Image
                   src={prod.image}
@@ -114,13 +106,13 @@ export function ListProducts() {
                   alt={`${prod.titulo}`}
                   className="rounded-full "
                 />
-              </th>
-              <th
+              </td>
+              <td
                 scope="row"
-                className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
                 {prod.referencia}
-              </th>
+              </td>
               <td className="px-4 py-4">Eliminar</td>
               <td className="px-4 py-4 flex items-center justify-center">
                 Editar

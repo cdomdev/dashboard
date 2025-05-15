@@ -21,7 +21,7 @@ export const ButtonGrs = ({
   classNeme,
   children,
 }: ButtonGrsProps) => {
-  const classes = `${classNeme} flex items-center justify-center gap-2 border-none py-2 px-4 rounded-md bg-blue-600 text-slate-200 hover:text-slate-100 hover:bg-blue-800 cursor-pointer duration-200`;
+  const classes = `${classNeme} flex items-center justify-center gap-2 border-none py-2 px-4 rounded-md bg-blue-600 text-slate-200 hover:text-slate-100 hover:bg-blue-800 cursor-pointer duration-200 text-sm md:text-base`;
 
   if (href) {
     return (

@@ -8,8 +8,16 @@ export default function HomeSubcategoria() {
 
   return (
     <>
-      <HeaderPagesSection href="/dashboard/subcategorias/crear" title="Subcategorias" url="/dashboard" catCount={catCount} textBtn="Nueva subcategoria" viewCount={true} viewBtn={true} />
-      <section className="shadow-md w-full rounded-md bg-white">
+      <HeaderPagesSection
+        href="/dashboard/subcategorias/crear"
+        title="Subcategorias"
+        url="/dashboard"
+        catCount={catCount}
+        textBtn="Nueva subcategoria"
+        viewCount={true}
+        viewBtn={true}
+      />
+      <section className="w-full">
         <List setCatCount={setCatCount} />
       </section>
     </>

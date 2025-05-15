@@ -12,9 +12,9 @@ interface PopoverProps {
 }
 
 const products = [
-    { id: crypto.randomUUID(), name: "Producto 1", price: 100 },
-    { id: crypto.randomUUID(), name: "Producto 2", price: 200 },
-    { id: crypto.randomUUID(), name: "Producto 3", price: 300 },
+    { id: "1", name: "Producto 1", price: 100 },
+    { id: "2", name: "Producto 2", price: 200 },
+    { id: "3", name: "Producto 3", price: 300 },
 ]
 
 export function PopoverProducts({ selectedproducts, setSelectedProducts }: PopoverProps) {
@@ -29,7 +29,7 @@ export function PopoverProducts({ selectedproducts, setSelectedProducts }: Popov
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <Button variant="outline" className="w-full bg-blue-400 hover:bg-blue-600 hover:text-white text-white dark:bg-blue-500 cursor-pointer">
+                <Button variant="outline" className="w-full bg-blue-400 hover:bg-blue-600 text-white hover:text-white dark:bg-blue-400 dark:hover:bg-blue-600 cursor-pointer">
                     Seleccionar productos para la oferta
                 </Button>
             </PopoverTrigger>
