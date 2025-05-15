@@ -15,7 +15,7 @@ export function FormOferts() {
     const [loading, setLoading] = useState<boolean>(false);
     const onSubmit = async (
         values: OfertsSchema,
-        { resetForm }: { resetForm: () => void }
+        // { resetForm }: { resetForm: () => void }
     ) => {
         setLoading(true);
         console.log(values)

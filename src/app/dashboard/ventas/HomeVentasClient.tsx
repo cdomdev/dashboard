@@ -1,14 +1,14 @@
 "use client"
 
 import { HeaderPagesSection } from "@/components/HeaderPagesSection";
-import { useState } from "react";
+// import { useState } from "react";
 import { SalesList } from "./components/List";
 
 export default function HomeVentas() {
-  const [count, setCount] = useState<number>(0)
+  // const [count, setCount] = useState<number>(0)
   return (
     <>
-      <HeaderPagesSection href="/dashboard/ofertas/crear" title="Ventas" url="/dashboard" viewCount={true} catCount={count} />
+      <HeaderPagesSection href="/dashboard/ofertas/crear" title="Ventas" url="/dashboard" viewCount={true} />
       <section className="mt-10">
         <SalesList />
       </section>
