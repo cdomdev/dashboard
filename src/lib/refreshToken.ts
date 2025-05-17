@@ -2,6 +2,7 @@ const HOST = process.env.NEXT_PUBLIC_HOST_API;
 
 export async function refreshAdminTokenClient() {
   try {
+    
     const res = await fetch(`${HOST}/api/auth/refresh-token`, {
       method: 'POST',
       credentials: 'include',
