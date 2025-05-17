@@ -1,7 +1,7 @@
 import {query} from '@/lib/request'
-import { categorySchema } from "@/interfaces";
+import { CategorySchema } from "@/interfaces";
 
-export async function createCategoria({ nombre }: categorySchema) {
+export async function createCategoria({ nombre }: CategorySchema) {
   const response = await query("/api/categories/create", "POST", { nombre });
   return response;
 }
