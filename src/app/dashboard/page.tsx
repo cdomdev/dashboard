@@ -27,7 +27,7 @@ export default async function Home() {
     {
       title: "Pendientes por envio",
       value: 0,
-      text: "Pendientes...",
+      text: "Pendientes",
       icon: Time,
       bgBox: "bg-[#cd76d8]",
     },
