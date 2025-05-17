@@ -39,7 +39,6 @@ import {
   CollapsibleContent,
 } from "@radix-ui/react-collapsible";
 
-// Menu items.
 
 const items = [
   {
@@ -74,7 +73,7 @@ const items = [
     icon: Categorias,
     subItems: [
       {
-        url: "/dashboard/categorias/crear",
+        url: "/dashboard/categorias",
         nombre: "Listado de categorias",
       },
       {
@@ -137,21 +136,21 @@ export function AppSidebar() {
                   <Collapsible key={item.title}>
                     <SidebarMenuItem>
                       <CollapsibleTrigger asChild>
-                        <SidebarMenuButton className="group flex items-center justify-between w-full">
+                        <SidebarMenuButton className="group flex items-center justify-between w-full cursor-pointer">
                           <div className="flex items-center gap-2">
                             <item.icon  />
-                            <span className="text-base">{item.title}</span>
+                            <span className="text-base ">{item.title}</span>
                           </div>
                           <ChevronRight className="transition-transform duration-200 group-data-[state=open]:rotate-90" />
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
                     </SidebarMenuItem>
 
-                    <CollapsibleContent>
-                      <SidebarMenuSub className="text-slate-700 gap-y-3 pl-1">
+                    <CollapsibleContent >
+                      <SidebarMenuSub className="text-slate-700 gap-y-3 pl-1 dark:text-slate-400">
                         {item.subItems.map((subItem) => (
-                          <SidebarMenuSubItem key={subItem.nombre}>
-                            <Link href={subItem.url}> <strong className="pr-1">-</strong> {subItem.nombre}</Link>
+                          <SidebarMenuSubItem key={subItem.nombre} className="cursor-pointer">
+                            <Link href={subItem.url} > <strong className="pr-1">-</strong> {subItem.nombre}</Link>
                           </SidebarMenuSubItem>
                         ))}
                       </SidebarMenuSub>
