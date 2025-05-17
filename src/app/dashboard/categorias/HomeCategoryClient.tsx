@@ -5,7 +5,7 @@ import { List } from "./components/List";
 import { HeaderPagesSection } from "@/components/HeaderPagesSection";
 
 export default function HomeCategoriaClient() {
-  const [catCount, setCatCount] = useState(0);
+  const [catCount, setCatCount] = useState<number>(0);
 
   return (
     <>

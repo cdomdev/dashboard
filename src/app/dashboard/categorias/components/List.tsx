@@ -3,7 +3,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { getCategorias } from "../lib/categoria";
-import type { categorySchema } from "@/interfaces";
+import type { CategorySchema} from "@/interfaces";
 import { DeleteCategoria } from "./Delete";
 import Loading from "../loading";
 import { FormEditCat } from "./FormEditCat";
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export function List({ setCatCount }: Props) {
-  const [categorias, setCategorias] = useState<categorySchema[]>([]);
+  const [categorias, setCategorias] = useState<CategorySchema[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
