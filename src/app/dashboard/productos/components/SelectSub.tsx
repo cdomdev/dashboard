@@ -1,10 +1,10 @@
 import { getSubcategorias } from "@/app/dashboard/subcategorias/lib/subcategoria";
-import { categorySchema, ProductSchema } from "@/interfaces";
+import { CategorySchema, ProductSchema } from "@/interfaces";
 import { useFormikContext, ErrorMessage } from "formik";
 import { useEffect, useState } from "react";
 
 export function SelectSub() {
-  const [subcategories, setSubcategories] = useState<categorySchema[]>();
+  const [subcategories, setSubcategories] = useState<CategorySchema[]>();
 
   const { setFieldValue, values } = useFormikContext<ProductSchema>();
 

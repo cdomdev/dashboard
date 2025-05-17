@@ -1,7 +1,7 @@
 "use client";
 
 import { Formik, Field, ErrorMessage } from "formik";
-import type { categorySchema } from "@/interfaces";
+import type { CategorySchema } from "@/interfaces";
 import { Dataabase } from "../../../../components/icons";
 import { ButtonGrs } from "../../../../components/ui/custom/buttons/Button";
 import { createSubcategoria } from "../lib/subcategoria";
@@ -9,7 +9,7 @@ import { useToastStore } from "@/context/global.context.app";
 
 export function FormSubcategory() {
   const onSubmit = async (
-    values: categorySchema,
+    values: CategorySchema,
     { resetForm }: { resetForm: () => void }
   ) => {
     const seToast = useToastStore.getState().setToast;
@@ -37,8 +37,8 @@ export function FormSubcategory() {
   return (
     <Formik
       initialValues={{ nombre: "" }}
-      validate={(values: categorySchema) => {
-        const errors: Partial<categorySchema> = {};
+      validate={(values: CategorySchema) => {
+        const errors: Partial<CategorySchema> = {};
         if (!values.nombre) {
           errors.nombre = "¡Este campo no puede quedar vacío!";
         }

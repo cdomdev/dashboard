@@ -1,7 +1,7 @@
 import { query } from "@/lib/request";
-import { categorySchema } from "@/interfaces";
+import { CategorySchema } from "@/interfaces";
 
-export function createSubcategoria({ nombre }: categorySchema) {
+export function createSubcategoria({ nombre }: CategorySchema) {
   const response = query("/api/subcategories/create", "POST", { nombre });
   return response;
 }

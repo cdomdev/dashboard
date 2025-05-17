@@ -1,4 +1,4 @@
-import { categorySchema } from "@/interfaces";
+import { CategorySchema } from "@/interfaces";
 import { deleteSubcategoria } from "../lib/subcategoria";
 import { useToastStore } from "@/context/global.context.app";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { Delete } from "@/components/icons";
 interface deleProps {
   id?: string;
   setSubcategorias: React.Dispatch<
-    React.SetStateAction<categorySchema[]>
+    React.SetStateAction<CategorySchema[]>
   >;
   setCatCount: React.Dispatch<React.SetStateAction<number>>;
 }

@@ -1,10 +1,10 @@
 import { getCategorias } from "@/app/dashboard/categorias/lib/categoria";
-import { categorySchema, ProductSchema } from "@/interfaces";
+import { CategorySchema, ProductSchema } from "@/interfaces";
 import { ErrorMessage, useFormikContext } from "formik";
 import { useEffect, useState } from "react";
 
 export function SelectCat() {
-  const [categories, setCategories] = useState<categorySchema[]>([]);
+  const [categories, setCategories] = useState<CategorySchema[]>([]);
 
   const { setFieldValue, values} = useFormikContext<ProductSchema>();
 
