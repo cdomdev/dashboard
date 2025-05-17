@@ -1,6 +1,31 @@
 "use client";
+import { getAllSales } from "../lib/sales";
+import { OrderSchema } from "@/interfaces";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export function SalesList() {
+interface Props {
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export function SalesList({ setCount }: Props) {
+  const [sales, setSales] = useState<OrderSchema[]>([]);
+
+  useEffect(() => {
+    async function fechtData() {
+      const res = await getAllSales();
+      if (res.status === 200) {
+        setSales(res?.data.ventas);
+        setCount(res?.data.ventas.length);
+      } else {
+        setCount(0);
+        setSales([]);
+      }
+    }
+
+    fechtData();
+  }, [setCount]);
+
   const itemsHeadTable = [
     "#ID",
     "Nombre de usuario",
@@ -14,35 +39,6 @@ export function SalesList() {
     "Accion",
   ];
 
-  const items = [
-    {
-      id: "1",
-      nombre: "Carlos",
-      email: "carlos@gmail.com",
-      telefono: "3215678902",
-      pago_total: "120.000",
-      metodo_de_pago: "linea",
-      estado_pedido: "En alistamiento",
-    },
-    {
-      id: "2",
-      nombre: "Carlos",
-      email: "carlos@gmail.com",
-      telefono: "3215678902",
-      pago_total: "120.000",
-      metodo_de_pago: "linea",
-      estado_pedido: "En alistamiento",
-    },
-    {
-      id: "3",
-      nombre: "Carlos",
-      email: "carlos@gmail.com",
-      telefono: "3215678902",
-      pago_total: "120.000",
-      metodo_de_pago: "linea",
-      estado_pedido: "En alistamiento",
-    },
-  ];
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-sm">
       <table className="w-full text-sm text-Back rtl:text-right text-gray-500 dark:text-gray-400">
@@ -56,7 +52,7 @@ export function SalesList() {
           </tr>
         </thead>
         <tbody className="overflow-y-auto">
-          {items?.map((prod, index) => (
+          {sales?.map((prod, index) => (
             <tr
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
               key={prod.id || index}
@@ -65,25 +61,25 @@ export function SalesList() {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                {prod?.id?.slice(1, 7)}
+                {prod?.id.slice(1, 6)}
               </th>
               <td
                 scope="row"
                 className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
-                {prod.nombre}
+                {prod.usuario.nombre}
               </td>
               <td
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
-                {prod.email}
+                {prod.usuario.email}
               </td>
               <td
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
-                {prod.telefono}
+                {prod.usuario.telefono}
               </td>
               <td
                 scope="row"
@@ -104,7 +100,14 @@ export function SalesList() {
               >
                 {prod.estado_pedido}
               </td>
-              <td className="px-4 py-4">Detalles</td>
+              <td className="px-4 py-4">
+                <Link
+                  href={`/dashboard/ventas/user/${prod.usuario.id}`}
+                  className="hover:underline dark:text-blue-600"
+                >
+                  Ver pedido
+                </Link>
+              </td>
               <td className="px-4 py-4">Eliminar</td>
               <td className="px-4 py-4 flex items-center justify-center">
                 Editar
