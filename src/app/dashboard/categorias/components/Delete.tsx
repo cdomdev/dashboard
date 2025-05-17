@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { categorySchema } from "@/interfaces";
+import { CategorySchema } from "@/interfaces";
 import { deleteCategory } from "../lib/categoria";
 import { useToastStore } from "@/context/global.context.app";
 import { Modal } from "../../../../components/ui/custom/Modals/Modal";
@@ -8,7 +8,7 @@ import { Delete } from "@/components/icons";
 
 interface deleProps {
   id?: string;
-  setCategorias: React.Dispatch<React.SetStateAction<categorySchema[]>>;
+  setCategorias: React.Dispatch<React.SetStateAction<CategorySchema[]>>;
   setCatCount: React.Dispatch<React.SetStateAction<number>>;
 }
 

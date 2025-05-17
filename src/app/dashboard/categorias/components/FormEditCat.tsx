@@ -1,6 +1,6 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import { useState } from "react";
-import type { categorySchema } from "@/interfaces";
+import type { CategorySchema } from "@/interfaces";
 import { ButtonGrs } from "@/components/ui/custom/buttons/Button";
 import { Dataabase } from "@/components/icons";
 import { editCategory } from "../lib/categoria";
@@ -16,8 +16,8 @@ interface PropForm {
 }
 
 interface Props {
-  category: categorySchema;
-  setCategorias: React.Dispatch<React.SetStateAction<categorySchema[]>>;
+  category: CategorySchema;
+  setCategorias: React.Dispatch<React.SetStateAction<CategorySchema[]>>;
 }
 
 export function FormEditCat({ category, setCategorias }: Props) {
