@@ -3,7 +3,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { getSubcategorias } from "../lib/subcategoria";
-import type { categorySchema } from "@/interfaces";
+import type { CategorySchema } from "@/interfaces";
 import { DeleteSubcategoria } from "./Delete";
 import Loading from "../loading";
 import { DbNotResult } from "@/components/icons/DbNotResult";
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export function List({ setCatCount }: Props) {
-  const [subcategoria, setSubcategoria] = useState<categorySchema[]>([]);
+  const [subcategoria, setSubcategoria] = useState<CategorySchema[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
