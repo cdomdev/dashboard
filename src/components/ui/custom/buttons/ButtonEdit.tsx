@@ -1,18 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Edit } from "lucide-react";
+import { ButtonHTMLAttributes } from "react";
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
-  handler?: () => void;
 }
 
-export function Editbutton({ className, handler }: Props) {
+export function Editbutton({ className, ...props }: Props) {
   return (
     <Button
       type="button"
       className={`${className} cursor-pointer`}
       variant={"default"}
-      onClick={handler}
+      {...props}
     >
       <Edit className="w-5 h-5" />
       <span className="sr-only">Edit</span>
