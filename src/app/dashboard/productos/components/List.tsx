@@ -6,33 +6,47 @@ import Loading from "../loading";
 import { DbNotResult } from "@/components/icons";
 import { getProducts } from "../lib/products";
 import Image from "next/image";
+import { Pagination } from "@/components/Pagination";
+import { TableItems } from "@/components/ui/custom/table/TableItems";
+import { Editbutton } from "@/components/ui/custom/buttons";
+import Link from "next/link";
+import {DeletProduct} from './DeleteProduct'
 
-export function ListProducts() {
-  const [products, setProducts] = useState<ProductSchema[]>();
+interface Props {
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export function ListProducts({ setCount }: Props) {
+  const [products, setProducts] = useState<ProductSchema[]>([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const pageSize = 5;
 
   useEffect(() => {
-    async function fechData() {
-      const res = await getProducts();
-      console.log("productos", res);
+    async function fetchData() {
+      const res = await getProducts(page, pageSize);
       if (res.status === 200) {
         setProducts(res.data.data);
+        setTotalPages(res.data.pagination.pageCount);
+        setCount(res.data.pagination.total);
       } else {
         setProducts([]);
       }
     }
-    fechData();
-  }, []);
+    fetchData();
+  }, [page, setCount]);
 
   const itemsHeadTable = [
-    "id",
+    "ID",
     "Nombre del producto",
     "Marca",
     "Cantidad",
     "Precio",
     "Imagen",
     "Referencia",
-    "Accion",
-    "Accion",
+    "",
+    "",
   ];
 
   if (!products) return <Loading />;
@@ -46,32 +60,25 @@ export function ListProducts() {
     );
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-sm animate-fadeIn">
-      <table className="w-full text-sm text-Back rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            {itemsHeadTable.map((item, idx) => (
-              <th key={idx} scope="col" className="p-4">
-                {item}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="overflow-y-auto">
+    <>
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+
+      <TableItems itemsHead={itemsHeadTable}>
+        <>
           {products?.map((prod, index) => (
             <tr
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+              className="bg-white border-b  last:border-b-0 last:rounded-b  dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
               key={prod.id || index}
             >
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4  not-first:font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
                 {prod?.id?.slice(1, 7)}
               </th>
               <td
                 scope="row"
-                className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+                className="py-4 font-medium   text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
                 {prod.titulo}
               </td>
@@ -84,7 +91,9 @@ export function ListProducts() {
               <td
                 scope="row"
                 className={`${
-                  prod.cantidad < 10 ? "text-red-600 font-extrabold" : "text-gray-900"
+                  prod.cantidad < 10
+                    ? "text-red-600 font-extrabold"
+                    : "text-gray-900"
                 } px-6 py-4 font-medium  whitespace-nowrap dark:text-white text-center`}
               >
                 {prod.cantidad}
@@ -109,18 +118,22 @@ export function ListProducts() {
               </td>
               <td
                 scope="row"
-                className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+                className="py-4 font-medium  text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
                 {prod.referencia}
               </td>
-              <td className="px-4 py-4">Eliminar</td>
-              <td className="px-4 py-4 flex items-center justify-center">
-                Editar
+              <td className="px-4 py-4 text-center">
+                <Link href={`/dashboard/productos/editar/${prod.id}`}>
+                  <Editbutton />
+                </Link>
+              </td>
+              <td className="px-4 py-4">
+                <DeletProduct id={prod.id} setProducts={setProducts} setCount={setCount} />
               </td>
             </tr>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </>
+      </TableItems>
+    </>
   );
 }

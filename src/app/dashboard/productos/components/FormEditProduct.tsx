@@ -7,14 +7,30 @@ import { Dataabase } from "@/components/icons";
 import { SelectSub } from "./SelectSub";
 import { SelectCat } from "./SelectCat";
 import { productValidationSchema } from "@/schemas/producvalidateSchema";
-import { createProduct } from "../lib/products";
+import { createProduct, getProductBy } from "../lib/products";
 import { ImageDrop } from "./Drag";
 import { useToastStore } from "@/context/global.context.app";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Spiner } from "@/components/ui/custom/loaders/Spiner";
+import { useParams } from "next/navigation";
 
-export function FormProducts() {
+export function FormEditProduct() {
   const [loading, setLoading] = useState<boolean>(false);
+  const [product, setProduct] = useState<ProductSchema>();
+
+  const params = useParams();
+  const id = typeof params?.id === "string" ? params.id : undefined;
+
+  useEffect(() => {
+    async function fechtData() {
+      const res = await getProductBy(id);
+      if (res.status === 200) {
+        setProduct(res.data.data);
+      } 
+    }
+    
+    fechtData();
+  }, [id]);
   const onSubmit = async (
     values: ProductSchema,
     { resetForm }: { resetForm: () => void }
@@ -32,28 +48,30 @@ export function FormProducts() {
     }
   };
 
+
   return (
     <>
       <Formik
+        enableReinitialize
         initialValues={{
-          cantidad: 1,
-          marca: "",
-          titulo: "",
-          precio: 0,
-          referencia: "",
-          categoria: "",
-          subcategoria: "",
-          descripcion: "",
-          image: "",
+          cantidad: product?.cantidad ?? 1,
+          marca: product?.marca ?? "",
+          titulo: product?.titulo ?? "",
+          precio: product?.precio ?? 0,
+          referencia: product?.referencia ?? "",
+          categoria: product?.categoria ?? "",
+          subcategoria: product?.subcategoria ?? "",
+          descripcion: product?.descripcion ?? "",
+          image: product?.image ?? "",
         }}
         validationSchema={productValidationSchema}
         onSubmit={onSubmit}
       >
-        {({ handleSubmit }) => (
+        {({ handleSubmit}) => (
           <div className="flex flex-col md:flex-row w-full gap-4">
             <form
               onSubmit={handleSubmit}
-              className="md:w-[75%] shadow-md rounded-md p-4 bg-white dark:bg-gray-100"
+              className="md:w-[75%] shadow-md rounded-md p-4 bg-white dark:bg-gray-100 dark:text-gray-700"
             >
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="w-full">
@@ -233,7 +251,11 @@ export function FormProducts() {
                 text=""
                 icon={<Dataabase />}
               >
-                {loading ? <Spiner className="w-6 h-6" /> : "Guardar producto"}
+                {loading ? (
+                  <Spiner className="w-6 h-6" />
+                ) : (
+                  "Actulizar producto"
+                )}
               </ButtonGrs>
             </div>
           </div>

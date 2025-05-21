@@ -1,3 +1,5 @@
+"use client"
+
 import { useDropzone } from "react-dropzone";
 import { useField, useFormikContext } from "formik";
 import { useCallback, useEffect } from "react";
