@@ -1,6 +1,5 @@
 "use client";
 
-import { HeaderPagesSection } from "@/components/HeaderPagesSection";
 import { OrderSchema } from "@/interfaces";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -9,29 +8,28 @@ import { TableItems } from "@/components/ui/custom/table/TableItems";
 import { DetailsButton } from "@/components/ui/custom/buttons";
 import { DeleteData } from "./DeleteData";
 import Image from "next/image";
-
-// interface Props {
-//   setCount: React.Dispatch<React.SetStateAction<number>>;
-// }
+import { ButtonStatus } from "@/components/ui/custom/buttons/ButtonStatusOrder";
+import { HeaderPagesSection } from "@/components/HeaderPagesSection";
 
 export function UserOrders() {
   const [sale, setSale] = useState<OrderSchema[]>([]);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState<number>(0);
 
   const params = useParams();
   const id = typeof params?.id === "string" ? params.id : undefined;
-  
+
   useEffect(() => {
     const fetchPedido = async () => {
       if (!id) return;
       const res = await getSalesBy(id);
       if (res.status === 200) {
         setSale(res.data.pedido);
+        setCount(res.data.pedido.length);
       }
     };
-    
+
     fetchPedido();
-  }, [id]);
+  }, [id, setCount]);
 
   if (!sale) return <p>Cargando pedido...</p>;
 
@@ -40,24 +38,22 @@ export function UserOrders() {
     "Usuario",
     "Total pagado",
     "Método de pago",
-    "Estado del pedido",
     "Costo de envío",
     "Estado de Mercado Pago",
+    "Estado del pedido",
     "Detalles",
     "",
   ];
-  
-  console.log(count)
-  
+
   return (
     <>
       <HeaderPagesSection
         href="#"
-        title={`Listado de pedidos ${sale[0]?.usuario?.nombre}`}
+        title={`Listado de pedidos`}
         url="/dashboard/ventas"
         viewCount={true}
-        textSpan={`El usuario tiene ${sale.length} ${
-          sale.length > 1 ? "Pedidos" : "Pedido"
+        textSpan={`El usuario tiene ${count} ${
+          count > 1 ? "Pedidos" : "Pedido"
         }`}
       />
 
@@ -112,12 +108,7 @@ export function UserOrders() {
               >
                 {prod.metodo_de_pago}
               </td>
-              <td
-                scope="row"
-                className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {prod.estado_pedido}
-              </td>
+
               <td
                 scope="row"
                 className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
@@ -129,6 +120,12 @@ export function UserOrders() {
                 className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
                 {prod.status_mercadopago || "N/A"}
+              </td>
+              <td
+                scope="row"
+                className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+              >
+                <ButtonStatus id={prod.id} initialStatus={prod.estado_pedido} />
               </td>
               <td className="px-4 py-4 text-center">
                 <DetailsButton

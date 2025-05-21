@@ -26,3 +26,8 @@ export async function deleteSaleBy(id: string) {
   const res = await query(`/api/order/delete/${id}`, "DELETE");
   return res;
 }
+
+export async function UpdateStatusSaleBy(id: string, status: string) {
+  const res = await query(`api/order/update-state/${id}`, "PUT", { status });
+  return res;
+}

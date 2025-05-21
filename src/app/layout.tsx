@@ -16,7 +16,7 @@ export default async function LayoutRoot({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className="bg-white dark:bg-slate-900">
+      <body >
         <Providers>
           <Toast />
           <main>{children}</main>
