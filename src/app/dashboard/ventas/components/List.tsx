@@ -1,8 +1,10 @@
 "use client";
 import { getAllSales } from "../lib/sales";
 import { OrderSchema } from "@/interfaces";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import { TableItems } from "@/components/ui/custom/table/TableItems";
+import { DetailsButton } from "@/components/ui/custom/buttons";
+import Image from "next/image";
 
 interface Props {
   setCount: React.Dispatch<React.SetStateAction<number>>;
@@ -28,94 +30,80 @@ export function SalesList({ setCount }: Props) {
 
   const itemsHeadTable = [
     "#ID",
-    "Nombre de usuario",
-    "Email",
-    "telefono",
-    "Total pagado",
-    "Metodo de pago",
-    "Estado del pedido",
-    "Mas detalles",
-    "Accion",
-    "Accion",
+    "Usuario",
+    "Ciudad",
+    "Departamento",
+    "Teléfono",
+    "Detalles",
   ];
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-sm">
-      <table className="w-full text-sm text-Back rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            {itemsHeadTable.map((item, idx) => (
-              <th key={idx} scope="col" className="p-4 text-center">
-                {item}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="overflow-y-auto">
-          {sales?.map((prod, index) => (
-            <tr
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-              key={prod.id || index}
+    <TableItems itemsHead={itemsHeadTable}>
+      <>
+        {sales.map((prod, index) => (
+          <tr
+            className="bg-white border-b last:border-b-0 last:rounded-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 "
+            key={prod.id || index}
+          >
+            <th
+              scope="row"
+              className=" pl-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-bl-lg "
             >
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                {prod?.id.slice(1, 6)}
-              </th>
-              <td
-                scope="row"
-                className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {prod.usuario.nombre}
-              </td>
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {prod.usuario.email}
-              </td>
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {prod.usuario.telefono}
-              </td>
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {prod.pago_total}
-              </td>
+              {prod?.id.slice(1, 6)}
+            </th>
 
-              <td
-                scope="row"
-                className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {prod.metodo_de_pago}
-              </td>
-              <td
-                scope="row"
-                className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {prod.estado_pedido}
-              </td>
-              <td className="px-4 py-4">
-                <Link
-                  href={`/dashboard/ventas/user/${prod.usuario.id}`}
-                  className="hover:underline dark:text-blue-600"
-                >
-                  Ver pedido
-                </Link>
-              </td>
-              <td className="px-4 py-4">Eliminar</td>
-              <td className="px-4 py-4 flex items-center justify-center">
-                Editar
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+            <td
+              scope="row"
+              className="flex items-center justify-center  py-1 text-gray-900 whitespace-nowrap dark:text-white"
+            >
+              {
+                <>
+                  <Image
+                    className="w-10 h-10 rounded-full"
+                    src={prod.usuario.picture || "/default-avatar-profile.webp"}
+                    alt="perfil de usuario"
+                    width={50}
+                    height={50}
+                  />
+                  <div className="ps-3">
+                    <div className="text-base font-semibold">
+                      {prod.usuario.nombre}
+                    </div>
+                    <div className="font-normal text-gray-500">
+                      {prod.usuario.email}
+                    </div>
+                  </div>
+                </>
+              }
+            </td>
+
+            <td
+              scope="row"
+              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+            >
+              {prod.usuario.ciudad}
+            </td>
+            <td
+              scope="row"
+              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+            >
+              {prod.usuario.departamento}
+            </td>
+            <td
+              scope="row"
+              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+            >
+              {prod.usuario.telefono}
+            </td>
+
+            <td className="px-4 pt-1.5 pb-1 text-center rounded-br-lg ">
+              <DetailsButton
+                url={`/dashboard/ventas/user/${prod.usuario.id}`}
+              />
+            </td>
+          </tr>
+        ))}
+      </>
+    </TableItems>
   );
 }

@@ -20,3 +20,9 @@ export async function modifedSatatusSaleBy(id: string) {
   const res = await query(`/api/update/state-orders/${id}`, "PUT");
   return res;
 }
+
+
+export async function deleteSaleBy(id: string) {
+  const res = await query(`/api/order/delete/${id}`, "DELETE");
+  return res;
+}
