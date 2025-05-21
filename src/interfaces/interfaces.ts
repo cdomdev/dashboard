@@ -50,7 +50,7 @@ export const detailOrder = z.object({
   cantidad: z.number(),
   descuento: z.number(),
 
-  products: productSchema,
+  Producto: productSchema,
 });
 
 export const orderSchema = z.object({
@@ -63,7 +63,7 @@ export const orderSchema = z.object({
 
   usuario: userSchema,
 
-  detalles: detailOrder,
+  detalles_pedido: detailOrder.array(),
 });
 
 export type ProductSchema = z.infer<typeof productSchema>;
