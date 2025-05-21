@@ -10,16 +10,17 @@ import { DetailsButton } from "@/components/ui/custom/buttons";
 import { DeleteData } from "./DeleteData";
 import Image from "next/image";
 
-interface Props {
-  setCount: React.Dispatch<React.SetStateAction<number>>;
-}
+// interface Props {
+//   setCount: React.Dispatch<React.SetStateAction<number>>;
+// }
 
-export function UserOrders({ setCount }: Props) {
+export function UserOrders() {
   const [sale, setSale] = useState<OrderSchema[]>([]);
+  const [count, setCount] = useState(0);
 
   const params = useParams();
   const id = typeof params?.id === "string" ? params.id : undefined;
-
+  
   useEffect(() => {
     const fetchPedido = async () => {
       if (!id) return;
@@ -28,7 +29,7 @@ export function UserOrders({ setCount }: Props) {
         setSale(res.data.pedido);
       }
     };
-
+    
     fetchPedido();
   }, [id]);
 
@@ -45,7 +46,9 @@ export function UserOrders({ setCount }: Props) {
     "Detalles",
     "",
   ];
-
+  
+  console.log(count)
+  
   return (
     <>
       <HeaderPagesSection
