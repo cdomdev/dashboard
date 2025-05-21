@@ -17,14 +17,19 @@ export const useToastStore = create<ToastState>((set) => ({
   hideToast: () => set({ showToast: false }),
 }));
 
-interface ModalState {
-  isOpen: boolean;
-  openModal: () => void;
-  closeModal: () => void;
-}
 
-export const useModalStore = create<ModalState>((set) => ({
-  isOpen: false,
-  openModal: () => set({ isOpen: true }),
-  closeModal: () => set({ isOpen: false }),
+type OrderStatusStore = {
+  statusMap: Record<string, string>;
+  updateStatus: (id: string, status: string) => void;
+};
+
+export const useOrderStatusStore = create<OrderStatusStore>((set) => ({
+  statusMap: {},
+  updateStatus: (id, status) =>
+    set((state) => ({
+      statusMap: {
+        ...state.statusMap,
+        [id]: status,
+      },
+    })),
 }));
