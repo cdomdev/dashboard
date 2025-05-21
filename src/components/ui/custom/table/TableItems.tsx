@@ -6,7 +6,7 @@ interface PropsTable {
 
 export function TableItems({ itemsHead, children }: PropsTable) {
   return (
-    <div className={`mt-10 relative shadow-md sm:rounded-lg animate-fadeIn `}>
+    <div className={`mt-5 relative shadow-md sm:rounded-lg animate-fadeIn `}>
       <table className="w-full text-sm text-Back rtl:text-right text-gray-500 dark:text-gray-400 ">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
           <tr>

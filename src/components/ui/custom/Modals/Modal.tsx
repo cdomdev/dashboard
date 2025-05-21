@@ -48,8 +48,14 @@ export const Modal: React.FC<ModalProps> = ({
             <h3 className="mb-2 text-lg text-gray-800 font-semibold">
               {modalTitle}
             </h3>
-            <hr className="text-black dark:text-black w-full"/>
-            {modalContent && <p className="text-black pt-2 text-pretty text-base">{modalContent}</p>}
+
+            <hr className="my-2 border-gray-200  dark:border-gray-300" />
+
+            {modalContent && (
+              <p className="text-black pt-2 text-pretty text-base">
+                {modalContent}
+              </p>
+            )}
             <div className="p-4">{children}</div>
           </div>
         </div>
