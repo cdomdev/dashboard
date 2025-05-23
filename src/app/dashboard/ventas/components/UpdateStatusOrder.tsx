@@ -32,6 +32,7 @@ export function UpdateState({ id }: { id: string }) {
       seToast("Estado actualizado con éxito", "toast-success");
       setIsOpen(false);
     } else {
+      setIsOpen(false);
       seToast("No fue posible actualizar el estado", "toast-fail");
     }
   };
@@ -40,7 +41,7 @@ export function UpdateState({ id }: { id: string }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-blue-500 text-white px-4 py-2 rounded-md"
+        className="bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer"
       >
         Actualizar estado del pedido
       </button>

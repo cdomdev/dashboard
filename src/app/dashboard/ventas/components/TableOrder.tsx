@@ -5,7 +5,7 @@ import { OrderSchema } from "@/interfaces";
 import { useParams } from "next/navigation";
 import { getOneSaleBy } from "../lib/sales";
 import { HeaderPagesSection } from "@/components/HeaderPagesSection";
-import { LoadingSpinner } from "./LoadingSpiner";
+import { LoadingSpinner } from "@/components/LoadingSpiner";
 import { ButtonStatus } from "@/components/ui/custom/buttons/ButtonStatusOrder";
 import { UpdateState } from "./UpdateStatusOrder";
 
