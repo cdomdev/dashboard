@@ -27,10 +27,6 @@ export const ofertsSchema = z.object({
   image: z.instanceof(File).nullable(),
 });
 
-export const saleSchemas = z.object({
-  id: z.string(),
-});
-
 export const userSchema = z.object({
   id: z.string(),
   nombre: z.string(),
@@ -49,6 +45,8 @@ export const detailOrder = z.object({
   sub_total: z.string(),
   cantidad: z.number(),
   descuento: z.number(),
+  createdAt: z.union([z.string(), z.date()]),
+  updatedAt: z.union([z.string(), z.date()]),
 
   Producto: productSchema,
 });
@@ -60,6 +58,8 @@ export const orderSchema = z.object({
   costo_de_envio: z.string(),
   status_mercadopago: z.string(),
   pago_total: z.string(),
+  createdAt: z.union([z.string(), z.date()]),
+  updatedAt: z.union([z.string(), z.date()]),
 
   usuario: userSchema,
 
@@ -73,3 +73,5 @@ export type OfertsSchema = z.infer<typeof ofertsSchema>;
 export type CategorySchema = z.infer<typeof categorySchema>;
 
 export type OrderSchema = z.infer<typeof orderSchema>;
+
+export type UserSchema = z.infer<typeof userSchema>;
