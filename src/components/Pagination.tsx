@@ -20,7 +20,7 @@ export function Pagination({
   };
 
   return (
-    <div className="flex justify-between items-center my-4 px-4">
+    <div className="flex gap-10 lg:justify-between items-center my-4 lg:px-4">
       <p className="text-gray-600 dark:text-gray-300">
         Página {page} de {totalPages}
       </p>
@@ -28,14 +28,14 @@ export function Pagination({
         <button
           onClick={handlePrev}
           disabled={page === 1}
-          className="bg-gray-300 text-gray-800 px-3 py-1 rounded disabled:opacity-50 flex items-center justify-center group cursor-pointer transition "
+          className="bg-gray-300 text-gray-800 px-3 py-1 rounded disabled:opacity-50 flex items-center justify-center group cursor-pointer transition text-xs md:text-base"
         >
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 duration-200" /> Anterior
         </button>
         <button
           onClick={handleNext}
           disabled={page === totalPages}
-          className="bg-gray-300 text-gray-800 px-3 py-1 rounded disabled:opacity-50 flex items-center justify-center group cursor-pointer transition "
+          className="bg-gray-300 text-gray-800 px-3 py-1 rounded disabled:opacity-50 flex items-center justify-center group cursor-pointer transition text-xs md:text-base "
         >
           Siguiente
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 duration-200" />
