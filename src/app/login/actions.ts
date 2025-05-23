@@ -26,14 +26,14 @@ export async function loginAdmin(data: LoginData) {
   cookiesSession.set("bearer-token", accessToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
     path: "/",
   });
 
   cookiesSession.set("bearer-token-rfsh", refreshToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
     path: "/",
   });
 
