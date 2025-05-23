@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { TableItems } from "@/components/ui/custom/table/TableItems";
 import { DetailsButton } from "@/components/ui/custom/buttons";
 import Image from "next/image";
-import {NoDataResponse} from "@/components/NoDataResp"
+import {NoDataResponse} from "@/components/NoDataInResp"
 
 interface Props {
   setCount: React.Dispatch<React.SetStateAction<number>>;
