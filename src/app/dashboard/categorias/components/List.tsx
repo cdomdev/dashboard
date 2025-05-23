@@ -7,7 +7,6 @@ import type { CategorySchema} from "@/interfaces";
 import { DeleteCategoria } from "./Delete";
 import Loading from "../loading";
 import { FormEditCat } from "./FormEditCat";
-import { DbNotResult } from "@/components/icons";
 
 interface Props {
   setCatCount: React.Dispatch<React.SetStateAction<number>>;
@@ -39,7 +38,6 @@ export function List({ setCatCount }: Props) {
   if (categorias?.length === 0)
     return (
       <div className=" shadow-sm mt-10 text-center text-md py-4 dark:text-black flex flex-col items-center dark:bg-white rounded-md">
-        <DbNotResult className="text-gray-400"/>
         <p className="text-gray-700">No hay subcategorias para listar</p>
       </div>
     );

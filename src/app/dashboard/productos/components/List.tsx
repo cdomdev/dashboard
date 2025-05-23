@@ -3,14 +3,13 @@
 import { ProductSchema } from "@/interfaces";
 import { useEffect, useState } from "react";
 import Loading from "../loading";
-import { DbNotResult } from "@/components/icons";
 import { getProducts } from "../lib/products";
 import Image from "next/image";
 import { Pagination } from "@/components/Pagination";
 import { TableItems } from "@/components/ui/custom/table/TableItems";
 import { Editbutton } from "@/components/ui/custom/buttons";
 import Link from "next/link";
-import {DeletProduct} from './DeleteProduct'
+import { DeletProduct } from "./DeleteProduct";
 
 interface Props {
   setCount: React.Dispatch<React.SetStateAction<number>>;
@@ -54,8 +53,7 @@ export function ListProducts({ setCount }: Props) {
   if (products?.length === 0)
     return (
       <div className="text-center text-md text-gray- py-4 dark:text-black flex flex-col items-center dark:bg-white rounded-md">
-        <DbNotResult className="" />
-        <p className="text-gray-700">No hay products para listar</p>
+        <p className="text-gray-700">No hay productos para listar</p>
       </div>
     );
 
@@ -128,7 +126,11 @@ export function ListProducts({ setCount }: Props) {
                 </Link>
               </td>
               <td className="px-4 py-4">
-                <DeletProduct id={prod.id} setProducts={setProducts} setCount={setCount} />
+                <DeletProduct
+                  id={prod.id}
+                  setProducts={setProducts}
+                  setCount={setCount}
+                />
               </td>
             </tr>
           ))}

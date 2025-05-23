@@ -21,7 +21,15 @@ interface PropTable {
   items: string[];
   users?: UserInterface[];
 }
+
 export function ListUsers({ items, users }: PropTable) {
+  if (!items || !users) {
+    return (
+      <div className=" shadow-sm mt-10 text-center text-md py-4 dark:text-black flex flex-col items-center dark:bg-white rounded-md">
+        <p className="text-gray-700">No hay datos para listar</p>
+      </div>
+    );
+  }
   return (
     <div className="mt-5 relative overflow-x-auto shadow-md sm:rounded-sm animate-fadeIn">
       <table className="w-full text-sm text-Back rtl:text-right text-gray-500 dark:text-gray-400">
@@ -113,7 +121,7 @@ export function ListUsers({ items, users }: PropTable) {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
-               Ver usuario
+                Ver usuario
               </td>
             </tr>
           ))}

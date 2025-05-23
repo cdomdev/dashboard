@@ -6,7 +6,6 @@ import { getSubcategorias } from "../lib/subcategoria";
 import type { CategorySchema } from "@/interfaces";
 import { DeleteSubcategoria } from "./Delete";
 import Loading from "../loading";
-import { DbNotResult } from "@/components/icons/DbNotResult";
 import { FormEditSubcat } from "./FormEditSubcat";
 
 interface Props {
@@ -36,8 +35,8 @@ export function List({ setCatCount }: Props) {
 
   if (subcategoria?.length === 0)
     return (
-      <div className="text-center mt-10s text-md text-gray- py-4 dark:text-black flex flex-col items-center">
-        <DbNotResult className="" />
+      
+      <div className=" shadow-sm mt-10 text-center text-md py-4 dark:text-black flex flex-col items-center dark:bg-white rounded-md">
         <p className="text-gray-700">No hay subcategorias para listar</p>
       </div>
     );

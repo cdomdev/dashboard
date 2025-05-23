@@ -37,6 +37,12 @@ export function SalesList({ setCount }: Props) {
     "Detalles",
   ];
 
+  if(!sales){
+    return <div className=" shadow-sm mt-10 text-center text-md py-4 dark:text-black flex flex-col items-center dark:bg-white rounded-md">
+        <p className="text-gray-700">No hay datos para listar</p>
+      </div>
+  }
+
   return (
     <TableItems itemsHead={itemsHeadTable}>
       <>
