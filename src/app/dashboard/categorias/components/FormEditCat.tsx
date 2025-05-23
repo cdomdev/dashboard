@@ -6,8 +6,7 @@ import { Dataabase } from "@/components/icons";
 import { editCategory } from "../lib/categoria";
 import { useToastStore } from "@/context/global.context.app";
 import { Modal } from "../../../../components/ui/custom/Modals/Modal";
-import { Edit } from "lucide-react";
-
+import { Editbutton } from "@/components/ui/custom/buttons";
 
 interface PropForm {
   nombre: string;
@@ -56,13 +55,7 @@ export function FormEditCat({ category, setCategorias }: Props) {
 
   return (
     <>
-      <button
-        className="text-blue-600 hover:underline font-medium text-sm cursor-pointer w-full flex items-center gap-1 justify-center"
-        onClick={() => setIsDeleteOpen(true)}
-      >
-        <Edit className="w-5 h-5"/>
-        Editar
-      </button>
+      <Editbutton onClick={() => setIsDeleteOpen(true)} />
 
       <Modal
         isOpen={isDeleteOpen}

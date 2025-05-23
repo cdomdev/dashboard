@@ -3,10 +3,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { getCategorias } from "../lib/categoria";
-import type { CategorySchema} from "@/interfaces";
+import type { CategorySchema } from "@/interfaces";
 import { DeleteCategoria } from "./Delete";
 import Loading from "../loading";
 import { FormEditCat } from "./FormEditCat";
+import { NoDataResponse } from "@/components/NoDataInResp";
+import { TableItems } from "@/components/ui/custom/table/TableItems";
 
 interface Props {
   setCatCount: React.Dispatch<React.SetStateAction<number>>;
@@ -29,64 +31,46 @@ export function List({ setCatCount }: Props) {
     fetchData();
   }, [setCatCount]);
 
-  
   const itemsHead = ["#ID", "Nombre de la categoria", "Accion", "Accion"];
-
 
   if (!categorias) return <Loading />;
 
-  if (categorias?.length === 0)
-    return (
-      <div className=" shadow-sm mt-10 text-center text-md py-4 dark:text-black flex flex-col items-center dark:bg-white rounded-md">
-        <p className="text-gray-700">No hay subcategorias para listar</p>
-      </div>
-    );
+  if (categorias?.length === 0) return <NoDataResponse />;
 
   return (
-    <div className="mt-10 relative shadow-md sm:rounded-sm animate-fadeIn">
-      <table className="w-full text-sm text-Back rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-           <tr>
-            {itemsHead.map((item, idx) => (
-              <th key={idx} scope="col" className="p-4 text-center">
-                {item}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {categorias?.map((cat, index) => (
-            <tr
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-              key={cat.id || index}
+    <TableItems itemsHead={itemsHead}>
+      <>
+        {categorias?.map((cat, index) => (
+          <tr
+            className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+            key={cat.id || index}
+          >
+            <th
+              scope="row"
+              className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
             >
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {cat.id?.slice(1, 7) || index}
-              </th>
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {cat.nombre}
-              </th>
+              {cat.id?.slice(1, 7) || index}
+            </th>
+            <th
+              scope="row"
+              className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+            >
+              {cat.nombre}
+            </th>
 
-              <td className="px-6 py-4 text-center">
-                <DeleteCategoria
-                  setCategorias={setCategorias}
-                  id={cat.id}
-                  setCatCount={setCatCount}
-                />
-              </td>
-              <td className="px-6 py-4 flex items-center justify- text-center">
-                <FormEditCat category={cat} setCategorias={setCategorias} />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+            <td className="px-6 py-3 text-center">
+              <DeleteCategoria
+                setCategorias={setCategorias}
+                id={cat.id}
+                setCatCount={setCatCount}
+              />
+            </td>
+            <td className="px-6 py-3 flex items-center justify-center text-center">
+              <FormEditCat category={cat} setCategorias={setCategorias} />
+            </td>
+          </tr>
+        ))}
+      </>
+    </TableItems>
   );
 }

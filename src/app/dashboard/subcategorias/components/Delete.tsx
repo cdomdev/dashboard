@@ -3,13 +3,11 @@ import { deleteSubcategoria } from "../lib/subcategoria";
 import { useToastStore } from "@/context/global.context.app";
 import { useState } from "react";
 import { Modal } from "@/components/ui/custom/Modals/Modal";
-import { Delete } from "@/components/icons";
+import { DeleteButton } from "@/components/ui/custom/buttons";
 
 interface deleProps {
   id?: string;
-  setSubcategorias: React.Dispatch<
-    React.SetStateAction<CategorySchema[]>
-  >;
+  setSubcategorias: React.Dispatch<React.SetStateAction<CategorySchema[]>>;
   setCatCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -31,6 +29,11 @@ export function DeleteSubcategoria({
         });
         setCatCount((prev) => prev - 1);
         seToast("Subcategoría eliminada con éxito", "toast-success");
+      } else {
+        seToast(
+          "No se pudo eliminar la subcategoria, intentelo mas tarde",
+          "toast-fail"
+        );
       }
     } catch (error) {
       console.log("Error al intentar eliminar la suncategoria", error);
@@ -39,13 +42,7 @@ export function DeleteSubcategoria({
   }
   return (
     <>
-      <button
-        className="flex items-center gap-1 justify-center text-red-600 hover:underline font-medium text-sm cursor-pointer w-full"
-        onClick={() => setIsDeleteOpen(true)}
-      >
-       <Delete/>
-        Eliminar
-      </button>
+      <DeleteButton onClick={() => setIsDeleteOpen(true)} />
 
       <Modal
         isOpen={isDeleteOpen}

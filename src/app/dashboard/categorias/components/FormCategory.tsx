@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Formik, Field, ErrorMessage } from "formik";
 import type { CategorySchema } from "@/interfaces";
@@ -24,9 +24,10 @@ export function FormCategory() {
           res.message || "Ya existe una categoría con ese nombre",
           "error"
         );
-      } else {
+      } else if (res.status === 500) {
         seToast(
-          res.message || "Error inesperado al crear la categoría",
+          res.message ||
+            "Error inesperado al crear la categoría, intentelo mas tarde",
           "error"
         );
       }

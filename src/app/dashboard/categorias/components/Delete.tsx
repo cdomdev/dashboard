@@ -4,7 +4,7 @@ import { CategorySchema } from "@/interfaces";
 import { deleteCategory } from "../lib/categoria";
 import { useToastStore } from "@/context/global.context.app";
 import { Modal } from "../../../../components/ui/custom/Modals/Modal";
-import { Delete } from "@/components/icons";
+import { DeleteButton } from "@/components/ui/custom/buttons";
 
 interface deleProps {
   id?: string;
@@ -26,6 +26,11 @@ export function DeleteCategoria({ id, setCategorias, setCatCount }: deleProps) {
         });
         setCatCount((prev) => prev - 1);
         seToast("Categoría eliminada con éxito", "toast-success");
+      } else {
+        seToast(
+          "No se pudo elimir la categoria, intentelo mas tarde",
+          "toast-fail"
+        );
       }
     } catch (error) {
       console.log("Error al intentar eliminar la categoria", error);
@@ -35,14 +40,7 @@ export function DeleteCategoria({ id, setCategorias, setCatCount }: deleProps) {
 
   return (
     <>
-      <button
-        className="text-red-600 hover:underline font-medium text-sm cursor-pointer inline-flex gap-1 items-center"
-        onClick={() => setIsDeleteOpen(true)}
-      >
-        <Delete />
-        Eliminar
-      </button>
-
+      <DeleteButton onClick={() => setIsDeleteOpen(true)}></DeleteButton>
       <Modal
         isOpen={isDeleteOpen}
         onClose={() => setIsDeleteOpen(false)}
