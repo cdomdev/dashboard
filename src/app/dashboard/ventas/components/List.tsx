@@ -38,7 +38,7 @@ export function SalesList({ setCount }: Props) {
     "Detalles",
   ];
 
-  if(sales.length === ) return <NoDataResponse/>
+  if(sales.length === 0 ) return <NoDataResponse/>
 
   return (
     <TableItems itemsHead={itemsHeadTable}>
