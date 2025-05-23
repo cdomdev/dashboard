@@ -7,6 +7,7 @@ import {
 } from "../../components/icons";
 import "@/app/globals.css";
 import Graficas from "../../components/Grafics";
+import { SalesData } from "@/components/Sales";
 
 export default async function Home() {
   const dataBox = [
@@ -15,35 +16,35 @@ export default async function Home() {
       value: 0,
       text: "Ordenes sin despachar",
       icon: BoxComponent,
-      bgBox: "bg-[#fbddb9]",
+      bgBox: "bg-orange-200",
     },
     {
       title: "Ordenes despachadas",
       value: 0,
       text: "Entregado",
       icon: SendBox,
-      bgBox: "bg-[#6ee35e]",
+      bgBox: "bg-green-200",
     },
     {
       title: "Pendientes por envio",
       value: 0,
       text: "Pendientes",
       icon: Time,
-      bgBox: "bg-[#cd76d8]",
+      bgBox: "bg-indigo-200",
     },
     {
       title: "Total vendido",
       value: 0,
       text: "Balance",
       icon: Sale,
-      bgBox: "bg-[#c86464]",
+      bgBox: "bg-rose-200",
     },
     {
       title: "Total usuarios",
       value: 0,
       text: "Usuarios",
       icon: Usuario,
-      bgBox: "bg-[#33ddc0]",
+      bgBox: "bg-teal-200",
     },
   ];
 
@@ -60,18 +61,16 @@ export default async function Home() {
                 <h1 className="text-xs sm:text-sm font-semibold">
                   {item.title}
                 </h1>
-                <p className="font-extrabold text-sm sm:text-xl">
-                  {item.value}
-                </p>
-                <span className="text-[8px] text-slate-800 sm:text-xs font-semibold">
+                <p className="font-semibold text-sm sm:text-xl">{item.value}</p>
+                <span className="text-xs text-slate-600 sm:text-md ">
                   {item.text}
                 </span>
               </div>
 
               <div
-                className={`bg-white rounded-full w-10 h-10 sm:h-12 sm:w-12 flex justify-center items-center `}
+                className={`bg-white rounded-full w-9 h-9 sm:h-10 sm:w-10 flex justify-center items-center `}
               >
-                <item.icon />
+                <item.icon className="stroke-1 w-8 h-8" />
               </div>
             </div>
           ))}
@@ -79,14 +78,11 @@ export default async function Home() {
       </section>
 
       <section className=" grid grid-cols-1 lg:grid-cols-2 gap-3">
-        <div className="h-auto rounded-md p-2 bg-white shadow dark:text-black dark:bg-gray-200">
-          <h2 className="text-lg md:text-xl font-semibold pl-1 md:pl-4">
-            Productos mas vendidos
-          </h2>
+        <div className="h-auto rounded-md p-2 bg-white shadow dark:text-black">
           <Graficas />
         </div>
-        <div className="rounded-md sm:p-1 p-4 bg-white shadow  dark:text-black dark:bg-gray-200">
-          <Sale />
+        <div className="rounded-md p-5 bg-white shadow  dark:text-black ">
+          <SalesData />
         </div>
       </section>
     </section>
