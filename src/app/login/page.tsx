@@ -3,32 +3,46 @@
 import { LoginSchema } from "@/interfaces/login";
 import { useState } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
-import { loginAdmin } from "./actions";
 import { useToastStore } from "../../context/global.context.app";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
 
+  const router = useRouter();
   const seToast = useToastStore.getState().setToast;
 
-  useToastStore();
   const onSubmit = async (data: LoginSchema) => {
     setIsLoading(true);
 
-    const res = await loginAdmin(data);
-    const { result } = res;
-    if (res.result.status !== 200) {
-      seToast(
-        `${result ? result.message : "Hubo un error en el inicio de sesion"} `,
-        "erros"
-      );
+    try {
+      const res = await fetch("/api/auth", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      
+      const {  result } = await res.json(); 
+
+      if (res.status === 200 ) {
+        router.push("/dashboard");
+      } else if (res.status === 401) {
+        seToast(result?.message || "Credenciales inválidas", "error");
+      } else {
+        seToast(result?.message || "Error al iniciar sesión", "error");
+      }
+    } catch (error) {
+      console.log("Error en el inicio de sesion: ", error);
       setIsLoading(false);
-    } else {
       seToast(
-        "Algo salio mal con el inicio de sesion, intente mas tarde",
+        `${"Algo salio mal con el inicio de sesion, intentalo mas tarde"}`,
         "error"
       );
-      setIsLoading(false);
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -127,7 +141,7 @@ export default function LoginPage() {
                     type="password"
                     id="password"
                     name="password"
-                     autoComplete="current-password"
+                    autoComplete="current-password"
                     placeholder="Ingrese su contraseña"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring- focus:ring-blue-400 focus:border-blue-400 block w-full ps-10 p-2.5
                     dark:bg-gray-600 dark:border-gray-400 dark:placeholder-gray-400 dark:text-white dark:focus:ring-1 dark:focus:ring-blue-400 dark:focus:border-blue-400"

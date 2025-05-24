@@ -1,4 +1,5 @@
 import axios from "axios";
+import {getToken} from './getToken'
 import { refreshAdminTokenClient } from "./refreshToken";
 const HOST = process.env.NEXT_PUBLIC_HOST_API;
 
@@ -11,8 +12,13 @@ export const api = axios.create({
   },
 });
 
+
 api.interceptors.request.use(
   async (config) => {
+    const token = await getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => Promise.reject(error)
@@ -28,14 +34,20 @@ api.interceptors.response.use(
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
+      try {
+        const refreshResponse = await refreshAdminTokenClient();
 
-      const refreshResponse = await refreshAdminTokenClient();
-
-      const { newAccessToken } = refreshResponse;
-      
-      if (refreshResponse) {
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-        return api(originalRequest);
+        if (refreshResponse?.newAccessToken) {
+          originalRequest.headers.Authorization = `Bearer ${refreshResponse.newAccessToken}`;
+          return api(originalRequest);
+        } else {
+          window.location.href = "/login";
+          return Promise.reject(error);
+        }
+      } catch (error) {
+        console.error("Error en la renovacion de la sesion");
+        window.location.href = "/login";
+        return Promise.reject(error);
       }
     }
 
