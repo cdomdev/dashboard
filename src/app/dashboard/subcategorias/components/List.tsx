@@ -36,7 +36,7 @@ export function List({ setCatCount }: Props) {
   if (!subcategoria) return <Loading />;
 
   if (subcategoria?.length === 0)
-    return <NoDataResponse text="No hay subcategorias para listar" />;
+    return <NoDataResponse text="No hay subcategorias" />;
 
   return (
     <TableItems itemsHead={itemsHead}>

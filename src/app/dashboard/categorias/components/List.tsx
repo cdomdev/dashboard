@@ -35,7 +35,7 @@ export function List({ setCatCount }: Props) {
 
   if (!categorias) return <Loading />;
 
-  if (categorias?.length === 0) return <NoDataResponse />;
+  if (categorias?.length === 0) return <NoDataResponse text="No hay categorias" />;
 
   return (
     <TableItems itemsHead={itemsHead}>

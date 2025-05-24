@@ -10,6 +10,7 @@ import { TableItems } from "@/components/ui/custom/table/TableItems";
 import { Editbutton } from "@/components/ui/custom/buttons";
 import Link from "next/link";
 import { DeletProduct } from "./DeleteProduct";
+import { NoDataResponse } from "@/components/NoDataInResp";
 
 interface Props {
   setCount: React.Dispatch<React.SetStateAction<number>>;
@@ -50,12 +51,7 @@ export function ListProducts({ setCount }: Props) {
 
   if (!products) return <Loading />;
 
-  if (products?.length === 0)
-    return (
-      <div className="text-center text-md text-gray- py-4 dark:text-black flex flex-col items-center dark:bg-white rounded-md">
-        <p className="text-gray-700">No hay productos para listar</p>
-      </div>
-    );
+  if (products?.length === 0) return <NoDataResponse text="No hay productos" />;
 
   return (
     <>
