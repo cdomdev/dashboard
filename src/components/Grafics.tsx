@@ -121,8 +121,11 @@ export default function Grafics() {
 
         <p className="flex items-center gap-2 text-pretty">
           <span>⭐ </span>
-          El producto más vendido: {topProduct?.titulo} (
-          {topProduct?.sales_count} ventas)
+          El producto más vendido:{" "}
+          {topProduct.sales_count > 0
+            ? topProduct?.titulo
+            : "No hay productos"}{" "}
+          ({topProduct.sales_count > 0 ? topProduct?.sales_count : 0} ventas)
         </p>
       </div>
 

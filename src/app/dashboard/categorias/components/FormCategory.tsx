@@ -24,10 +24,9 @@ export function FormCategory() {
           res.message || "Ya existe una categoría con ese nombre",
           "error"
         );
-      } else if (res.status === 500) {
+      } else if (res.status === 401 || res.status === 403) {
         seToast(
-          res.message ||
-            "Error inesperado al crear la categoría, intentelo mas tarde",
+          "Algo salio mal con la sesion, si el problma persiste inicie sesion nuevamente",
           "error"
         );
       }
@@ -51,7 +50,7 @@ export function FormCategory() {
           <div className="grid grid-cols-1 md:flex w-full gap-4 ">
             <form
               onSubmit={handleSubmit}
-              className="shadow-md rounded-md p-4 bg-white dark:bg-gray-200 md:w-2/3"
+              className="shadow-md rounded-md p-4 bg-white  md:w-2/3"
             >
               <label
                 htmlFor="nombre"
@@ -59,7 +58,7 @@ export function FormCategory() {
               >
                 Nombre
               </label>
-              <div className="relative w-full lg:max-w-2/4">
+              <div className="relative w-full lg:max-w-3/4">
                 <Field
                   type="text"
                   id="nombre"

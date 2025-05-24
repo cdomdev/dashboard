@@ -10,7 +10,10 @@ import { TableItems } from "@/components/ui/custom/table/TableItems";
 import { Editbutton } from "@/components/ui/custom/buttons";
 import Link from "next/link";
 import { DeletProduct } from "./DeleteProduct";
+import { useToastStore } from "@/context/global.context.app";
 import { NoDataResponse } from "@/components/NoDataInResp";
+import axios from "axios";
+import {itemsHeadTableProducts} from '@/utils/headListForTables'
 
 interface Props {
   setCount: React.Dispatch<React.SetStateAction<number>>;
@@ -21,33 +24,35 @@ export function ListProducts({ setCount }: Props) {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  const setToast = useToastStore.getState().setToast;
   const pageSize = 5;
 
   useEffect(() => {
     async function fetchData() {
-      const res = await getProducts(page, pageSize);
-      if (res.status === 200) {
-        setProducts(res.data.data);
-        setTotalPages(res.data.pagination.pageCount);
-        setCount(res.data.pagination.total);
-      } else {
-        setProducts([]);
+      try {
+        const res = await getProducts(page, pageSize);
+        if (res.status === 200) {
+          setProducts(res.data.data);
+          setTotalPages(res.data.pagination.pageCount);
+          setCount(res.data.pagination.total);
+        }
+      } catch (error) {
+        console.log("Error fetching products: ", error);
+        if (axios.isAxiosError(error) && error.response) {
+          const { status, data } = error.response;
+          if (status === 401 || status === 403) {
+            const message =
+              data?.message || "No tienes permisos para ver los productos";
+            setToast("toast-fail", message);
+          } else if (status === 404) {
+            const message = data?.message || "No hay productos para listar";
+            setToast("toast-fail", message);
+          }
+        }
       }
     }
     fetchData();
-  }, [page, setCount]);
-
-  const itemsHeadTable = [
-    "ID",
-    "Nombre del producto",
-    "Marca",
-    "Cantidad",
-    "Precio",
-    "Imagen",
-    "Referencia",
-    "",
-    "",
-  ];
+  }, [page, setCount, setToast]);
 
   if (!products) return <Loading />;
 
@@ -57,7 +62,7 @@ export function ListProducts({ setCount }: Props) {
     <>
       <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
 
-      <TableItems itemsHead={itemsHeadTable}>
+      <TableItems itemsHead={itemsHeadTableProducts}>
         <>
           {products?.map((prod, index) => (
             <tr

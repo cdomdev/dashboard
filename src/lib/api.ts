@@ -1,6 +1,6 @@
 import axios from "axios";
 import {getToken} from './getToken'
-import { refreshAdminTokenClient } from "./refreshToken";
+import { refreshAdmin } from "./refreshToken";
 const HOST = process.env.NEXT_PUBLIC_HOST_API;
 
 axios.defaults.withCredentials = true;
@@ -35,7 +35,10 @@ api.interceptors.response.use(
     ) {
       originalRequest._retry = true;
       try {
-        const refreshResponse = await refreshAdminTokenClient();
+
+        const refreshResponse = await refreshAdmin();
+
+        console.log("respueta de la renovcacion ---- >", refreshResponse)
 
         if (refreshResponse?.newAccessToken) {
           originalRequest.headers.Authorization = `Bearer ${refreshResponse.newAccessToken}`;

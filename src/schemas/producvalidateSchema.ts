@@ -15,13 +15,12 @@ export const productValidationSchema = Yup.object({
 
   referencia: Yup.string().required("¡Este campo no puede quedar vacío!"),
 
-  categoria: Yup.string().notRequired(),
+  categoria: Yup.string().required(),
 
-  subcategoria: Yup.string().notRequired(),
+  subcategoria: Yup.string().required(),
 
   descripcion: Yup.string().required("¡Este campo no puede quedar vacío!"),
-  
-  
+
   // image: Yup.mixed()
   // .required("¡Debes subir una imagen!")
   // .test("fileType", "Solo se permiten imágenes", (value: any) => {
@@ -34,4 +33,20 @@ export const productValidationSchema = Yup.object({
   //   if (!file) return false;
   //   return file.size <= 10 * 1024 * 1024;
   // }),
+});
+
+export const productValidationSchemaEdit = Yup.object({
+  cantidad: Yup.number(),
+  marca: Yup.string(),
+
+  titulo: Yup.string(),
+
+  precio: Yup.number(),
+  referencia: Yup.string().notRequired(),
+
+  categoria: Yup.array().notRequired(),
+
+  subcategoria: Yup.array().notRequired(),
+
+  descripcion: Yup.string(),
 });

@@ -16,7 +16,7 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("/api/auth", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -24,15 +24,17 @@ export default function LoginPage() {
         },
         body: JSON.stringify(data),
       });
-      
-      const {  result } = await res.json(); 
 
-      if (res.status === 200 ) {
+      const { result } = await res.json();
+
+      if (res.status === 200) {
         router.push("/dashboard");
       } else if (res.status === 401) {
         seToast(result?.message || "Credenciales inválidas", "error");
+        setIsLoading(false);
       } else {
         seToast(result?.message || "Error al iniciar sesión", "error");
+        setIsLoading(false);
       }
     } catch (error) {
       console.log("Error en el inicio de sesion: ", error);
@@ -41,8 +43,6 @@ export default function LoginPage() {
         `${"Algo salio mal con el inicio de sesion, intentalo mas tarde"}`,
         "error"
       );
-    }finally{
-      setIsLoading(false)
     }
   };
 

@@ -22,7 +22,7 @@ export async function createProduct(product: ProductSchema) {
 }
 
 export async function editProduct(product: ProductSchema) {
-  const response = query(`/api/products/update/${product.id}`, "POST", {
+  const response = query(`/api/products/update/${product.id}`, "PUT", {
     product,
   });
   return response;

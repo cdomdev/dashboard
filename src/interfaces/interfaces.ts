@@ -13,6 +13,7 @@ export const productSchema = z.object({
   image: z.string(),
 });
 
+
 export const categorySchema = z.object({
   id: z.string().optional(),
   nombre: z.string(),

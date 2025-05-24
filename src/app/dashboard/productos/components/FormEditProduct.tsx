@@ -1,23 +1,41 @@
 "use client";
 
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, Field, ErrorMessage, FieldProps } from "formik";
 import type { ProductSchema } from "@/interfaces";
 import { ButtonGrs } from "@/components/ui/custom/buttons/Button";
 import { Dataabase } from "@/components/icons";
 import { SelectSub } from "./SelectSub";
 import { SelectCat } from "./SelectCat";
-import { productValidationSchema } from "@/schemas/producvalidateSchema";
-import { createProduct, getProductBy } from "../lib/products";
-import { ImageDrop } from "./Drag";
+import { productValidationSchemaEdit } from "@/schemas/producvalidateSchema";
+import { getProductBy, editProduct } from "../lib/products";
 import { useToastStore } from "@/context/global.context.app";
 import { useEffect, useState } from "react";
 import { Spiner } from "@/components/ui/custom/loaders/Spiner";
 import { useParams } from "next/navigation";
+import { formatPrice, cleanPrice } from "../utils/formatPrice";
+
+interface Prop {
+  id: string;
+  cantidad: number;
+  marca: string;
+  titulo: string;
+  precio: number;
+  referencia: string;
+  categoria: ProCatAndSub;
+  subcategoria: ProCatAndSub;
+  descripcion: string;
+}
+
+interface ProCatAndSub {
+  id: string;
+  nombre: string;
+}
 
 export function FormEditProduct() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [product, setProduct] = useState<ProductSchema>();
+  const [product, setProduct] = useState<Prop>();
 
+  console.log(product);
   const params = useParams();
   const id = typeof params?.id === "string" ? params.id : undefined;
 
@@ -26,9 +44,9 @@ export function FormEditProduct() {
       const res = await getProductBy(id);
       if (res.status === 200) {
         setProduct(res.data.data);
-      } 
+      }
     }
-    
+
     fechtData();
   }, [id]);
   const onSubmit = async (
@@ -36,38 +54,45 @@ export function FormEditProduct() {
     { resetForm }: { resetForm: () => void }
   ) => {
     setLoading(true);
-    const res = await createProduct(values);
+    const res = await editProduct(values);
     const seToast = useToastStore.getState().setToast;
-    if (res.status === 200) {
-      seToast(res.message || "Producto agregado con exito", "toast-success");
+    if (res.status === 201) {
+      seToast(res.message || "Producto actulizado con exito", "toast-success");
       resetForm();
       setLoading(false);
-    } else {
+    } else if (res.status === 401 || res.status === 402) {
+      seToast(
+        res.message ||
+          "Algo salio mal con la sesion, por favor inicie sesion nuevamente en caso de persistir el error",
+        "error"
+      );
+      setLoading(false);
+    } else if (res.status === 500) {
       seToast(res.message || "Hubo un error al agregar el producto", "error");
       setLoading(false);
     }
   };
-
 
   return (
     <>
       <Formik
         enableReinitialize
         initialValues={{
+          id: product?.id ?? "",
           cantidad: product?.cantidad ?? 1,
           marca: product?.marca ?? "",
           titulo: product?.titulo ?? "",
           precio: product?.precio ?? 0,
           referencia: product?.referencia ?? "",
-          categoria: product?.categoria ?? "",
-          subcategoria: product?.subcategoria ?? "",
+          categoria: product?.categoria.id ?? "",
+          subcategoria: product?.subcategoria?.id ?? "",
           descripcion: product?.descripcion ?? "",
-          image: product?.image ?? "",
+          image: "",
         }}
-        validationSchema={productValidationSchema}
+        validationSchema={productValidationSchemaEdit}
         onSubmit={onSubmit}
       >
-        {({ handleSubmit}) => (
+        {({ handleSubmit }) => (
           <div className="flex flex-col md:flex-row w-full gap-4">
             <form
               onSubmit={handleSubmit}
@@ -151,20 +176,29 @@ export function FormEditProduct() {
                 <div className="w-full">
                   <label
                     htmlFor="precio"
-                    className="block my-1 pt-4 mx-1 text-sm font-medium text-gray-900 "
+                    className="block my-1 pt-4 mx-1 text-sm font-medium text-gray-900"
                   >
                     Precio
                   </label>
                   <div className="relative">
-                    <Field
-                      type="number"
-                      id="precio"
-                      name="precio"
-                      min={0}
-                      placeholder="Precio"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring- focus:ring-blue-400 focus:border-blue-400 block w-full p-2.5
-    dark:placeholder-gray-400  dark:focus:ring-1 dark:focus:ring-blue-400 dark:focus:border-blue-400"
-                    />
+                    <Field name="precio">
+                      {({ field, form }: FieldProps<string, ProductSchema>) => (
+                        <input
+                          type="text"
+                          id="precio"
+                          placeholder="Precio"
+                          value={formatPrice(field.value || "")}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLInputElement>
+                          ) => {
+                            const cleanValue = cleanPrice(e.target.value);
+                            form.setFieldValue("precio", cleanValue);
+                          }}
+                          onBlur={field.onBlur}
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring- focus:ring-blue-400 focus:border-blue-400 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-1 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+                        />
+                      )}
+                    </Field>
                   </div>
                   <ErrorMessage
                     name="precio"
@@ -236,10 +270,6 @@ export function FormEditProduct() {
                     component="div"
                     className="text-red-500 text-sm mt-1 my-2"
                   />
-                </div>
-
-                <div className="w-full">
-                  <ImageDrop name="image" />
                 </div>
               </div>
             </form>
