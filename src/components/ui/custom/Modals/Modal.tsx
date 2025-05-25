@@ -1,3 +1,5 @@
+import { createPortal } from "react-dom";
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -15,10 +17,10 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  return (
+  const modalContentEl = (
     <div
       id="popup-modal"
-      className="fixed top-0 right-0 left-0 z-50 w-full h-full flex justify-center items-center bg-black/30"
+      className="fixed top-0 right-0 left-0 z-50 w-full h-full flex justify-center items-center bg-black/40"
     >
       <div className="relative p-1 w-full max-w-md max-h-full rounded-lg">
         <div className="relative bg-white rounded-lg">
@@ -62,4 +64,7 @@ export const Modal: React.FC<ModalProps> = ({
       </div>
     </div>
   );
+
+  return createPortal(modalContentEl, document.body);
+
 };
