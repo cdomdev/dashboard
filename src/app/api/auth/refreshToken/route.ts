@@ -34,6 +34,7 @@ export async function GET() {
     return NextResponse.json({ response: res.status, data });
   } catch (err) {
     console.error("Error al refrescar token:", err);
-    return null;
+    return NextResponse.json({ error: "Error al refrescar token" }, { status: 500 });
   }
+  
 }
