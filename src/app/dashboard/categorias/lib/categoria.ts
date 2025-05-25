@@ -6,7 +6,7 @@ export async function createCategoria({ nombre }: CategorySchema) {
   return response;
 }
 
-export async function getCategorias(page: number, pageSize: number) {
+export async function getCategorias(page?: number, pageSize?: number) {
   const response = await query(
     `/api/categories/list?page=${page}&pageSize=${pageSize}`,
     "GET"
