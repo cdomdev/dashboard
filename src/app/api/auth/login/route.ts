@@ -29,14 +29,14 @@ export async function POST(req: Request) {
   cookiesSession.set("bearer-token", accessToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: "strict",
     path: "/",
   });
 
   cookiesSession.set("bearer-token-rfsh", refreshToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: "strict",
     path: "/",
   });
 

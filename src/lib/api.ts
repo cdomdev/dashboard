@@ -37,9 +37,7 @@ api.interceptors.response.use(
       try {
 
         const refreshResponse = await refreshAdmin();
-
-        console.log("respueta de la renovcacion ---- >", refreshResponse)
-
+        
         if (refreshResponse?.newAccessToken) {
           originalRequest.headers.Authorization = `Bearer ${refreshResponse.newAccessToken}`;
           return api(originalRequest);
@@ -48,7 +46,7 @@ api.interceptors.response.use(
           return Promise.reject(error);
         }
       } catch (error) {
-        console.error("Error en la renovacion de la sesion");
+        console.error("Error al renovar la sesion");
         window.location.href = "/login";
         return Promise.reject(error);
       }
