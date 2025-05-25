@@ -8,9 +8,6 @@ export async function refreshAdmin() {
       },
     });
 
-    console.log("datos de la renovacion del token refe --->", res);
-
-
     if (!res.ok) throw new Error("No se pudo renovar el token");
 
     const data = await res.json();
