@@ -1,4 +1,4 @@
-import {query} from '@/lib/request'
+import { query } from "@/lib/request";
 import { CategorySchema } from "@/interfaces";
 
 export async function createCategoria({ nombre }: CategorySchema) {
@@ -6,8 +6,11 @@ export async function createCategoria({ nombre }: CategorySchema) {
   return response;
 }
 
-export async function getCategorias() {
-  const response = await query("/api/categories/list", "GET");
+export async function getCategorias(page: number, pageSize: number) {
+  const response = await query(
+    `/api/categories/list?page=${page}&pageSize=${pageSize}`,
+    "GET"
+  );
   return response;
 }
 

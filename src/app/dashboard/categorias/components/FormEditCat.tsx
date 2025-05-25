@@ -20,7 +20,7 @@ interface Props {
 }
 
 export function FormEditCat({ category, setCategorias }: Props) {
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
   const onSubmit = async (
     values: PropForm,
     { resetForm }: { resetForm: () => void }
@@ -31,7 +31,7 @@ export function FormEditCat({ category, setCategorias }: Props) {
 
     if (res.success) {
       resetForm();
-      setIsDeleteOpen(false);
+      setIsEditOpen(false);
       seToast("Categoría actalizada con éxito", "toast-success");
       setCategorias((prev) =>
         prev.map((cat) =>
@@ -44,22 +44,25 @@ export function FormEditCat({ category, setCategorias }: Props) {
           res.message || "Ya existe una categoría con ese nombre",
           "error"
         );
+        setIsEditOpen(false)
       } else {
+        setIsEditOpen(false)
         seToast(
           res.message || "Error inesperado al crear la categoría",
           "error"
         );
+
       }
     }
   };
 
   return (
     <>
-      <Editbutton onClick={() => setIsDeleteOpen(true)} />
+      <Editbutton onClick={() => setIsEditOpen(true)} />
 
       <Modal
-        isOpen={isDeleteOpen}
-        onClose={() => setIsDeleteOpen(false)}
+        isOpen={isEditOpen}
+        onClose={() => setIsEditOpen(false)}
         modalTitle="¿Está seguro?"
         modalContent="Esta acción modificara la categoría seleccionada."
       >

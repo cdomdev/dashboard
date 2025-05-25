@@ -6,8 +6,11 @@ export function createSubcategoria({ nombre }: CategorySchema) {
   return response;
 }
 
-export function getSubcategorias() {
-  const response = query("/api/subcategories/list", "GET");
+export function getSubcategorias(page: number, pageSize: number) {
+  const response = query(
+    `/api/subcategories/list?page=${page}&pageSize=${pageSize}`,
+    "GET"
+  );
   return response;
 }
 
