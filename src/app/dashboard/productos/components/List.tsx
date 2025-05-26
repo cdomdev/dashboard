@@ -14,6 +14,7 @@ import { useToastStore } from "@/context/global.context.app";
 import { NoDataResponse } from "@/components/NoDataInResp";
 import axios from "axios";
 import {itemsHeadTableProducts} from '@/utils/headListForTables'
+import { formatPrice } from "../utils/formatPrice";
 
 interface Props {
   setCount: React.Dispatch<React.SetStateAction<number>>;
@@ -77,7 +78,7 @@ export function ListProducts({ setCount }: Props) {
               </th>
               <td
                 scope="row"
-                className="py-4 font-medium   text-gray-900 whitespace-nowrap dark:text-white text-center"
+                className="py-4 font-medium  text-gray-900 whitespace-nowrap dark:text-white text-center text-wrap"
               >
                 {prod.titulo}
               </td>
@@ -97,11 +98,17 @@ export function ListProducts({ setCount }: Props) {
               >
                 {prod.cantidad}
               </td>
+               <td
+                scope="row"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+              >
+                {prod.descuento ? prod.descuento : "0"} %
+              </td>
               <td
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
-                {prod.precio}
+                {formatPrice(prod.precio)}
               </td>
               <td
                 scope="row"

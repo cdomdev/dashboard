@@ -9,12 +9,11 @@ export async function GET() {
     const res = await fetch(`${HOST}/api/auth/refresh-token`, {
       method: "GET",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
 
     const data = await res.json();
+
+    console.log("Respuesta del servidor en el refresh ---> :", data); 
 
     if (!res.ok) return NextResponse.json({ data }, { status: res.status });
 

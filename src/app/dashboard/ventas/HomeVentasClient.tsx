@@ -7,7 +7,7 @@ import { SalesList } from "./components/List";
 export default function HomeVentas() {
   const [count, setCount] = useState<number>(0);
   return (
-    <>
+    <main>
       <HeaderPagesSection
         href="/dashboard/ofertas/crear"
         title="Ventas"
@@ -18,6 +18,6 @@ export default function HomeVentas() {
       <section className="mt-10">
         <SalesList setCount={setCount} />
       </section>
-    </>
+    </main>
   );
 }

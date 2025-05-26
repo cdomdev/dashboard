@@ -7,7 +7,7 @@ export default function HomeSubcategoria() {
   const [catCount, setCatCount] = useState(0);
 
   return (
-    <>
+    <main>
       <HeaderPagesSection
         href="/dashboard/subcategorias/crear"
         title="Subcategorias"
@@ -20,6 +20,6 @@ export default function HomeSubcategoria() {
       <section className="w-full">
         <List setCatCount={setCatCount} />
       </section>
-    </>
+    </main>
   );
 }

@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   description: "Pagina de login",
 };
 
-
 export default async function LayoutRoot({
   children,
 }: Readonly<{
@@ -16,10 +15,10 @@ export default async function LayoutRoot({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body >
+      <body>
         <Providers>
           <Toast />
-          <main>{children}</main>
+          {children}
         </Providers>
       </body>
     </html>

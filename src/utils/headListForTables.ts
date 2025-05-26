@@ -3,6 +3,7 @@ export const itemsHeadTableProducts = [
   "Nombre del producto",
   "Marca",
   "Cantidad",
+  "Descuento",
   "Precio",
   "Imagen",
   "Referencia",

@@ -29,13 +29,13 @@ export default function AdminPage() {
   ];
 
   return (
-    <>
+    <main>
       <HeaderPagesSection href="#" title="Administradores" url="/dashboard" />
       <h2 className="text-base md:text-xl pt-4">Listado de administradores</h2>
       <hr className="w-full my-1" />
       <section className="mt-5">
         <ListUsers items={itemsHeadTable} users={res} />
       </section>
-    </>
+    </main>
   );
 }

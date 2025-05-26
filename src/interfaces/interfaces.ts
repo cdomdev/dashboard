@@ -7,10 +7,11 @@ export const productSchema = z.object({
   titulo: z.string(),
   precio: z.number(),
   referencia: z.string(),
-  categoria: z.string(),
-  subcategoria: z.string(),
+  categoria: z.string().optional(),
+  subcategoria: z.string().optional(),
+  descuento: z.number().optional(),
   descripcion: z.string(),
-  image: z.string(),
+  image: z.string()
 });
 
 

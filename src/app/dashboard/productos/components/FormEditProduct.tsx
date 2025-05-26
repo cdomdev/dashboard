@@ -4,8 +4,6 @@ import { Formik, Field, ErrorMessage, FieldProps } from "formik";
 import type { ProductSchema } from "@/interfaces";
 import { ButtonGrs } from "@/components/ui/custom/buttons/Button";
 import { Dataabase } from "@/components/icons";
-import { SelectSub } from "./SelectSub";
-import { SelectCat } from "./SelectCat";
 import { productValidationSchemaEdit } from "@/schemas/producvalidateSchema";
 import { getProductBy, editProduct } from "../lib/products";
 import { useToastStore } from "@/context/global.context.app";
@@ -14,40 +12,23 @@ import { Spiner } from "@/components/ui/custom/loaders/Spiner";
 import { useParams } from "next/navigation";
 import { formatPrice, cleanPrice } from "../utils/formatPrice";
 
-interface Prop {
-  id: string;
-  cantidad: number;
-  marca: string;
-  titulo: string;
-  precio: number;
-  referencia: string;
-  categoria: ProCatAndSub;
-  subcategoria: ProCatAndSub;
-  descripcion: string;
-}
-
-interface ProCatAndSub {
-  id: string;
-  nombre: string;
-}
-
 export function FormEditProduct() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [product, setProduct] = useState<Prop>();
+  const [product, setProduct] = useState<ProductSchema>();
 
   console.log(product);
   const params = useParams();
   const id = typeof params?.id === "string" ? params.id : undefined;
 
   useEffect(() => {
-    async function fechtData() {
+    async function fetchData() {
       const res = await getProductBy(id);
       if (res.status === 200) {
         setProduct(res.data.data);
       }
     }
 
-    fechtData();
+    fetchData();
   }, [id]);
   const onSubmit = async (
     values: ProductSchema,
@@ -55,20 +36,20 @@ export function FormEditProduct() {
   ) => {
     setLoading(true);
     const res = await editProduct(values);
-    const seToast = useToastStore.getState().setToast;
+    const setToast = useToastStore.getState().setToast;
     if (res.status === 201) {
-      seToast(res.message || "Producto actulizado con exito", "toast-success");
+      setToast(res.message || "Producto actulizado con exito", "toast-success");
       resetForm();
       setLoading(false);
     } else if (res.status === 401 || res.status === 402) {
-      seToast(
+      setToast(
         res.message ||
           "Algo salio mal con la sesion, por favor inicie sesion nuevamente en caso de persistir el error",
         "error"
       );
       setLoading(false);
     } else if (res.status === 500) {
-      seToast(res.message || "Hubo un error al agregar el producto", "error");
+      setToast(res.message || "Hubo un error al agregar el producto", "error");
       setLoading(false);
     }
   };
@@ -83,9 +64,8 @@ export function FormEditProduct() {
           marca: product?.marca ?? "",
           titulo: product?.titulo ?? "",
           precio: product?.precio ?? 0,
+          descuento: product?.descuento ?? 0,
           referencia: product?.referencia ?? "",
-          categoria: product?.categoria.id ?? "",
-          subcategoria: product?.subcategoria?.id ?? "",
           descripcion: product?.descripcion ?? "",
           image: "",
         }}
@@ -187,7 +167,11 @@ export function FormEditProduct() {
                           type="text"
                           id="precio"
                           placeholder="Precio"
-                          value={formatPrice(field.value || "")}
+                          value={
+                            field.value !== undefined && field.value !== null
+                              ? formatPrice(String(field.value))
+                              : ""
+                          }
                           onChange={(
                             e: React.ChangeEvent<HTMLInputElement>
                           ) => {
@@ -208,7 +192,7 @@ export function FormEditProduct() {
                 </div>
               </div>
 
-              <div className=" grid md:grid-cols-2 gap-4 lg:max-w-2/4">
+              <div className=" grid md:grid-cols-2 gap-4">
                 <div className="w-full">
                   <label
                     htmlFor="cantidad"
@@ -233,17 +217,33 @@ export function FormEditProduct() {
                     className="text-red-500 text-sm mt-1 my-2"
                   />
                 </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="w-full">
-                  <SelectCat />
-                </div>
 
                 <div className="w-full">
-                  <SelectSub />
+                  <label
+                    htmlFor="descuento"
+                    className="block my-1 pt-4 mx-1 text-sm font-medium text-gray-900 "
+                  >
+                    Descuento
+                  </label>
+                  <div className="relative">
+                    <Field
+                      type="text"
+                      id="descuento"
+                      min={1}
+                      name="descuento"
+                      placeholder="Descuento"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring- focus:ring-blue-400 focus:border-blue-400 block w-full p-2.5
+    dark:placeholder-gray-400  dark:focus:ring-1 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+                    />
+                  </div>
+                  <ErrorMessage
+                    name="descuento"
+                    component="div"
+                    className="text-red-500 text-sm mt-1 my-2"
+                  />
                 </div>
               </div>
+
 
               <div className="mb-3 grid md:grid-cols-2 gap-4">
                 <div className="w-full">

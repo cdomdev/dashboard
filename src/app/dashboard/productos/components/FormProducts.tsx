@@ -33,7 +33,7 @@ export function FormProducts() {
       setToast(message, "toast-fail");
     } else if (status === 500) {
       setToast(message, "status-fail");
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -45,6 +45,7 @@ export function FormProducts() {
           marca: "",
           titulo: "",
           precio: 0,
+          descuento: 0,
           referencia: "",
           categoria: "",
           subcategoria: "",
@@ -149,7 +150,11 @@ export function FormProducts() {
                           type="text"
                           id="precio"
                           placeholder="Precio"
-                          value={formatPrice(field.value || "")}
+                          value={
+                            field.value !== undefined && field.value !== null
+                              ? formatPrice(String(field.value))
+                              : ""
+                          }
                           onChange={(
                             e: React.ChangeEvent<HTMLInputElement>
                           ) => {
@@ -170,7 +175,7 @@ export function FormProducts() {
                 </div>
               </div>
 
-              <div className=" grid md:grid-cols-2 gap-4 lg:max-w-2/4">
+              <div className=" grid md:grid-cols-2 gap-4">
                 <div className="w-full">
                   <label
                     htmlFor="cantidad"
@@ -180,7 +185,7 @@ export function FormProducts() {
                   </label>
                   <div className="relative">
                     <Field
-                      type="text"
+                      type="number"
                       id="cantidad"
                       min={1}
                       name="cantidad"
@@ -195,11 +200,31 @@ export function FormProducts() {
                     className="text-red-500 text-sm mt-1 my-2"
                   />
                 </div>
+
+                <div className="w-full">
+                  <label
+                    htmlFor="descuento"
+                    className="block my-1 pt-4 mx-1 text-sm font-medium text-gray-900 "
+                  >
+                    Descuento
+                  </label>
+                  <div className="relative">
+                    <Field
+                      type="number"
+                      id="descuento"
+                      min={0}
+                      name="descuento"
+                      placeholder="Descuento"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring- focus:ring-blue-400 focus:border-blue-400 block w-full p-2.5
+    dark:placeholder-gray-400  dark:focus:ring-1 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="w-full">
-                  <SelectCat />
+                  <SelectCat  />
                 </div>
 
                 <div className="w-full">
