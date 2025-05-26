@@ -31,6 +31,7 @@ import {
   Usuario,
   Ventas,
   Home,
+  Ofertas
 } from "./icons";
 import Link from "next/link";
 import {
@@ -52,7 +53,7 @@ const items = [
       },
       {
         url: "/dashboard/productos/crear",
-        nombre: "Agregar nuevo prodcuto",
+        nombre: "Agregar nuevo producto",
       },
     ],
   },
@@ -109,6 +110,21 @@ const items = [
       {
         url: "/dashboard/usuarios/user",
         nombre: "Usuarios",
+      },
+    ],
+  },
+  {
+    title: "Ofertas",
+    url: "/dashboard/ofertas",
+    icon: Ofertas,
+    subItems: [
+      {
+        url: "/dashboard/ofertas/cupones",
+        nombre: "Gestionar cupones",
+      },
+      {
+        url: "/dashboard/ofertas/crear",
+        nombre: "Agregar una nueva oferta",
       },
     ],
   },
