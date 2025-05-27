@@ -134,7 +134,9 @@
 
 }
 
-
+body{
+  overflow-x:hidden ;
+}
 
 @layer utilities {
   @keyframes fadeIn {
