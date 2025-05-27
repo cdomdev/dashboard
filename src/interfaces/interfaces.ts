@@ -29,17 +29,25 @@ export const ofertsSchema = z.object({
   image: z.instanceof(File).nullable(),
 });
 
+const rolesSchema = z.object({
+  id: z.string(),
+  nombre: z.string(),
+});
+
 export const userSchema = z.object({
   id: z.string(),
   nombre: z.string(),
   email: z.string().email(),
+  estado: z.string(),
   picture: z.string().nullable(),
   direccion: z.string(),
   telefono: z.string(),
   ciudad: z.string(),
   departamento: z.string(),
-  estado: z.string(),
+  
+  roles: rolesSchema,
 });
+
 
 export const detailOrder = z.object({
   id: z.number(),
@@ -68,6 +76,8 @@ export const orderSchema = z.object({
   detalles_pedido: detailOrder.array(),
 });
 
+
+
 export type ProductSchema = z.infer<typeof productSchema>;
 
 export type OfertsSchema = z.infer<typeof ofertsSchema>;
@@ -77,3 +87,6 @@ export type CategorySchema = z.infer<typeof categorySchema>;
 export type OrderSchema = z.infer<typeof orderSchema>;
 
 export type UserSchema = z.infer<typeof userSchema>;
+
+
+
