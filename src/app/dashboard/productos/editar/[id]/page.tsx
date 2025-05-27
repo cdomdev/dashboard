@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PageEdit() {
   return (
-    <main>
+    <>
       <HeaderPagesSection
         href="#"
         viewBtn={false}
@@ -19,6 +19,6 @@ export default function PageEdit() {
       <section className="flex gap-4 mt-10">
         <FormEditProduct />
       </section>
-    </main>
+    </>
   );
 }

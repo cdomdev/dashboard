@@ -10,6 +10,7 @@ import { FormEditSubcat } from "./FormEditSubcat";
 import { NoDataResponse } from "@/components/NoDataInResp";
 import { TableItems } from "@/components/ui/custom/table/TableItems";
 import { Pagination } from "@/components/Pagination";
+import { itemsHeadCatAndSub } from "@/utils/headListForTables";
 
 interface Props {
   setCatCount: React.Dispatch<React.SetStateAction<number>>;
@@ -20,7 +21,7 @@ export function List({ setCatCount }: Props) {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const pageSize = 5;
+  const pageSize = 10;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +38,6 @@ export function List({ setCatCount }: Props) {
     fetchData();
   }, [setCatCount, page]);
 
-  const itemsHead = ["#ID", "Nombre de la categoria", "Accion", "Accion"];
 
   if (!subcategoria) return <Loading />;
 
@@ -47,7 +47,7 @@ export function List({ setCatCount }: Props) {
   return (
     <>
       <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
-      <TableItems itemsHead={itemsHead}>
+      <TableItems itemsHead={itemsHeadCatAndSub}>
         {subcategoria?.map((cat, index) => (
           <tr
             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -55,9 +55,9 @@ export function List({ setCatCount }: Props) {
           >
             <th
               scope="row"
-              className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              className="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
             >
-              {cat.id?.slice(1, 7) || index}
+              {index + 1}
             </th>
             <th
               scope="row"

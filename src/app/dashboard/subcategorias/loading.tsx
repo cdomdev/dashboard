@@ -1,15 +1,22 @@
+import { itemsHeadCatAndSub } from "@/utils/headListForTables";
+
 export default function Loading() {
-  const filasFalsas = Array.from({ length: 3 });
+  const filasFalsas = Array.from({ length: 5 });
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-sm animate-pulse">
       <table className="w-full text-sm text-gray-500 dark:text-gray-400">
         <thead className="text-xs uppercase bg-gray-100 dark:bg-gray-600 dark:text-gray-400">
           <tr>
-            <th className="p-4">#ID</th>
-            <th className="px-6 py-3">Nombre de la subcategoria</th>
-            <th className="pr-12 py-3">Action</th>
-            <th className="px-6 py-3">Action</th>
+            {itemsHeadCatAndSub.map((item, idx) => (
+              <th
+                key={idx}
+                scope="col"
+                className="py-4 text-center first:rounded-tl-lg last:rounded-tr-lg"
+              >
+                {item}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody className="relative overflow-x-auto shadow-md sm:rounded-sm animate-pulse">

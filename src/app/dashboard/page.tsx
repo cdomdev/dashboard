@@ -49,7 +49,7 @@ export default async function Home() {
   ];
 
   return (
-    <main className="min-h-dvh">
+    <section >
       <section className="w-full py-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center">
           {dataBox.map((item, index) => (
@@ -85,6 +85,6 @@ export default async function Home() {
           <SalesData />
         </div>
       </section>
-    </main>
+    </section>
   );
 }

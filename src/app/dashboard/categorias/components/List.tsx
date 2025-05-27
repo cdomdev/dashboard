@@ -10,6 +10,7 @@ import { FormEditCat } from "./FormEditCat";
 import { NoDataResponse } from "@/components/NoDataInResp";
 import { TableItems } from "@/components/ui/custom/table/TableItems";
 import { Pagination } from "@/components/Pagination";
+import { itemsHeadCatAndSub } from "@/utils/headListForTables";
 
 interface Props {
   setCatCount: React.Dispatch<React.SetStateAction<number>>;
@@ -17,10 +18,10 @@ interface Props {
 
 export function List({ setCatCount }: Props) {
   const [categorias, setCategorias] = useState<CategorySchema[]>([]);
-    const [page, setPage] = useState(1);
-     const [totalPages, setTotalPages] = useState(1);
-    
-  const pageSize = 5;
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const pageSize = 10;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +29,7 @@ export function List({ setCatCount }: Props) {
       if (res?.status === 200 && Array.isArray(res.data?.categorias)) {
         setCatCount(res.data.categorias.length);
         setCategorias(res.data.categorias);
-         setTotalPages(res.data.pagination.pageCount);
+        setTotalPages(res.data.pagination.pageCount);
       } else {
         setCatCount(0);
         setCategorias([]);
@@ -37,7 +38,6 @@ export function List({ setCatCount }: Props) {
     fetchData();
   }, [setCatCount, page]);
 
-  const itemsHead = ["#ID", "Nombre de la categoria", "Accion", "Accion"];
 
   if (!categorias) return <Loading />;
 
@@ -48,7 +48,7 @@ export function List({ setCatCount }: Props) {
     <>
       <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
 
-      <TableItems itemsHead={itemsHead}>
+      <TableItems itemsHead={itemsHeadCatAndSub}>
         <>
           {categorias?.map((cat, index) => (
             <tr
@@ -57,9 +57,9 @@ export function List({ setCatCount }: Props) {
             >
               <th
                 scope="row"
-                className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+                className="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
-                {cat.id?.slice(1, 7) || index}
+                {index + 1}
               </th>
               <th
                 scope="row"
@@ -68,14 +68,14 @@ export function List({ setCatCount }: Props) {
                 {cat.nombre}
               </th>
 
-              <td className="px-6 py-3 text-center">
+              <td className=" py-3 text-center">
                 <DeleteCategoria
                   setCategorias={setCategorias}
                   id={cat.id}
                   setCatCount={setCatCount}
                 />
               </td>
-              <td className="px-6 py-3 flex items-center justify-center text-center">
+              <td className=" py-3 flex items-center justify-center text-center">
                 <FormEditCat category={cat} setCategorias={setCategorias} />
               </td>
             </tr>

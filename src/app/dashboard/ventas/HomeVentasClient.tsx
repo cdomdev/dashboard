@@ -15,7 +15,7 @@ export default function HomeVentas() {
         viewCount={true}
         catCount={count}
       />
-      <section className="mt-10">
+      <section className="mt-10 w-full max-w-screen">
         <SalesList setCount={setCount} />
       </section>
     </main>

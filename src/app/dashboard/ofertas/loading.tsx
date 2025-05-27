@@ -1,5 +1,3 @@
-import { itemsHeadTableUser } from "@/utils/headListForTables";
-
 export default function Loading() {
   const filasFalsas = Array.from({ length: 5 });
 
@@ -8,15 +6,10 @@ export default function Loading() {
       <table className="w-full text-sm text-gray-500 dark:text-gray-400">
         <thead className="text-xs uppercase bg-gray-100 dark:bg-gray-600 dark:text-gray-400">
           <tr>
-            {itemsHeadTableUser.map((item, idx) => (
-              <th
-                key={idx}
-                scope="col"
-                className="py-4 text-center first:rounded-tl-lg last:rounded-tr-lg"
-              >
-                {item}
-              </th>
-            ))}
+            <th className="p-4">#ID</th>
+            <th className="px-6 py-3">Nombre del producto</th>
+            <th className="pr-12 py-3">Action</th>
+            <th className="px-6 py-3">Action</th>
           </tr>
         </thead>
         <tbody className="relative overflow-x-auto shadow-md sm:rounded-sm animate-pulse">
@@ -30,9 +23,6 @@ export default function Loading() {
               </td>
               <td className="px-6 py-4">
                 <div className="h-4 bg-gray-300 rounded w-32"></div>
-              </td>
-              <td className="px-6 py-4">
-                <div className="h-4 bg-gray-300 rounded w-20"></div>
               </td>
               <td className="px-6 py-4">
                 <div className="h-4 bg-gray-300 rounded w-20"></div>

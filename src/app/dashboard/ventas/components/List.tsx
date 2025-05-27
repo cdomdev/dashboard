@@ -6,6 +6,8 @@ import { TableItems } from "@/components/ui/custom/table/TableItems";
 import { DetailsButton } from "@/components/ui/custom/buttons";
 import Image from "next/image";
 import { NoDataResponse } from "@/components/NoDataInResp";
+import { itemsHeadTableVentas } from "@/utils/headListForTables";
+import { Pagination } from "@/components/Pagination";
 
 interface Props {
   setCount: React.Dispatch<React.SetStateAction<number>>;
@@ -13,6 +15,10 @@ interface Props {
 
 export function SalesList({ setCount }: Props) {
   const [sales, setSales] = useState<OrderSchema[]>([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const pageSize = 10;
 
   useEffect(() => {
     async function fechtData() {
@@ -29,20 +35,16 @@ export function SalesList({ setCount }: Props) {
     fechtData();
   }, [setCount]);
 
-  const itemsHeadTable = [
-    "#ID",
-    "Usuario",
-    "Ciudad",
-    "Departamento",
-    "Teléfono",
-    "Detalles",
-  ];
+
 
   if (sales.length === 0)
     return <NoDataResponse text="No hay ventas para mostrar" />;
 
   return (
-    <TableItems itemsHead={itemsHeadTable}>
+    <>
+    
+    <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+    <TableItems itemsHead={itemsHeadTableVentas}>
       <>
         {sales.map((prod, index) => (
           <tr
@@ -51,9 +53,9 @@ export function SalesList({ setCount }: Props) {
           >
             <th
               scope="row"
-              className=" pl-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-bl-lg "
+              className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-bl-lg "
             >
-              {prod?.id.slice(1, 6)}
+              {index + 1}
             </th>
 
             <td
@@ -109,5 +111,7 @@ export function SalesList({ setCount }: Props) {
         ))}
       </>
     </TableItems>
+
+    </>
   );
 }

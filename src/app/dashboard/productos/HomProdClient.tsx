@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Home() {
   const [count, setCount] = useState<number>(0);
   return (
-    <main>
+    < >
       <HeaderPagesSection
         href="/dashboard/productos/crear"
         url="/dashboard"
@@ -17,9 +17,9 @@ export default function Home() {
         catCount={count}
         viewCount={true}
       />
-      <section className="w-full pt-5 overflow-x-auto">
+      <section className="w-full pt-5 max-w-screen">
         <ListProducts setCount={setCount} />
       </section>
-    </main>
+    </>
   );
 }

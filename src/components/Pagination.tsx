@@ -20,7 +20,7 @@ export function Pagination({
   };
 
   return (
-    <div className="flex gap-10 lg:justify-between items-center my-4 lg:px-4">
+    <div className="flex gap-10 md:justify-between  items-center my-4 lg:px-4">
       <p className="text-gray-600 dark:text-gray-300">
         Página {page} de {totalPages}
       </p>

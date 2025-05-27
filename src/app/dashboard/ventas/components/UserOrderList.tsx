@@ -10,6 +10,7 @@ import { DeleteData } from "./DeleteData";
 import Image from "next/image";
 import { ButtonStatus } from "@/components/ui/custom/buttons/ButtonStatusOrder";
 import { HeaderPagesSection } from "@/components/HeaderPagesSection";
+import { itemsHeadTableOrdes } from "@/utils/headListForTables";
 
 export function UserOrders() {
   const [sale, setSale] = useState<OrderSchema[]>([]);
@@ -33,17 +34,6 @@ export function UserOrders() {
 
   if (!sale) return <p>Cargando pedido...</p>;
 
-  const itemsHeadTable = [
-    "#ID",
-    "Usuario",
-    "Total pagado",
-    "Método de pago",
-    "Costo de envío",
-    "Estado de Mercado Pago",
-    "Estado del pedido",
-    "Detalles",
-    "",
-  ];
 
   return (
     <>
@@ -52,12 +42,11 @@ export function UserOrders() {
         title={`Listado de pedidos`}
         url="/dashboard/ventas"
         viewCount={true}
-        textSpan={`El usuario tiene ${count} ${
-          count > 1 ? "Pedidos" : "Pedido"
-        }`}
+        textSpan={`El usuario tiene ${count} ${count > 1 ? "Pedidos" : "Pedido"
+          }`}
       />
 
-      <TableItems itemsHead={itemsHeadTable}>
+      <TableItems itemsHead={itemsHeadTableOrdes}>
         <>
           {sale?.map((prod, index) => (
             <tr
@@ -68,7 +57,7 @@ export function UserOrders() {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-bl-lg "
               >
-                {prod?.id.slice(1, 6)}
+                {index + 1}
               </th>
 
               <td

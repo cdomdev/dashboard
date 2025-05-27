@@ -7,7 +7,7 @@ export default function HomeSubcategoria() {
   const [catCount, setCatCount] = useState(0);
 
   return (
-    <main>
+    <>
       <HeaderPagesSection
         href="/dashboard/subcategorias/crear"
         title="Subcategorias"
@@ -17,9 +17,9 @@ export default function HomeSubcategoria() {
         viewCount={true}
         viewBtn={true}
       />
-      <section className="w-full">
+      <section className="w-full pt-5 max-w-screen">
         <List setCatCount={setCatCount} />
       </section>
-    </main>
+    </>
   );
 }

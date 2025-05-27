@@ -27,14 +27,14 @@ export function HeaderPagesSection({
 }: PropSecction) {
   return (
     <section
-      className={` ${className} w-full lg:px-10 pt-7 pr-4 flex flex-col gap-1`}
+      className={` ${className} w-full  md:px-10  pt-7  flex flex-col gap-1`}
     >
       <div className="flex justify-between items-center">
         <Back url={url} />
         {viewBtn && (
           <Link
             href={href}
-            className="bg-blue-600 hover:bg-blue-700 duration-150 text-white py-2 px-4 rounded-lg flex items-center gap-2"
+            className="bg-blue-600 hover:bg-blue-700 duration-150 text-white py-2 px-4 rounded-lg flex items-center gap-2 text-sm md:text-base"
           >
             <More />
             {textBtn}

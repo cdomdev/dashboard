@@ -16,7 +16,6 @@ export function FormEditProduct() {
   const [loading, setLoading] = useState<boolean>(false);
   const [product, setProduct] = useState<ProductSchema>();
 
-  console.log(product);
   const params = useParams();
   const id = typeof params?.id === "string" ? params.id : undefined;
 

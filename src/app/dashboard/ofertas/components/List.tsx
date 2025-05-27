@@ -1,17 +1,18 @@
+import { itemsHeadTableOferts } from "@/utils/headListForTables";
 import Image from "next/image";
+import { TableItems } from "@/components/ui/custom/table/TableItems";
+import Loading from "../loading";
+import { useState } from "react";
+import { NoDataResponse } from "@/components/NoDataInResp";
+
 
 export function OfertsList() {
-  const itemsHeadTable = [
-    "#ID",
-    "Titulo de la oferta",
-    "Fecha de inicio",
-    "Fecha finalizacion",
-    "Imagen",
-    "Accion",
-    "Accion",
-  ];
+  const [oferts, setOferts] = useState(null)
 
-  const oferts = [
+  if (!oferts) return Loading()
+
+  // if(!oferts.length) return <NoDataResponse text="No hay datos para mostrar"/>)
+  const ofertsItems = [
     {
       id: "1",
       title: "Oferta 1",
@@ -99,78 +100,66 @@ export function OfertsList() {
   ];
 
   return (
-    <div className="mt-10 relative overflow-x-auto shadow-md sm:rounded-sm animate-fadeIn">
-      <table className="w-full text-sm text-Back rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            {itemsHeadTable.map((item, idx) => (
-              <th key={idx} scope="col" className="p-4">
-                {item}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {oferts?.map((ofr, index) => (
-            <tr
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-              key={ofr.id || index}
-            >
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                {ofr.id?.slice(1, 7) || index}
-              </th>
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {ofr.title}
-              </td>
+    <TableItems itemsHead={itemsHeadTableOferts}>
+      {ofertsItems?.map((ofr, index) => (
+        <tr
+          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+          key={ofr.id || index}
+        >
+          <th
+            scope="row"
+            className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          >
+            {index + 1}
+          </th>
+          <td
+            scope="row"
+            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+          >
+            {ofr.title}
+          </td>
 
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {ofr.start_date}
-              </td>
+          <td
+            scope="row"
+            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+          >
+            {ofr.start_date}
+          </td>
 
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                {ofr.end_date}
-              </td>
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                <Image
-                  src={ofr.image}
-                  width={20}
-                  height={60}
-                  alt={`Imagen de la oferta ${ofr.title}`}
-                  className=" rounded-full w-5 h-5"
-                />
-              </td>
+          <td
+            scope="row"
+            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+          >
+            {ofr.end_date}
+          </td>
+          <td
+            scope="row"
+            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+          >
+            <Image
+              src={ofr.image}
+              width={20}
+              height={60}
+              alt={`Imagen de la oferta ${ofr.title}`}
+              className=" rounded-full w-5 h-5"
+            />
+          </td>
 
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                Editar
-              </td>
-              <td
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-              >
-                Eliminar
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          <td
+            scope="row"
+            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+          >
+            Editar
+          </td>
+          <td
+            scope="row"
+            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+          >
+            Eliminar
+          </td>
+        </tr>
+      ))}
+    </TableItems>
+
   );
 }

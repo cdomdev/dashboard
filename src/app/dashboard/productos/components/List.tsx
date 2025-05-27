@@ -13,7 +13,7 @@ import { DeletProduct } from "./DeleteProduct";
 import { useToastStore } from "@/context/global.context.app";
 import { NoDataResponse } from "@/components/NoDataInResp";
 import axios from "axios";
-import {itemsHeadTableProducts} from '@/utils/headListForTables'
+import { itemsHeadTableProducts } from '@/utils/headListForTables'
 import { formatPrice } from "../utils/formatPrice";
 
 interface Props {
@@ -26,7 +26,7 @@ export function ListProducts({ setCount }: Props) {
   const [totalPages, setTotalPages] = useState(1);
 
   const setToast = useToastStore.getState().setToast;
-  const pageSize = 5;
+  const pageSize = 10;
 
   useEffect(() => {
     async function fetchData() {
@@ -72,9 +72,9 @@ export function ListProducts({ setCount }: Props) {
             >
               <th
                 scope="row"
-                className="px-6 py-4  not-first:font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-2 py-4  not-first:font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                {prod?.id?.slice(1, 7)}
+                {index + 1}
               </th>
               <td
                 scope="row"
@@ -90,15 +90,14 @@ export function ListProducts({ setCount }: Props) {
               </td>
               <td
                 scope="row"
-                className={`${
-                  prod.cantidad < 10
+                className={`${prod.cantidad < 10
                     ? "text-red-600 font-extrabold"
                     : "text-gray-900"
-                } px-6 py-4 font-medium  whitespace-nowrap dark:text-white text-center`}
+                  } px-6 py-4 font-medium  whitespace-nowrap dark:text-white text-center`}
               >
                 {prod.cantidad}
               </td>
-               <td
+              <td
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
