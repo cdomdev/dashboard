@@ -1,5 +1,3 @@
-"use client";
-
 import { HeaderPagesSection } from "@/components/HeaderPagesSection";
 import { FormProducts } from "../components/FormProducts";
 import { Metadata } from "next"
