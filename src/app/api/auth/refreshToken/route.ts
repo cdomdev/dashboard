@@ -1,39 +1,56 @@
-"use server"
-import { cookies } from "next/headers"
+"use server";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 const HOST = process.env.NEXT_PUBLIC_HOST_API;
 
 export async function GET() {
   try {
+    const cookieStore = await cookies();
+    const refreshToken = cookieStore.get("bearer-token-rfsh");
+
+    if (!refreshToken) {
+      return NextResponse.json(
+        { error: "No hay refresh token" },
+        { status: 401 }
+      );
+    }
+
     const res = await fetch(`${HOST}/api/auth/refresh-token`, {
       method: "GET",
-      credentials: "include",
+      headers: {
+        Cookie: `bearer-token-rfsh=${refreshToken.value}`,
+      },
     });
+
+    const contentType = res.headers.get("content-type") || "";
+
+    if (!contentType.includes("application/json")) {
+      const errorText = await res.text();
+      console.error("Respuesta no JSON del servidor:", errorText);
+      return NextResponse.json(
+        { error: "Respuesta no válida del servidor externo" },
+        { status: 502 }
+      );
+    }
 
     const data = await res.json();
 
-    console.log("Respuesta del servidor en el refresh ---> :", data); 
+    const response = NextResponse.json({ response: res.status, data });
 
-    if (!res.ok) return NextResponse.json({ data }, { status: res.status });
-
-    // definir nueva cookie 
-
-    const cookiesSession = await cookies()
-
-    const { newAccessToken } = data
-
-    cookiesSession.set("bearer-token", newAccessToken, {
+    response.cookies.set("bearer-token", data.newAccessToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
       path: "/",
     });
 
-    return NextResponse.json({ response: res.status, data });
+    return response;
   } catch (err) {
     console.error("Error al refrescar token:", err);
-    return NextResponse.json({ error: "Error al refrescar token" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Error al refrescar token" },
+      { status: 500 }
+    );
   }
-  
 }

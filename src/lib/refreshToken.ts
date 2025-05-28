@@ -3,9 +3,6 @@ export async function refreshAdmin() {
     const res = await fetch("/api/auth/refreshToken", {
       method: "GET",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
 
     if (!res.ok) throw new Error("No se pudo renovar el token");

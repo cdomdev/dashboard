@@ -37,9 +37,9 @@ api.interceptors.response.use(
       try {
 
         const refreshResponse = await refreshAdmin();
-        
-        if (refreshResponse?.newAccessToken) {
-          originalRequest.headers.Authorization = `Bearer ${refreshResponse.newAccessToken}`;
+        const newRefreshToken = refreshResponse.data.newAccessToken
+        if (refreshResponse?.data) {
+          originalRequest.headers.Authorization = `Bearer ${newRefreshToken}`;
           return api(originalRequest);
         } else {
           window.location.href = "/login";

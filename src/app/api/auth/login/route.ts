@@ -28,8 +28,8 @@ export async function POST(req: Request) {
 
   cookiesSession.set("bearer-token", accessToken, {
     httpOnly: true,
-    secure: true,
-    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
     path: "/",
   });
 
