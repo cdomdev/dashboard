@@ -22,10 +22,12 @@ export function SalesList({ setCount }: Props) {
 
   useEffect(() => {
     async function fechtData() {
-      const res = await getAllSales();
+      const res = await getAllSales(page, pageSize);
       if (res.status === 200) {
+        const longitud = res?.data?.ventas.length
         setSales(res?.data.ventas);
-        setCount(res?.data.ventas.length);
+        setCount(longitud);
+        setTotalPages(longitud)
       } else {
         setCount(0);
         setSales([]);
@@ -33,7 +35,7 @@ export function SalesList({ setCount }: Props) {
     }
 
     fechtData();
-  }, [setCount]);
+  }, [setCount, page]);
 
 
 
