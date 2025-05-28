@@ -14,11 +14,12 @@ export default function AdminPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getAdmin();
-      setRes(res?.data?.users);
+      const res = await getAdmin( page,pageSize);
+      setRes(res?.data?.admins);
+      setTotalPages(res.data.admin.length)
     };
     fetchData();
-  }, []);
+  }, [page]);
 
 
   return (

@@ -1,165 +1,131 @@
-import { itemsHeadTableOferts } from "@/utils/headListForTables";
+"use client";
+import { itemsHeadTableProducts } from "@/utils/headListForTables";
 import Image from "next/image";
 import { TableItems } from "@/components/ui/custom/table/TableItems";
+import { useEffect, useState } from "react";
+import { getProductWithDiscount } from "../lib/lib";
 import Loading from "../loading";
-import { useState } from "react";
 import { NoDataResponse } from "@/components/NoDataInResp";
+import { ProductSchema } from "@/interfaces";
+import { Pagination } from "@/components/Pagination";
+import { formatPrice } from "@/utils/formatPayment";
+import Link from "next/link";
+import { Editbutton } from "@/components/ui/custom/buttons";
+import { DeletProduct } from "../../productos/components/DeleteProduct";
 
+interface Prop {
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+}
 
-export function OfertsList() {
-  const [oferts, setOferts] = useState(null)
+export function OfertsList({ setCount }: Prop) {
+  const [products, setProducts] = useState<ProductSchema[]>([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  if (!oferts) return Loading()
+  const pageSize = 10;
 
-  // if(!oferts.length) return <NoDataResponse text="No hay datos para mostrar"/>)
-  const ofertsItems = [
-    {
-      id: "1",
-      title: "Oferta 1",
-      start_date: "10/06/2023",
-      end_date: "10/06/2023",
-      products: [
-        {
-          title: "Descripción de la oferta 1",
-          price: 120.0,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1tuoWOaXqZsb6z_in8zN1VsfTFHZUzvSIA&s",
-        },
-        {
-          title: "Descripción de la oferta 2",
-          price: 120.0,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1tuoWOaXqZsb6z_in8zN1VsfTFHZUzvSIA&s",
-        },
-        {
-          title: "Descripción de la oferta 3 ",
-          price: 120.0,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1tuoWOaXqZsb6z_in8zN1VsfTFHZUzvSIA&s",
-        },
-      ],
-      image:
-        "https://www.tarjetaalkosto.com.co/sites/default/files/u569/banner.png",
-    },
-    {
-      id: "2",
-      title: "Oferta 1",
-      start_date: "10/06/2023",
-      end_date: "10/06/2023",
-      products: [
-        {
-          title: "Descripción de la oferta 1",
-          price: 120.0,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1tuoWOaXqZsb6z_in8zN1VsfTFHZUzvSIA&s",
-        },
-        {
-          title: "Descripción de la oferta 2",
-          price: 120.0,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1tuoWOaXqZsb6z_in8zN1VsfTFHZUzvSIA&s",
-        },
-        {
-          title: "Descripción de la oferta 3 ",
-          price: 120.0,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1tuoWOaXqZsb6z_in8zN1VsfTFHZUzvSIA&s",
-        },
-      ],
-      image:
-        "https://www.tarjetaalkosto.com.co/sites/default/files/u569/banner.png",
-    },
-    {
-      id: "3",
-      title: "Oferta 1",
-      start_date: "10/06/2023",
-      end_date: "10/06/2023",
-      products: [
-        {
-          title: "Descripción de la oferta 1",
-          price: 120.0,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1tuoWOaXqZsb6z_in8zN1VsfTFHZUzvSIA&s",
-        },
-        {
-          title: "Descripción de la oferta 2",
-          price: 120.0,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1tuoWOaXqZsb6z_in8zN1VsfTFHZUzvSIA&s",
-        },
-        {
-          title: "Descripción de la oferta 3 ",
-          price: 120.0,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1tuoWOaXqZsb6z_in8zN1VsfTFHZUzvSIA&s",
-        },
-      ],
-      image:
-        "https://www.tarjetaalkosto.com.co/sites/default/files/u569/banner.png",
-    },
-  ];
+  useEffect(() => {
+    async function fetchData() {
+      const res = await getProductWithDiscount(page, pageSize);
+      if (res.status === 200) {
+        setProducts(res?.data.data);
+        setTotalPages(res?.data.data.length);
+      } else {
+        setProducts([]);
+      }
+    }
+
+    fetchData();
+  }, [page]);
+
+  if (!products) return Loading();
+  if (!products.length)
+    return <NoDataResponse text="No hay datos para mostrar" />;
 
   return (
-    <TableItems itemsHead={itemsHeadTableOferts}>
-      {ofertsItems?.map((ofr, index) => (
-        <tr
-          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-          key={ofr.id || index}
-        >
-          <th
-            scope="row"
-            className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-          >
-            {index + 1}
-          </th>
-          <td
-            scope="row"
-            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-          >
-            {ofr.title}
-          </td>
-
-          <td
-            scope="row"
-            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-          >
-            {ofr.start_date}
-          </td>
-
-          <td
-            scope="row"
-            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-          >
-            {ofr.end_date}
-          </td>
-          <td
-            scope="row"
-            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-          >
-            <Image
-              src={ofr.image}
-              width={20}
-              height={60}
-              alt={`Imagen de la oferta ${ofr.title}`}
-              className=" rounded-full w-5 h-5"
-            />
-          </td>
-
-          <td
-            scope="row"
-            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-          >
-            Editar
-          </td>
-          <td
-            scope="row"
-            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-          >
-            Eliminar
-          </td>
-        </tr>
-      ))}
-    </TableItems>
-
+    <>
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+      <TableItems itemsHead={itemsHeadTableProducts}>
+        <>
+          {products?.map((prod, index) => (
+            <tr
+              className="bg-white border-b  last:border-b-0 last:rounded-b  dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+              key={prod.id || index}
+            >
+              <th
+                scope="row"
+                className="px-2 py-4  not-first:font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                {index + 1}
+              </th>
+              <td
+                scope="row"
+                className="py-4 font-medium  text-gray-900 whitespace-nowrap dark:text-white text-center text-wrap"
+              >
+                {prod.titulo}
+              </td>
+              <td
+                scope="row"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+              >
+                {prod.marca}
+              </td>
+              <td
+                scope="row"
+                className={`${
+                  prod.cantidad < 10
+                    ? "text-red-600 font-extrabold"
+                    : "text-gray-900"
+                } px-6 py-4 font-medium  whitespace-nowrap dark:text-white text-center`}
+              >
+                {prod.cantidad}
+              </td>
+              <td
+                scope="row"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+              >
+                {prod.descuento ? prod.descuento : "0"} %
+              </td>
+              <td
+                scope="row"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+              >
+                {formatPrice(prod.precio)}
+              </td>
+              <td
+                scope="row"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text- text-center"
+              >
+                <Image
+                  src={prod.image}
+                  width={40}
+                  height={40}
+                  alt={`${prod.titulo}`}
+                  className="rounded-full "
+                />
+              </td>
+              <td
+                scope="row"
+                className="py-4 font-medium  text-gray-900 whitespace-nowrap dark:text-white text-center"
+              >
+                {prod.referencia}
+              </td>
+              <td className="px-4 py-4 text-center">
+                <Link href={`/dashboard/productos/editar/${prod.id}`}>
+                  <Editbutton />
+                </Link>
+              </td>
+              <td className="px-4 py-4">
+                <DeletProduct
+                  id={prod.id}
+                  setProducts={setProducts}
+                  setCount={setCount}
+                />
+              </td>
+            </tr>
+          ))}
+        </>
+      </TableItems>
+    </>
   );
 }

@@ -38,3 +38,8 @@ const formatValue = (value: number | string) => {
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
+
+export const formatPrice = (value: string | number): string => {
+  if (!value) return "";
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};

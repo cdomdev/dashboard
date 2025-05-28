@@ -16,14 +16,7 @@ import {
 
 import { ChevronRight } from "lucide-react";
 import { User } from "lucide-react";
-import { ChevronUp } from "lucide-react";
 
-import {
-  DropdownMenu,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-} from "./ui/dropdown-menu";
 import {
   Categorias,
   Products,
@@ -31,7 +24,7 @@ import {
   Usuario,
   Ventas,
   Home,
-  Ofertas
+  Ofertas,
 } from "./icons";
 import Link from "next/link";
 import {
@@ -39,7 +32,6 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from "@radix-ui/react-collapsible";
-
 
 const items = [
   {
@@ -118,6 +110,10 @@ const items = [
     url: "/dashboard/ofertas",
     icon: Ofertas,
     subItems: [
+       {
+        url: "/dashboard/ofertas",
+        nombre: "Ver productos con descuentos",
+      },
       {
         url: "/dashboard/ofertas/cupones",
         nombre: "Gestionar cupones",
@@ -126,6 +122,7 @@ const items = [
         url: "/dashboard/ofertas/crear",
         nombre: "Agregar una nueva oferta",
       },
+     
     ],
   },
 ];
@@ -134,7 +131,7 @@ export function AppSidebar() {
   return (
     <>
       <Sidebar collapsible="icon">
-        <SidebarContent >
+        <SidebarContent>
           <SidebarGroup className="pl-1">
             <SidebarGroupLabel className="text-sm">
               Panel de administracion
@@ -144,7 +141,9 @@ export function AppSidebar() {
                 <SidebarMenuButton className="group flex items-center justify-between w-full">
                   <div className="flex items-center gap-2">
                     <Home />
-                    <Link href="/dashboard" className="text-base">Dashboard</Link>
+                    <Link href="/dashboard" className="text-base">
+                      Dashboard
+                    </Link>
                   </div>
                 </SidebarMenuButton>
 
@@ -162,11 +161,18 @@ export function AppSidebar() {
                       </CollapsibleTrigger>
                     </SidebarMenuItem>
 
-                    <CollapsibleContent >
+                    <CollapsibleContent>
                       <SidebarMenuSub className="text-slate-700 gap-y-3 pl-1 dark:text-slate-400">
                         {item.subItems.map((subItem) => (
-                          <SidebarMenuSubItem key={subItem.nombre} className="cursor-pointer">
-                            <Link href={subItem.url} > <strong className="pr-1">-</strong> {subItem.nombre}</Link>
+                          <SidebarMenuSubItem
+                            key={subItem.nombre}
+                            className="cursor-pointer"
+                          >
+                            <Link href={subItem.url}>
+                              {" "}
+                              <strong className="pr-1">-</strong>{" "}
+                              {subItem.nombre}
+                            </Link>
                           </SidebarMenuSubItem>
                         ))}
                       </SidebarMenuSub>
