@@ -38,7 +38,6 @@ export function List({ setCatCount }: Props) {
     fetchData();
   }, [setCatCount, page]);
 
-
   if (!subcategoria) return <Loading />;
 
   if (subcategoria?.length === 0)
@@ -66,14 +65,14 @@ export function List({ setCatCount }: Props) {
               {cat.nombre}
             </th>
 
-            <td className="px-6 py-3">
+            <td className=" py-3">
               <DeleteSubcategoria
                 setSubcategorias={setSubcategoria}
                 id={cat.id}
                 setCatCount={setCatCount}
               />
             </td>
-            <td className="px-6 py-3 flex items-center justify-center">
+            <td className=" py-3 flex items-center justify-center">
               <FormEditSubcat
                 subcategory={cat}
                 setSubCategoria={setSubcategoria}

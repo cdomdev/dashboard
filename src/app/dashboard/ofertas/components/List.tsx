@@ -8,7 +8,7 @@ import Loading from "../loading";
 import { NoDataResponse } from "@/components/NoDataInResp";
 import { ProductSchema } from "@/interfaces";
 import { Pagination } from "@/components/Pagination";
-import { formatPrice } from "@/utils/formatPayment";
+import { formatValue } from "@/utils/formatPayment";
 import Link from "next/link";
 import { Editbutton } from "@/components/ui/custom/buttons";
 import { DeletProduct } from "../../productos/components/DeleteProduct";
@@ -90,7 +90,7 @@ export function OfertsList({ setCount }: Prop) {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
-                {formatPrice(prod.precio)}
+                {formatValue(prod.precio)}
               </td>
               <td
                 scope="row"
@@ -101,7 +101,7 @@ export function OfertsList({ setCount }: Prop) {
                   width={40}
                   height={40}
                   alt={`${prod.titulo}`}
-                  className="rounded-full "
+                  className="rounded-full mx-auto "
                 />
               </td>
               <td

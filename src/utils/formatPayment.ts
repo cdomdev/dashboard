@@ -26,7 +26,7 @@ export const formatSinglePayment = (order: OrderSchema) => {
 };
 
 // FUNCIÓN 3: Formatear valor con puntos
-const formatValue = (value: number | string) => {
+export const formatValue = (value: number | string) => {
   // Convertir a número si es string
   const numericValue = typeof value === "string" ? parseFloat(value) : value;
 

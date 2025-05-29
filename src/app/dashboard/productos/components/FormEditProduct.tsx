@@ -10,7 +10,8 @@ import { useToastStore } from "@/context/global.context.app";
 import { useEffect, useState } from "react";
 import { Spiner } from "@/components/ui/custom/loaders/Spiner";
 import { useParams } from "next/navigation";
-import { formatPrice, cleanPrice } from "../utils/formatPrice";
+import { cleanPrice } from "../utils/formatPrice";
+import { formatValue } from "@/utils/formatPayment";
 
 export function FormEditProduct() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -168,7 +169,7 @@ export function FormEditProduct() {
                           placeholder="Precio"
                           value={
                             field.value !== undefined && field.value !== null
-                              ? formatPrice(String(field.value))
+                              ? formatValue(String(field.value))
                               : ""
                           }
                           onChange={(
@@ -242,7 +243,6 @@ export function FormEditProduct() {
                   />
                 </div>
               </div>
-
 
               <div className="mb-3 grid md:grid-cols-2 gap-4">
                 <div className="w-full">

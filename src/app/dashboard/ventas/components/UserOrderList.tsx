@@ -6,11 +6,11 @@ import { useParams } from "next/navigation";
 import { getSalesBy } from "../lib/sales";
 import { TableItems } from "@/components/ui/custom/table/TableItems";
 import { DetailsButton } from "@/components/ui/custom/buttons";
-import { DeleteData } from "./DeleteData";
 import Image from "next/image";
 import { ButtonStatus } from "@/components/ui/custom/buttons/ButtonStatusOrder";
 import { HeaderPagesSection } from "@/components/HeaderPagesSection";
 import { itemsHeadTableOrdes } from "@/utils/headListForTables";
+import { formatValue } from "@/utils/formatPayment";
 
 export function UserOrders() {
   const [sale, setSale] = useState<OrderSchema[]>([]);
@@ -34,7 +34,6 @@ export function UserOrders() {
 
   if (!sale) return <p>Cargando pedido...</p>;
 
-
   return (
     <>
       <HeaderPagesSection
@@ -42,8 +41,9 @@ export function UserOrders() {
         title={`Listado de pedidos`}
         url="/dashboard/ventas"
         viewCount={true}
-        textSpan={`El usuario tiene ${count} ${count > 1 ? "Pedidos" : "Pedido"
-          }`}
+        textSpan={`El usuario tiene ${count} ${
+          count > 1 ? "Pedidos" : "Pedido"
+        }`}
       />
 
       <TableItems itemsHead={itemsHeadTableOrdes}>
@@ -88,7 +88,7 @@ export function UserOrders() {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
-                {prod.pago_total}
+                {formatValue(prod.pago_total)}
               </td>
 
               <td
@@ -102,7 +102,7 @@ export function UserOrders() {
                 scope="row"
                 className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
               >
-                {prod.costo_de_envio}
+                {formatValue(prod.costo_de_envio)}
               </td>
               <td
                 scope="row"
@@ -119,13 +119,6 @@ export function UserOrders() {
               <td className="px-4 py-4 text-center">
                 <DetailsButton
                   url={`/dashboard/ventas/user/detalle/${prod?.id}`}
-                />
-              </td>
-              <td className="px-4 py-2 text-center rounded-br-lg">
-                <DeleteData
-                  id={prod.id}
-                  setCount={setCount}
-                  setSales={setSale}
                 />
               </td>
             </tr>

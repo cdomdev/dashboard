@@ -7,8 +7,12 @@ export function getMorSalled() {
   return res;
 }
 
+export function Sales() {
+  const res = query("/api/balance/sales-month", "GET");
+  return res;
+}
 
-export function Sales(){
-  const res = query("/api/balance/sales-month", "GET")
-  return res
+export function balans() {
+  const res = query("api/balance/see-balance-sheets", "GET");
+  return res;
 }

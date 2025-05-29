@@ -8,6 +8,7 @@ import { HeaderPagesSection } from "@/components/HeaderPagesSection";
 import { LoadingSpinner } from "@/components/LoadingSpiner";
 import { ButtonStatus } from "@/components/ui/custom/buttons/ButtonStatusOrder";
 import { UpdateState } from "./UpdateStatusOrder";
+import { formatValue } from "@/utils/formatPayment";
 
 export function TablerOrder() {
   const [sale, setSale] = useState<OrderSchema>();
@@ -94,7 +95,10 @@ export function TablerOrder() {
             <div className="flex items-center justify-between gap-x-3">
               <div className="flex items-center gap-x-3">
                 <h3 className="font-semibold ">Estado del pedido: </h3>
-                <ButtonStatus id={sale?.id} initialStatus={sale?.estado_pedido} />
+                <ButtonStatus
+                  id={sale?.id}
+                  initialStatus={sale?.estado_pedido}
+                />
               </div>
               <div>
                 <UpdateState id={sale?.id} />
@@ -110,8 +114,8 @@ export function TablerOrder() {
                 <tr>
                   <th className="px-6 py-3 text-center">Nombre del producto</th>
                   <th className="px-6 py-3 text-center">Cantidad</th>
-                  <th className="px-6 py-3 ">Precio unitario</th>
-                  <th className="px-6 py-3 ">Descuento</th>
+                  <th className="px-6 py-3 text-center">Precio unitario</th>
+                  <th className="px-6 py-3 text-center">Descuento</th>
                   <th className="px-6 py-3 text-center">Subtotal</th>
                 </tr>
               </thead>
@@ -125,20 +129,24 @@ export function TablerOrder() {
                       key={pro.id || index}
                       className="border-b last:border-b-0 border-gray-200 hover:bg-gray-50"
                     >
-                      <th className="px-6 py-4 font-normal text-gray-900  text-wrap max-w-[200px] break-words">
+                      <th className="px-6 py-4 font-normal text-gray-900  max-w-[170px] break-words text-balance">
                         {pro.Producto.titulo}
                       </th>
                       <td className="px-6 py-4 text-center">{pro.cantidad}</td>
-                      <td className="px-6 py-4 text-center">{pro.precio_unitario}</td>
+                      <td className="px-6 py-4 text-center">
+                        {formatValue(pro.precio_unitario)}
+                      </td>
                       <td
                         className={`${
                           pro.descuento ? "text-red-400" : "text-black text-xs"
                         } px-6 py-4 text-center`}
                       >
-                        {pro.descuento || "No hay descuento"}
+                        {pro.descuento || 0}
                         <span className={pro.descuento ? "" : "hidden"}>%</span>
                       </td>
-                      <td className="px-6 py-4 text-center">{pro.sub_total}</td>
+                      <td className="px-6 py-4 text-center">
+                        {formatValue(pro.sub_total)}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

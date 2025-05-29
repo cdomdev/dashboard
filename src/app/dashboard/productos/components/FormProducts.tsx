@@ -12,7 +12,8 @@ import { ImageDrop } from "./Drag";
 import { useToastStore } from "@/context/global.context.app";
 import { useState } from "react";
 import { Spiner } from "@/components/ui/custom/loaders/Spiner";
-import { cleanPrice, formatPrice } from "../utils/formatPrice";
+import { formatValue } from "@/utils/formatPayment";
+import { cleanPrice } from "../utils/formatPrice";
 
 export function FormProducts() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -152,7 +153,7 @@ export function FormProducts() {
                           placeholder="Precio"
                           value={
                             field.value !== undefined && field.value !== null
-                              ? formatPrice(String(field.value))
+                              ? formatValue(String(field.value))
                               : ""
                           }
                           onChange={(
@@ -224,7 +225,7 @@ export function FormProducts() {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="w-full">
-                  <SelectCat  />
+                  <SelectCat />
                 </div>
 
                 <div className="w-full">

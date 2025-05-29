@@ -47,7 +47,7 @@ export const Modal: React.FC<ModalProps> = ({
             <span className="sr-only">Close modal</span>
           </button>
           <div className="p-1 text-center ">
-            <h3 className="mb-2 text-lg text-gray-800 font-semibold">
+            <h3 className="mb-2 text-lg text-gray-800 font-semibold text-wrap">
               {modalTitle}
             </h3>
 

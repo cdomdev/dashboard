@@ -13,7 +13,10 @@ export function DropdNotications() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="hover:bg-transparent cursor-pointer">
+        <Button
+          variant="ghost"
+          className="hover:bg-transparent cursor-pointer ring-0"
+        >
           {" "}
           <svg
             className="size-6"
@@ -29,10 +32,14 @@ export function DropdNotications() {
           <span className="sr-only">button drop-menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Notificaciones</DropdownMenuLabel>
+      <DropdownMenuContent className="w-fit max-w-80">
+        <DropdownMenuLabel className="py-0.5 text-center">
+          Notificaciones
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
-       <span className="text-xs text-gray-300 text-center block">No hay notificaiones</span>
+        <span className="text-xs text-gray-300 text-center block p-2">
+          No hay notificaciones
+        </span>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -11,9 +11,8 @@ export const productSchema = z.object({
   subcategoria: z.string().optional(),
   descuento: z.number().optional(),
   descripcion: z.string(),
-  image: z.string()
+  image: z.string(),
 });
-
 
 export const categorySchema = z.object({
   id: z.string().optional(),
@@ -44,10 +43,9 @@ export const userSchema = z.object({
   telefono: z.string(),
   ciudad: z.string(),
   departamento: z.string(),
-  
+
   roles: rolesSchema,
 });
-
 
 export const detailOrder = z.object({
   id: z.number(),
@@ -76,7 +74,13 @@ export const orderSchema = z.object({
   detalles_pedido: detailOrder.array(),
 });
 
-
+export const balanceSchema = z.object({
+  users: z.number(),
+  totalOrders: z.number(),
+  totalSales: z.number(),
+  totalPending: z.number(),
+  totalShipped: z.number(),
+});
 
 export type ProductSchema = z.infer<typeof productSchema>;
 
@@ -88,5 +92,4 @@ export type OrderSchema = z.infer<typeof orderSchema>;
 
 export type UserSchema = z.infer<typeof userSchema>;
 
-
-
+export type BalanceSchema = z.infer<typeof balanceSchema>;

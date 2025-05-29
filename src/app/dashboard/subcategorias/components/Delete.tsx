@@ -29,11 +29,22 @@ export function DeleteSubcategoria({
         });
         setCatCount((prev) => prev - 1);
         seToast("Subcategoría eliminada con éxito", "toast-success");
-      } else {
+        setIsDeleteOpen(false);
+      } else if (res.status === 404) {
+        seToast(
+          `${
+            res.message ||
+            "No se pudo eliminar la subcategoria, intentelo mas tarde"
+          }`,
+          "toast-fail"
+        );
+        setIsDeleteOpen(false);
+      } else if (res.status === 500) {
         seToast(
           "No se pudo eliminar la subcategoria, intentelo mas tarde",
           "toast-fail"
         );
+        setIsDeleteOpen(false);
       }
     } catch (error) {
       console.log("Error al intentar eliminar la suncategoria", error);
@@ -58,7 +69,7 @@ export function DeleteSubcategoria({
             Sí, eliminar
           </button>
           <button
-            className="text-black border py-1.5 px-5 rounded-md hover:bg-gray-400 dark:hover:text-black cursor-pointer duration-200"
+            className="text-black border py-1.5 px-5 rounded-md hover:bg-gray-400 dark:hover:text-black cursor-pointer duration-200 dark:border-black"
             onClick={() => setIsDeleteOpen(false)}
           >
             No, cancelar

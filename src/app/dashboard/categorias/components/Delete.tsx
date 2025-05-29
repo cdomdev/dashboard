@@ -25,10 +25,20 @@ export function DeleteCategoria({ id, setCategorias, setCatCount }: deleProps) {
           return nuevaLista;
         });
         setCatCount((prev) => prev - 1);
+        setIsDeleteOpen(false);
         seToast("Categoría eliminada con éxito", "toast-success");
-      } else {
+      } else if (res.status === 404) {
         seToast(
-          "No se pudo elimir la categoria, intentelo mas tarde",
+          `${
+            res.message || "No se pudo elimir la categoria, intentelo mas tarde"
+          } `,
+          "toast-fail"
+        );
+        setIsDeleteOpen(false);
+      } else if (res.status === 500) {
+        setIsDeleteOpen(false);
+        seToast(
+          `${"No se pudo elimir la categoria, intentelo mas tarde"} `,
           "toast-fail"
         );
       }
@@ -55,7 +65,7 @@ export function DeleteCategoria({ id, setCategorias, setCatCount }: deleProps) {
             Sí, eliminar
           </button>
           <button
-            className="text-black border py-1.5 px-5 rounded-md hover:bg-gray-400 dark:hover:text-black cursor-pointer duration-200"
+            className="text-black border py-1.5 px-5 rounded-md hover:bg-gray-400 dark:hover:text-black cursor-pointer duration-200 dark:border-black"
             onClick={() => setIsDeleteOpen(false)}
           >
             No, cancelar

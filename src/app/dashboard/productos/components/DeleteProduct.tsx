@@ -4,6 +4,7 @@ import { useState } from "react";
 import { deleteProduct } from "../lib/products";
 import { ProductSchema } from "@/interfaces";
 import { useToastStore } from "@/context/global.context.app";
+import { Alert } from "@/components/icons";
 
 interface Props {
   id?: string;
@@ -22,9 +23,13 @@ export function DeletProduct({ id, setProducts, setCount }: Props) {
     if (res.status === 201) {
       setOpen(false);
       setProducts((prev) => prev.filter((prod) => prod.id !== id));
-      seToast("Producto eliminado con exitop", "toast-success");
+      seToast("Producto eliminado con exito", "toast-success");
       setCount((prev) => prev - 1);
-    } else {
+    } else if (res.status === 404) {
+      setOpen(false);
+      seToast(res.message, "toast-fail");
+    } else if(res.status === 500){
+      seToast(res.message, "toast-fail");
       setProducts([]);
     }
   }
@@ -36,10 +41,21 @@ export function DeletProduct({ id, setProducts, setCount }: Props) {
       <Modal
         isOpen={open}
         onClose={() => setOpen(false)}
-        modalTitle="¿Está seguro?"
-        modalContent="Esta acción eliminará la el producto seleccionada. ¿Desea continuar?"
+        modalTitle="Esta acción eliminará el producto"
+        modalContent=""
       >
-        <div className="flex gap-3 justify-center items-center pt-4">
+        <div className="flex items-center justify-center pb-1 gap-2">
+          <Alert className="text-red-500 text-center inline-block" />
+          <p className="text-red-500 font-semibold text-center">
+            ¡Atención! Esta acción no se puede deshacer.
+          </p>
+          <Alert className="text-red-500 text-center inline-block" />
+        </div>
+        <p className="text-black">
+          No podrá eliminar productos que estén asociados a una venta.
+        </p>
+        <span className="text-black font-semibold">¿Desea continuar? </span>
+        <div className="flex gap-3 justify-center items-center pt-7">
           <button
             className="bg-red-600 text-white py-1.5 px-6 rounded-md cursor-pointer hover:bg-red-800 duration-200 "
             onClick={handleDelete}
@@ -47,7 +63,7 @@ export function DeletProduct({ id, setProducts, setCount }: Props) {
             Sí, eliminar
           </button>
           <button
-            className="text-black border py-1.5 px-5 rounded-md hover:bg-gray-400 dark:hover:text-black cursor-pointer duration-200"
+            className="text-black  py-1.5 px-5 rounded-md hover:bg-gray-400 dark:hover:text-black cursor-pointer duration-200 border dark:border-black"
             onClick={() => setOpen(false)}
           >
             No, cancelar
