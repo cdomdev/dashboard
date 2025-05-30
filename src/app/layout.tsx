@@ -2,14 +2,14 @@ import "@/app/globals.css";
 import { Toast } from "@/components/Toast";
 import { Providers } from "@/app/Provider";
 import { Metadata } from "next";
-import {Lato} from "next/font/google" 
+import {Montserrat} from "next/font/google" 
 
 export const metadata: Metadata = {
   title: "Login",
   description: "Pagina de login",
 };
 
-const lato = Lato({
+const lato = Montserrat({
   weight: ["400", "700"],
   subsets: ["latin"],
   display: "swap",

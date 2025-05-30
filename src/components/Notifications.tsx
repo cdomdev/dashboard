@@ -9,8 +9,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { getNotifications } from "@/lib/notifications";
 import { useState, useEffect } from "react";
+import { formatTimestamp } from "@/utils/formatDate";
 
 import { io } from "socket.io-client";
+import { Delete } from "./icons";
 const HOST = process.env.NEXT_PUBLIC_HOST_API;
 
 const socket = io(HOST, {
@@ -21,6 +23,7 @@ interface Prop {
   id: number;
   status: boolean;
   mensaje: string;
+  createdAt: string;
 }
 export function DropdNotications() {
   const [notificartions, setNotifications] = useState<Prop[]>([]);
@@ -74,6 +77,28 @@ export function DropdNotications() {
           Notificaciones
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <div className="flex items-center justify-end px-2 gap-2">
+          <button className="text-xs">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="size-6 cursor-pointer hover:stroke-green-700 hover:scale-110 dark:stroke-white dark:hover:stroke-green-700"
+              width="44"
+              height="44"
+              viewBox="0 0 24 24"
+              strokeWidth="1"
+              stroke="#2c3e50"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M7 12l5 5l10 -10" />
+              <path d="M2 12l5 5m5 -5l5 -5" />
+            </svg>
+          </button>
+          <button className="text-xs hover:text-red-600 cursor-pointer"><Delete/></button>
+        </div>
+        <DropdownMenuSeparator />
         {notificartions.length === 0 ? (
           <span className="text-xs text-gray-300 text-center block p-2">
             No hay notificaciones
@@ -83,9 +108,14 @@ export function DropdNotications() {
             {notificartions.map((notif, i) => (
               <li
                 key={i}
-                className="p-1  text-gray-800 dark:bg-gray-50  rounded-xs"
+                className="p-1 text-xs text-gray-800 dark:text-gray-50 rounded-xs text-[10px] md:text-[11px] flex gap-1 cursor-pointer hover:bg-gray-300  dark:hover:bg-transparent items-center "
               >
-                {notif.mensaje}
+                <div className="w-full">
+                  <p className="text-wrap leading-3">{notif.mensaje}</p>
+                  <span className="text-gray-600 dark:text-gray-50 text-right">
+                    {formatTimestamp(notif?.createdAt)}
+                  </span>
+                </div>
               </li>
             ))}
           </ul>
