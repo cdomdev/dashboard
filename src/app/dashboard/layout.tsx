@@ -33,7 +33,7 @@ export default async function DashboardLayout({
           <header className="sticky top-0 z-20 border-b bg-background px-4 py-3 shadow-sm w-full">
             <nav className="flex items-center justify-between gap-4">
               <SidebarTrigger className="cursor-pointer" />
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-5">
                 <ModeToggle />
                 <DropdNotications />
                 <DropProfileMenu />

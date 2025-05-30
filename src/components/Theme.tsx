@@ -28,23 +28,19 @@ export function ModeToggle() {
 
   const showIcon = () => {
     if (theme === "dark" || resolvedTheme === "dark") {
-      return <Moon className="h-[1.2rem] w-[1.2rem]" />;
+      return <Moon className="size-5" />;
     } else {
-      return <Sun className="h-[1.2rem] w-[1.2rem]" />;
+      return <Sun className="size-5" />;
     }
   };
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="cursor-pointer ring-0 dark:ring-0 focus:ring-0 hover:bg-transparent"
-        >
+      <DropdownMenuTrigger asChild className="m-0 hover:bg-transparent p-0 relative focus:outline-none focus:ring-0 ring-0 dark:hover:bg-transparent dark:ring-0">
+        <button className="cursor-pointer">
           {showIcon()}
           <span className="sr-only">Toggle theme</span>
-        </Button>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem
@@ -57,14 +53,8 @@ export function ModeToggle() {
           onClick={() => setTheme("dark")}
           className="cursor-pointer"
         >
-          <Moon /> Oscuro
+          <Moon className="size-4" /> Oscuro
         </DropdownMenuItem>
-        {/* <DropdownMenuItem
-          onClick={() => setTheme("system")}
-          className="cursor-pointer"
-        >
-          <SystemIcon /> Sistema
-        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );
