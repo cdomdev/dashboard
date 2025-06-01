@@ -14,8 +14,8 @@ interface deleProps {
 export function DeleteData({ id, setCount, setSales }: deleProps) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
+  const {showToast} = useToastStore()
   async function handleDelete() {
-    const seToast = useToastStore.getState().setToast;
 
     const res = await deleteSaleBy(id);
     if (res.status === 200) {
@@ -24,7 +24,7 @@ export function DeleteData({ id, setCount, setSales }: deleProps) {
         return nuevaLista;
       });
       setCount((prev) => prev - 1);
-      seToast("Categoría eliminada con éxito", "toast-success");
+      showToast("Categoría eliminada con éxito", "success");
     }
   }
   return (

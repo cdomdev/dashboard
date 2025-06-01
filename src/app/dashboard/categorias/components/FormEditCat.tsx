@@ -21,18 +21,18 @@ interface Props {
 
 export function FormEditCat({ category, setCategorias }: Props) {
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const {showToast} = useToastStore()
   const onSubmit = async (
     values: PropForm,
     { resetForm }: { resetForm: () => void }
   ) => {
-    const seToast = useToastStore.getState().setToast;
 
     const res = await editCategory(values);
 
     if (res.success) {
       resetForm();
       setIsEditOpen(false);
-      seToast("Categoría actalizada con éxito", "toast-success");
+      showToast("Categoría actalizada con éxito", "success");
       setCategorias((prev) =>
         prev.map((cat) =>
           cat.id === category.id ? { ...cat, nombre: values.nombre } : cat
@@ -40,14 +40,14 @@ export function FormEditCat({ category, setCategorias }: Props) {
       );
     } else {
       if (res.status === 409) {
-        seToast(
+        showToast(
           res.message || "Ya existe una categoría con ese nombre",
           "error"
         );
         setIsEditOpen(false)
       } else {
         setIsEditOpen(false)
-        seToast(
+        showToast(
           res.message || "Error inesperado al crear la categoría",
           "error"
         );

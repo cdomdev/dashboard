@@ -17,9 +17,8 @@ export function DeleteSubcategoria({
   setCatCount,
 }: deleProps) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-
+  const { showToast } = useToastStore();
   async function handleDelete() {
-    const seToast = useToastStore.getState().setToast;
     try {
       const res = await deleteSubcategoria(id);
       if (res.status === 200) {
@@ -28,27 +27,27 @@ export function DeleteSubcategoria({
           return nuevaLista;
         });
         setCatCount((prev) => prev - 1);
-        seToast("Subcategoría eliminada con éxito", "toast-success");
+        showToast("Subcategoría eliminada con éxito", "success");
         setIsDeleteOpen(false);
       } else if (res.status === 404) {
-        seToast(
+        showToast(
           `${
             res.message ||
             "No se pudo eliminar la subcategoria, intentelo mas tarde"
           }`,
-          "toast-fail"
+          "error"
         );
         setIsDeleteOpen(false);
       } else if (res.status === 500) {
-        seToast(
+        showToast(
           "No se pudo eliminar la subcategoria, intentelo mas tarde",
-          "toast-fail"
+          "error"
         );
         setIsDeleteOpen(false);
       }
     } catch (error) {
       console.log("Error al intentar eliminar la suncategoria", error);
-      seToast("Hubo un error al intenatr eliminar la subcategori", "error");
+      showToast("Algo salio mal al intenatr eliminar la subcategoria", "error");
     }
   }
   return (

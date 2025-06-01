@@ -8,23 +8,23 @@ import { createSubcategoria } from "../lib/subcategoria";
 import { useToastStore } from "@/context/global.context.app";
 
 export function FormSubcategory() {
+  const { showToast } = useToastStore();
   const onSubmit = async (
     values: CategorySchema,
     { resetForm }: { resetForm: () => void }
   ) => {
-    const seToast = useToastStore.getState().setToast;
     try {
       const res = await createSubcategoria(values);
       if (res?.status === 201) {
         resetForm();
-        seToast("Subcategoría creada con éxito", "toast-success");
+        showToast("Subcategoría creada con éxito", "success");
       } else if (res.status === 409) {
-        seToast(
+        showToast(
           res.message || "Ya existe una subcategoría con ese nombre",
           "error"
         );
       } else {
-        seToast(
+        showToast(
           res.message || "Error inesperado al crear la subcategoría",
           "error"
         );

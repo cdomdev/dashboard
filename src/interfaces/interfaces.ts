@@ -82,6 +82,24 @@ export const balanceSchema = z.object({
   totalShipped: z.number(),
 });
 
+export const notificationSchema = z.object({
+  id: z.number(),
+  status: z.boolean(),
+  mensaje: z.string(),
+  createdAt: z.string() || z.date(),
+});
+
+export const loginSchema = z.object({
+  email: z.string().email({ message: "Este campo no puede quedar vacio" }),
+  password: z
+    .string({
+      required_error: "Se requiere una contraseña",
+    })
+    .min(6, "Se requiere la contraseña"),
+});
+
+export type LoginSchema = z.infer<typeof loginSchema>;
+
 export type ProductSchema = z.infer<typeof productSchema>;
 
 export type OfertsSchema = z.infer<typeof ofertsSchema>;
@@ -93,3 +111,5 @@ export type OrderSchema = z.infer<typeof orderSchema>;
 export type UserSchema = z.infer<typeof userSchema>;
 
 export type BalanceSchema = z.infer<typeof balanceSchema>;
+
+export type NotificationSchema = z.infer<typeof notificationSchema>;

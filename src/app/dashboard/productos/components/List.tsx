@@ -12,9 +12,8 @@ import Link from "next/link";
 import { DeletProduct } from "./DeleteProduct";
 import { useToastStore } from "@/context/global.context.app";
 import { NoDataResponse } from "@/components/NoDataInResp";
-import axios from "axios";
-import { itemsHeadTableProducts } from '@/utils/headListForTables'
-import { formatValue} from "@/utils/formatPayment";
+import { itemsHeadTableProducts } from "@/utils/headListForTables";
+import { formatValue } from "@/utils/formatPayment";
 
 interface Props {
   setCount: React.Dispatch<React.SetStateAction<number>>;
@@ -24,36 +23,28 @@ export function ListProducts({ setCount }: Props) {
   const [products, setProducts] = useState<ProductSchema[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
-  const setToast = useToastStore.getState().setToast;
+  const { showToast } = useToastStore();
   const pageSize = 10;
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        const res = await getProducts(page, pageSize);
-        if (res.status === 200) {
-          setProducts(res.data.data);
-          setTotalPages(res.data.pagination.pageCount);
-          setCount(res.data.pagination.total);
-        }
-      } catch (error) {
-        console.log("Error fetching products: ", error);
-        if (axios.isAxiosError(error) && error.response) {
-          const { status, data } = error.response;
-          if (status === 401 || status === 403) {
-            const message =
-              data?.message || "No tienes permisos para ver los productos";
-            setToast("toast-fail", message);
-          } else if (status === 404) {
-            const message = data?.message || "No hay productos para listar";
-            setToast("toast-fail", message);
-          }
-        }
+      const res = await getProducts(page, pageSize);
+      const { status, data } = res;
+      if (res.status === 200) {
+        setProducts(res.data.data);
+        setTotalPages(res.data.pagination.pageCount);
+        setCount(res.data.pagination.total);
+      } else if (status === 401 || status === 403) {
+        const message =
+          data?.message || "No tienes permisos para ver los productos";
+        showToast("toast-fail", message);
+      } else if (status === 404) {
+        const message = data?.message || "No hay productos para listar";
+        showToast("toast-fail", message);
       }
     }
     fetchData();
-  }, [page, setCount, setToast]);
+  }, [page, setCount, showToast]);
 
   if (!products) return <Loading />;
 
@@ -90,10 +81,11 @@ export function ListProducts({ setCount }: Props) {
               </td>
               <td
                 scope="row"
-                className={`${prod.cantidad < 10
+                className={`${
+                  prod.cantidad < 10
                     ? "text-red-600 font-extrabold"
                     : "text-gray-900"
-                  } px-6 py-4 font-medium  whitespace-nowrap dark:text-white text-center`}
+                } px-6 py-4 font-medium  whitespace-nowrap dark:text-white text-center`}
               >
                 {prod.cantidad}
               </td>

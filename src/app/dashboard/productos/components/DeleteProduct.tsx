@@ -15,7 +15,7 @@ interface Props {
 export function DeletProduct({ id, setProducts, setCount }: Props) {
   const [open, setOpen] = useState<boolean>(false);
 
-  const seToast = useToastStore.getState().setToast;
+  const { showToast } = useToastStore();
 
   async function handleDelete() {
     const res = await deleteProduct(id);
@@ -23,13 +23,13 @@ export function DeletProduct({ id, setProducts, setCount }: Props) {
     if (res.status === 201) {
       setOpen(false);
       setProducts((prev) => prev.filter((prod) => prod.id !== id));
-      seToast("Producto eliminado con exito", "toast-success");
+      showToast("Producto eliminado con exito", "success");
       setCount((prev) => prev - 1);
     } else if (res.status === 404) {
       setOpen(false);
-      seToast(res.message, "toast-fail");
-    } else if(res.status === 500){
-      seToast(res.message, "toast-fail");
+      showToast(res.message, "error");
+    } else if (res.status === 500) {
+      showToast(res.message, "error");
       setProducts([]);
     }
   }

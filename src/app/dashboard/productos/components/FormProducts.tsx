@@ -17,23 +17,23 @@ import { cleanPrice } from "../utils/formatPrice";
 
 export function FormProducts() {
   const [loading, setLoading] = useState<boolean>(false);
+  const { showToast } = useToastStore();
   const onSubmit = async (
     values: ProductSchema,
     { resetForm }: { resetForm: () => void }
   ) => {
     setLoading(true);
-    const setToast = useToastStore.getState().setToast;
     const res = await createProduct(values);
     const { status, message } = res;
     if (status === 200) {
-      setToast(message || "Producto agregado con exito", "toast-success");
+      showToast(message || "Producto agregado con exito", "success");
       resetForm();
       setLoading(false);
     } else if (status === 401 || status === 403) {
       setLoading(false);
-      setToast(message, "toast-fail");
+      showToast(message, "error");
     } else if (status === 500) {
-      setToast(message, "status-fail");
+      showToast(message, "error");
       setLoading(false);
     }
   };

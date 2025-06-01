@@ -16,8 +16,8 @@ export function UpdateState({ id }: { id: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(statusOptions[0].value);
 
+  const {showToast} = useToastStore()
   const updateStatusInStore = useOrderStatusStore((state) => state.updateStatus);
-  const seToast = useToastStore.getState().setToast;
 
   const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedStatus(event.target.value);
@@ -29,11 +29,11 @@ export function UpdateState({ id }: { id: string }) {
     const res = await UpdateStatusSaleBy(id, selectedStatus);
     if (res.status === 200) {
       updateStatusInStore(id, selectedStatus);
-      seToast("Estado actualizado con éxito", "toast-success");
+      showToast("Estado actualizado con éxito", "success");
       setIsOpen(false);
     } else {
       setIsOpen(false);
-      seToast("No fue posible actualizar el estado", "toast-fail");
+      showToast("No fue posible actualizar el estado", "error");
     }
   };
 

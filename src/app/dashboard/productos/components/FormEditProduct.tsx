@@ -16,6 +16,7 @@ import { formatValue } from "@/utils/formatPayment";
 export function FormEditProduct() {
   const [loading, setLoading] = useState<boolean>(false);
   const [product, setProduct] = useState<ProductSchema>();
+  const {showToast} = useToastStore()
 
   const params = useParams();
   const id = typeof params?.id === "string" ? params.id : undefined;
@@ -36,20 +37,19 @@ export function FormEditProduct() {
   ) => {
     setLoading(true);
     const res = await editProduct(values);
-    const setToast = useToastStore.getState().setToast;
     if (res.status === 201) {
-      setToast(res.message || "Producto actulizado con exito", "toast-success");
+      showToast(res.message || "Producto actulizado con exito", "success");
       resetForm();
       setLoading(false);
     } else if (res.status === 401 || res.status === 402) {
-      setToast(
+      showToast(
         res.message ||
           "Algo salio mal con la sesion, por favor inicie sesion nuevamente en caso de persistir el error",
         "error"
       );
       setLoading(false);
     } else if (res.status === 500) {
-      setToast(res.message || "Hubo un error al agregar el producto", "error");
+      showToast(res.message || "Hubo un error al agregar el producto", "error");
       setLoading(false);
     }
   };

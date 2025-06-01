@@ -1,6 +1,6 @@
 "use client";
 
-import { LoginSchema } from "@/interfaces/login";
+import { LoginSchema } from "@/interfaces";
 import { useState } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { useToastStore } from "../../context/global.context.app";
@@ -10,8 +10,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
-  const seToast = useToastStore.getState().setToast;
-
+  const { showToast } = useToastStore();
   const onSubmit = async (data: LoginSchema) => {
     setIsLoading(true);
 
@@ -30,16 +29,16 @@ export default function LoginPage() {
       if (res.status === 200) {
         router.push("/dashboard");
       } else if (res.status === 401) {
-        seToast(result?.message || "Credenciales inválidas", "error");
+        showToast(result?.message || "Credenciales inválidas", "error");
         setIsLoading(false);
       } else {
-        seToast(result?.message || "Error al iniciar sesión", "error");
+        showToast(result?.message || "Error al iniciar sesión", "error");
         setIsLoading(false);
       }
     } catch (error) {
       console.log("Error en el inicio de sesion: ", error);
       setIsLoading(false);
-      seToast(
+      showToast(
         `${"Algo salio mal con el inicio de sesion, intentalo mas tarde"}`,
         "error"
       );

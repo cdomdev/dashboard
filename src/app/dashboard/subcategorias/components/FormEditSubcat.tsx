@@ -21,18 +21,18 @@ interface Props {
 
 export function FormEditSubcat({ subcategory, setSubCategoria }: Props) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const {showToast} = useToastStore()
   const onSubmit = async (
     values: PropForm,
     { resetForm }: { resetForm: () => void }
   ) => {
-    const seToast = useToastStore.getState().setToast;
 
     const res = await editSubcategory(values);
 
     if (res.success) {
       resetForm();
       setIsDeleteOpen(false);
-      seToast("SUbcategoría actalizada con éxito", "toast-success");
+      showToast("SUbcategoría actalizada con éxito", "success");
       setSubCategoria((prev) =>
         prev.map((cat) =>
           cat.id === subcategory.id ? { ...cat, nombre: values.nombre } : cat
@@ -40,12 +40,12 @@ export function FormEditSubcat({ subcategory, setSubCategoria }: Props) {
       );
     } else {
       if (res.status === 409) {
-        seToast(
+        showToast(
           res.message || "Ya existe una subcategoría con ese nombre",
           "error"
         );
       } else {
-        seToast(
+        showToast(
           res.message || "Error inesperado al editar la subcategoría",
           "error"
         );

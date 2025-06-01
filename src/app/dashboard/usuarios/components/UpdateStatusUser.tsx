@@ -18,7 +18,7 @@ export function UpdateStateUser({ user }: { user: UserSchema }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(statusOptions[0].value);
 
-  const setToast = useToastStore.getState().setToast;
+  const { showToast } = useToastStore();
 
   const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedStatus(event.target.value);
@@ -29,12 +29,12 @@ export function UpdateStateUser({ user }: { user: UserSchema }) {
     console.log(user.id, selectedStatus);
     const res = await updateStateOfUser(user.id);
     if (res.status === 201) {
-      setToast("Estado del usuario actualizado con éxito", "toast-success");
+      showToast("Estado del usuario actualizado con éxito", "success");
       setIsOpen(false);
     } else if (res.status === 500) {
-      setToast(
+      showToast(
         "No fue posible actualizar el estado, intentelo mas tarde",
-        "toast-fail"
+        "error"
       );
       setIsOpen(false);
     }

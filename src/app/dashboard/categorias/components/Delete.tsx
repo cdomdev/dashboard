@@ -14,9 +14,8 @@ interface deleProps {
 
 export function DeleteCategoria({ id, setCategorias, setCatCount }: deleProps) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-
+  const { showToast } = useToastStore();
   async function handleDelete() {
-    const seToast = useToastStore.getState().setToast;
     try {
       const res = await deleteCategory(id);
       if (res.status === 200) {
@@ -26,25 +25,25 @@ export function DeleteCategoria({ id, setCategorias, setCatCount }: deleProps) {
         });
         setCatCount((prev) => prev - 1);
         setIsDeleteOpen(false);
-        seToast("Categoría eliminada con éxito", "toast-success");
+        showToast("Categoría eliminada con éxito", "success");
       } else if (res.status === 404) {
-        seToast(
+        showToast(
           `${
             res.message || "No se pudo elimir la categoria, intentelo mas tarde"
           } `,
-          "toast-fail"
+          "error"
         );
         setIsDeleteOpen(false);
       } else if (res.status === 500) {
         setIsDeleteOpen(false);
-        seToast(
+        showToast(
           `${"No se pudo elimir la categoria, intentelo mas tarde"} `,
-          "toast-fail"
+          "error"
         );
       }
     } catch (error) {
       console.log("Error al intentar eliminar la categoria", error);
-      seToast("Hubo un error al intenatr eliminar la categoria", "error");
+      showToast("Hubo un error al intenatr eliminar la categoria", "error");
     }
   }
 

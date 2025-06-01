@@ -8,24 +8,24 @@ import { createCategoria } from "../lib/categoria";
 import { useToastStore } from "@/context/global.context.app";
 
 export function FormCategory() {
+  const { showToast } = useToastStore();
   const onSubmit = async (
     values: CategorySchema,
     { resetForm }: { resetForm: () => void }
   ) => {
-    const seToast = useToastStore.getState().setToast;
     const res = await createCategoria(values);
 
     if (res.success) {
       resetForm();
-      seToast("Categoría creada con éxito", "toast-success");
+      showToast("Categoría creada con éxito", "success");
     } else {
       if (res.status === 409) {
-        seToast(
+        showToast(
           res.message || "Ya existe una categoría con ese nombre",
           "error"
         );
       } else if (res.status === 401 || res.status === 403) {
-        seToast(
+        showToast(
           "Algo salio mal con la sesion, si el problma persiste inicie sesion nuevamente",
           "error"
         );
