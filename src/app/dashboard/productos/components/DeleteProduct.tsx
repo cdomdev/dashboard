@@ -45,11 +45,9 @@ export function DeletProduct({ id, setProducts, setCount }: Props) {
         modalContent=""
       >
         <div className="flex items-center justify-center pb-1 gap-2">
-          <Alert className="text-red-500 text-center inline-block" />
           <p className="text-red-500 font-semibold text-center">
             ¡Atención! Esta acción no se puede deshacer.
           </p>
-          <Alert className="text-red-500 text-center inline-block" />
         </div>
         <p className="text-black">
           No podrá eliminar productos que estén asociados a una venta.
