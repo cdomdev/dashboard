@@ -4,7 +4,6 @@ import { useState } from "react";
 import { deleteProduct } from "../lib/products";
 import { ProductSchema } from "@/interfaces";
 import { useToastStore } from "@/context/global.context.app";
-import { Alert } from "@/components/icons";
 
 interface Props {
   id?: string;
