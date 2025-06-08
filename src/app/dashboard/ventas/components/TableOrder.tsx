@@ -21,9 +21,10 @@ export function TablerOrder() {
     const fetchPedido = async () => {
       if (!id) return;
       const res = await getOneSaleBy(id);
+  
       if (res.status === 200) {
-        setSale(res?.data?.pedido);
-        const userId = res.data.pedido.usuario?.id;
+        setSale(res?.data?.pedidos);
+        const userId = res.data.pedidos.usuario?.id;
         if (userId) setUserId(userId);
       } else {
         setSale({} as OrderSchema);
@@ -129,8 +130,8 @@ export function TablerOrder() {
                       key={pro.id || index}
                       className="border-b last:border-b-0 border-gray-200 hover:bg-gray-50"
                     >
-                      <th className="px-6 py-4 font-normal text-gray-900  max-w-[170px] break-words text-balance">
-                        {pro.Producto.titulo}
+                      <th className="px-6 py-4 font-normal text-gray-900 max-w-[170px] break-words text-balance">
+                        {pro.productos?.titulo || "Producto no disponible"}
                       </th>
                       <td className="px-6 py-4 text-center">{pro.cantidad}</td>
                       <td className="px-6 py-4 text-center">

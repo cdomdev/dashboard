@@ -56,7 +56,7 @@ export const detailOrder = z.object({
   createdAt: z.union([z.string(), z.date()]),
   updatedAt: z.union([z.string(), z.date()]),
 
-  Producto: productSchema,
+  productos: productSchema,
 });
 
 export const orderSchema = z.object({

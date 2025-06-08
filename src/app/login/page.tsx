@@ -47,7 +47,7 @@ export default function LoginPage() {
 
   return (
     <main>
-      <section className="text-white  min-h-screen bg-gradient-to-r from-[rgba(191,190,167,1)] via-[rgba(200,200,200,1)] to-[rgba(195,195,195,1)] bg-[112deg] flex justify-center flex-col items-center gap-3 auth">
+      <section className="text-white  min-h-dvh bg-gradient-to-r from-[rgba(191,190,167,1)] via-[rgba(200,200,200,1)] to-[rgba(195,195,195,1)] bg-[112deg] flex pt-20 lg:pt-0 lg:justify-center flex-col items-center gap-3 auth">
         <div className="w-80 md:w-96 p-4 h-auto md:min-h-96 flex flex-col items-center rounded-lg shadow-xl bg-white">
           <div className="my-4">
             <h1 className="font-semibold text-lg md:text-2xl  text-black text-center">

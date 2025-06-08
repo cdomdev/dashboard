@@ -8,8 +8,11 @@ export async function getAllSales(page: number, pageSize: number) {
   return res;
 }
 
-export async function getSalesBy(id: string) {
-  const res = await query(`/api/order/list/${id}`, "GET");
+export async function getSalesBy( page: number, pageSize: number, id: string,) {
+  const res = await query(
+    `/api/order/list/${id}?page=${page}&pageSize=${pageSize}`,
+    "GET"
+  );
   return res;
 }
 

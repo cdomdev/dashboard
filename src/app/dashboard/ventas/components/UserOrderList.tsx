@@ -11,10 +11,15 @@ import { ButtonStatus } from "@/components/ui/custom/buttons/ButtonStatusOrder";
 import { HeaderPagesSection } from "@/components/HeaderPagesSection";
 import { itemsHeadTableOrdes } from "@/utils/headListForTables";
 import { formatValue } from "@/utils/formatPayment";
+import { Pagination } from "@/components/Pagination";
 
 export function UserOrders() {
   const [sale, setSale] = useState<OrderSchema[]>([]);
   const [count, setCount] = useState<number>(0);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const pageSize = 10;
 
   const params = useParams();
   const id = typeof params?.id === "string" ? params.id : undefined;
@@ -22,15 +27,20 @@ export function UserOrders() {
   useEffect(() => {
     const fetchPedido = async () => {
       if (!id) return;
-      const res = await getSalesBy(id);
+      const res = await getSalesBy(pageSize, page, id);
       if (res.status === 200) {
-        setSale(res.data.pedido);
-        setCount(res.data.pedido.length);
+         const longitud = res?.data?.pedidos.length
+        setSale(res?.data.pedidos);
+        setCount(longitud);
+        setTotalPages(longitud)
+      }else {
+        setCount(0);
+        setSale([]);
       }
     };
 
     fetchPedido();
-  }, [id, setCount]);
+  }, [id, setCount, page]);
 
   if (!sale) return <p>Cargando pedido...</p>;
 
@@ -46,6 +56,7 @@ export function UserOrders() {
         }`}
       />
 
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
       <TableItems itemsHead={itemsHeadTableOrdes}>
         <>
           {sale?.map((prod, index) => (
@@ -55,7 +66,7 @@ export function UserOrders() {
             >
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-bl-lg "
+                className="px-2 py-4  not-first:font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
                 {index + 1}
               </th>

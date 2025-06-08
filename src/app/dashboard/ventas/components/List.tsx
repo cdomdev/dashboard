@@ -50,19 +50,19 @@ export function SalesList({ setCount }: Props) {
       <>
         {sales.map((prod, index) => (
           <tr
-            className="bg-white border-b last:border-b-0 last:rounded-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 "
+            className="bg-white border-b  last:border-b-0 last:rounded-b  dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
             key={prod.id || index}
           >
             <th
               scope="row"
-              className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-bl-lg "
+              className="px-2 py-4  not-first:font-medium text-gray-900 whitespace-nowrap dark:text-white"
             >
               {index + 1}
             </th>
 
             <td
               scope="row"
-              className="flex items-center justify-center  py-1 text-gray-900 whitespace-nowrap dark:text-white"
+              className="flex items-center   py-1 text-gray-900 whitespace-nowrap dark:text-white"
             >
               {
                 <>
@@ -89,13 +89,13 @@ export function SalesList({ setCount }: Props) {
               scope="row"
               className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
             >
-              {prod.usuario.ciudad}
+              {prod.usuario.ciudad  || "No hay dato"}
             </td>
             <td
               scope="row"
               className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
             >
-              {prod.usuario.departamento}
+              {prod.usuario.departamento || "No hay dato"}
             </td>
             <td
               scope="row"
@@ -104,7 +104,7 @@ export function SalesList({ setCount }: Props) {
               {prod.usuario.telefono}
             </td>
 
-            <td className="px-4 pt-1.5 pb-1 text-center rounded-br-lg ">
+            <td className="px-4 pt-1.5 pb-1 text-center  ">
               <DetailsButton
                 url={`/dashboard/ventas/user/${prod.usuario.id}`}
               />

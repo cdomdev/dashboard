@@ -6,22 +6,22 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/**",
       },
       {
-        protocol: 'https',
-        hostname: 'encrypted-tbn0.gstatic.com',
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
+        port: "",
+        pathname: "/**",
       },
-      
     ],
+    domains: ["lh3.googleusercontent.com"],
   },
   allowedDevOrigins: [
-    'https://3000-firebase-dashboard-1746882853146.cluster-hf4yr35cmnbd4vhbxvfvc6cp5q.cloudworkstations.dev',
+    "https://3000-firebase-dashboard-1746882853146.cluster-hf4yr35cmnbd4vhbxvfvc6cp5q.cloudworkstations.dev",
   ],
 };
 

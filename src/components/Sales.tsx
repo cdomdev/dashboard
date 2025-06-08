@@ -32,13 +32,6 @@ export const SalesData = () => {
     }
   }, [filter, dataVentas]);
 
-  const texto =
-    filteredVentas.length === 1
-      ? `Se realizó ${filteredVentas.length} venta este mes`
-      : filteredVentas.length > 1
-      ? `Se realizaron ${filteredVentas.length} ventas este mes`
-      : "";
-
   return (
     <>
       <div className="flex justify-between p-1 md:p-0">
@@ -47,12 +40,7 @@ export const SalesData = () => {
             Ventas recientes
           </h2>
           <p className="text-xs md:text-sm text-slate-500">
-            {filteredVentas.length > 0 ? texto : "No hay ventas "}
-            {filter === "este-mes"
-              ? "este mes"
-              : filter === "mes-pasado"
-              ? "el mes pasado"
-              : "en total"}
+           Esta son algunas las ultimas ventas
           </p>
         </div>
 
@@ -71,7 +59,7 @@ export const SalesData = () => {
           </form>
         </div>
       </div>
-      <div className="pl-2 pt-4  max-h-[350px] overflow-y-auto">
+      <div className="pl-2 pt-4  max-h-[400px] overflow-y-auto">
         <ul className="flex flex-col gap-1">
           {filteredVentas.length > 0 ? (
             filteredVentas.map((order, index) => (
