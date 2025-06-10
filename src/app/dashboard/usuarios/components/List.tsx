@@ -27,7 +27,7 @@ export function ListUsers({ items, users }: PropTable) {
           >
             <th
               scope="row"
-              className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              className="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
             >
               {index + 1}
             </th>

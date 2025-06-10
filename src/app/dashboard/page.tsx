@@ -5,7 +5,7 @@ import { Cardbalances } from "@/components/CardBalans";
 
 export default async function Home() {
   return (
-    <section>
+    <>
       <section className="w-full py-4">
         <Cardbalances />
       </section>
@@ -18,6 +18,6 @@ export default async function Home() {
           <SalesData />
         </div>
       </section>
-    </section>
+    </>
   );
 }
