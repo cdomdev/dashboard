@@ -110,7 +110,7 @@ const items = [
     url: "/dashboard/ofertas",
     icon: Ofertas,
     subItems: [
-       {
+      {
         url: "/dashboard/ofertas",
         nombre: "Ver productos con descuentos",
       },
@@ -122,7 +122,6 @@ const items = [
         url: "/dashboard/ofertas/crear",
         nombre: "Agregar una nueva oferta",
       },
-     
     ],
   },
 ];

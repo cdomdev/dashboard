@@ -40,7 +40,7 @@ export const SalesData = () => {
             Ventas recientes
           </h2>
           <p className="text-xs md:text-sm text-slate-500">
-           Esta son algunas las ultimas ventas
+            Esta son algunas las ultimas ventas
           </p>
         </div>
 
@@ -68,18 +68,15 @@ export const SalesData = () => {
                 className="flex justify-between gap-1 md:gap-7 py-2 px-1 items-center"
               >
                 <div className="flex gap-4">
-                  <div>
-                    <Image
-                      src={
-                        order.usuario.picture || "/default-avatar-profile.webp"
-                      }
-                      alt="avatar del usuario"
-                      className="rounded-full cursor-pointer relative w-14 h-10"
-                      width={56}
-                      height={40}
-                      loading="lazy"
-                    />
-                  </div>
+                  <Image
+                    className="w-10 h-10 rounded-full"
+                    src={
+                      order.usuario.picture || "/default-avatar-profile.webp"
+                    }
+                    alt="perfil de usuario"
+                    width={50}
+                    height={50}
+                  />
                   <div className="flex flex-col w-full leading-4">
                     <span className="text-sm md:text-base font-semibold">
                       {order.usuario.nombre}

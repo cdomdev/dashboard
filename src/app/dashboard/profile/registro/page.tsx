@@ -1,7 +1,13 @@
-export default function RegistroHome(){
-    return(
-        <>
-        <p>Agregar un nuevo Administrador</p>
-        </>
-    )
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Gestionar usuarios administradores",
+};
+
+export default function HomeRegistro() {
+  return (
+    <>
+      <p className="">Esta es la pagina de registro</p>
+    </>
+  );
 }

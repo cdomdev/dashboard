@@ -43,11 +43,9 @@ export const itemsHeadTableVentas = [
 
 export const itemsHeadTableUser = [
   "",
-  "Nombre",
-  "Email",
+  "Usuario",
   "Estado",
   "Rol",
-  "Avatar",
   "Telefono",
   "Ciudad",
   "",
